@@ -10,6 +10,8 @@ import Foundation
 
 class DominantColor: CCNode {
     
+    // MARK: Functions
+    
     /**
     Called when the screen is tapped on the left side. "Moves" the DominantColor towards its target mark; a.k.a. the opponent's side of the screen.
     */

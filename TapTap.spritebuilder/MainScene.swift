@@ -14,13 +14,17 @@ enum Side {
 
 class MainScene: CCNode {
     
+    // MARK: Constants
+    
     let moveAmount: CGFloat = 0.03
     
     let wrongTapPenalty: CGFloat = 0.04
     let numberOfTileRows: Int = 4
     
+    // MARK: Variables
+    
     var countdown: String = "0" {
-        didSet {
+        didSet { // Called during the `countdownBeforeGameBegins()` sequence. Every time the countdown variable changes, it changes the label output of the `redCountdownLabel` and the `blueCountdownLabel`.
             redCountdownLabel.string = String("\(countdown)")
             blueCountdownLabel.string = String("\(countdown)")
         }
@@ -37,6 +41,7 @@ class MainScene: CCNode {
     
     weak var world: CCNode!
     
+    // Variables used to handle the infinite generation of tileRows. Two sets exist to handle both players' sets individually.
     weak var blueTileRowNode: CCNode!
     var blueTileRows: [TileRow] = []
     var blueIndex: Int = 0
@@ -44,6 +49,11 @@ class MainScene: CCNode {
     var redTileRows: [TileRow] = []
     var redIndex: Int = 0
     
+    // MARK: Reset Functions
+    
+    /**
+    Called whenever the `MainScene.ccb` file loads.
+    */
     func didLoadFromCCB() {
         
         for index in 0..<numberOfTileRows {
@@ -74,6 +84,13 @@ class MainScene: CCNode {
 
     }
     
+    // MARK: Primed Game State Functions
+    
+    /**
+    Launches a 3-second countdown before the game begins.
+    
+    `TileRows` are left visible during this countdown on purpose to give a few seconds to the players so they can get acquainted with the starting generation of tiles before the game truly starts.
+    */
     func countdownBeforeGameBegins() {
         redCountdownLabel.visible = true
         blueCountdownLabel.visible = true
@@ -84,10 +101,12 @@ class MainScene: CCNode {
             self.delay(1.0) {
                 self.countdown = "1"
                 self.delay(1.0) {
+                    // Enable user interaction on "GO!".
                     self.countdown = "GO!"
                     self.userInteractionEnabled = true
                     self.multipleTouchEnabled = true
                     self.delay(0.4) {
+                        // Remove the "GO!" after a slight pause. No need to wait another full second since the players will already know what to do.
                         self.redCountdownLabel.visible = false
                         self.blueCountdownLabel.visible = false
                         return
@@ -97,6 +116,9 @@ class MainScene: CCNode {
         }
     }
     
+    /**
+    When called, delays the running of code included in the `closure` parameter.
+    */
     func delay(delay:Double, closure:()->()) {
         dispatch_after(
             dispatch_time(
@@ -106,6 +128,15 @@ class MainScene: CCNode {
             dispatch_get_main_queue(), closure)
     }
     
+    // MARK: In-Game Functions
+    
+    /**
+    Called whenever a tap on the screen occurs.
+    
+    It checks to see which side of the screen the tap occured, and passes that information along to the `checkIfRightTap()` function for further processing.
+    
+    In addition, it calls the `checkIfWin()` function to determine if the tap action caused the game to land in a win state. If `checkIfWin()` returns false, it calls the `checkForWarning()` function to determine if the tap action caused the game to land in a state where it should display a `warningGradient` to one of the players.
+    */
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!) {
         
         var taplocation = touch.locationInNode(world)
@@ -121,12 +152,20 @@ class MainScene: CCNode {
             checkIfRightTap(side: .Red, location: taplocation)
         }
         
+        // Check to see if the tap caused a win. If not, check to see if the tap caused the game to enter a warning state for one of the players.
         if !checkIfWin() {
             checkForWarning()
         }
         
     }
     
+    // MARK: Checking Functions
+    
+    /**
+    Called whenever a tap occurs by `touchBegan()`. 
+    
+    Checks to see if the tap caused the game to land in a state where it should display a `warningGradient` to one of the players. Also, checks to see if the tap caused the game to do the reverse - if the tap caused the game to leave one of the two possible warning states.
+    */
     func checkForWarning() {
         
         var scale = dominantColor.scaleX
@@ -144,6 +183,11 @@ class MainScene: CCNode {
         
     }
     
+    /**
+    Called whenever a tap occurs by `touchBegan()`.
+    
+    Checks to see if the tap landed in the right box on a `TileRow`.
+    */
     func checkIfRightTap(#side: Side, location: CGPoint) {
         
         if side == .Blue { // Blue player tapped.
@@ -188,7 +232,7 @@ class MainScene: CCNode {
             }
             
         }
-        else if side == .Red {
+        else if side == .Red { // Red side tapped.
             var tileRow = redTileRows[redIndex]
             var rowBox: BoxNumber = tileRow.enumBox
             
@@ -230,6 +274,11 @@ class MainScene: CCNode {
         }
     }
     
+    /**
+    Checks at every tap if a Win state has occured as a result of the tap.
+    
+    Returns a Boolean variable for outside functions to determine if a win occured. Returns true if a win occured. Returns false in all other cases.
+    */
     func checkIfWin() -> Bool {
         var scale = dominantColor.scaleX
         
@@ -244,7 +293,14 @@ class MainScene: CCNode {
         
         return false
     }
+    
+    // MARK: End-Game Functions
 
+    /**
+    To be run whenever a state occurs where red wins.
+    
+    Triggers end-game animation sequences.
+    */
     func redWins() {
         println("Red wins")
         self.userInteractionEnabled = false
@@ -257,6 +313,11 @@ class MainScene: CCNode {
         blueWarningGradient.visible = false
     }
     
+    /**
+    To be run whenever a state occurs where blue wins.
+    
+    Triggers end-game animation sequences.
+    */
     func blueWins() {
         println("Blue wins")
         self.userInteractionEnabled = false
@@ -269,6 +330,24 @@ class MainScene: CCNode {
         redWarningGradient.visible = false
     }
     
+    /**
+    Runs an animation sequence on the `TileRowNodes` to fade them out of view.
+    
+    `cascadeOpacityEnabled = true` is used to apply the opacity effect to the `tileRows` that are children of the nodes.
+    */
+    func fadeOutTileRows() {
+        blueTileRowNode.cascadeOpacityEnabled = true
+        blueTileRowNode.runAction(CCActionFadeOut(duration: 0.3))
+        
+        redTileRowNode.cascadeOpacityEnabled = true
+        redTileRowNode.runAction(CCActionFadeOut(duration: 0.3))
+    }
+    
+    // MARK: Button Functions
+    
+    /**
+    Resets the MainScene to its original state and restarts the game.
+    */
     func playAgain() {
         var mainScene = CCBReader.load("MainScene") as! MainScene
         mainScene.animationManager.runAnimationsForSequenceNamed("Default Timeline")
@@ -278,14 +357,6 @@ class MainScene: CCNode {
                 
         var transition = CCTransition(fadeWithDuration: 0.5)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
-    }
-    
-    func fadeOutTileRows() {
-        blueTileRowNode.cascadeOpacityEnabled = true
-        blueTileRowNode.runAction(CCActionFadeOut(duration: 0.3))
-        
-        redTileRowNode.cascadeOpacityEnabled = true
-        redTileRowNode.runAction(CCActionFadeOut(duration: 0.3))
     }
     
     func mainMenu() {

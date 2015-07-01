@@ -10,8 +10,12 @@ import Foundation
 
 class ParticleLine: CCNode {
     
+    // MARK: Variables
+    
     weak var redParticles: CCParticleSystem!
     weak var blueParticles: CCParticleSystem!
+    
+    // MARK: Functions
     
     /**
     Stops the generation of the particles from a ParticleLine object. 

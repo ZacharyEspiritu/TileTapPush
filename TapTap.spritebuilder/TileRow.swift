@@ -14,6 +14,8 @@ enum BoxNumber {
 
 class TileRow: CCNode {
     
+    // MARK: Variables
+    
     // Connecting our boxes to make everything more boxy. Fun fact: everything's in a layout box, so it's a box in a box. Boxception ftw.
     weak var box1: CCNodeColor!
     weak var box2: CCNodeColor!
@@ -46,6 +48,8 @@ class TileRow: CCNode {
             }
         }
     }
+    
+    // MARK: Procedural Generation Functions
     
     /**
     Generates a random TileRow.
