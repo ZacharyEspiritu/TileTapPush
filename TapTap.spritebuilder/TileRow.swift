@@ -20,50 +20,52 @@ class TileRow: CCNode {
     weak var box3: CCNodeColor!
     weak var box4: CCNodeColor!
     
-    var enumBox: BoxNumber = .Top // Default box. We have to put something in for each of our variables otherwise we would have to implement an override init() function somewhere in here, and who really wants to do that? I also don't want to run the risk of implementing a .None enumeration just in case something goes wrong and it becomes impossible to make a move in-game.
+    var enumBox: BoxNumber = .Top /** Default box. We have to put something in for each of our variables otherwise we would have to implement an override init() function somewhere in here, and who really wants to do that? I also don't want to run the risk of implementing a .None enumeration just in case something goes wrong and it becomes impossible to make a move in-game. */ {
+        didSet {
+            
+            let whiteColor = CCColor(red: 1, green: 1, blue: 1)
+            let blackColor = CCColor(red: 0, green: 0, blue: 0)
+            
+            box1.color = blackColor
+            box2.color = blackColor
+            box3.color = blackColor
+            box4.color = blackColor
+            
+            if enumBox == .Top {
+                box4.color = whiteColor
+            }
+            else if enumBox == .Midtop {
+                box3.color = whiteColor
+                
+            }
+            else if enumBox == .Midbottom {
+                box2.color = whiteColor
+            }
+            else if enumBox == .Bottom {
+                box1.color = whiteColor
+            }
+        }
+    }
     
     /**
     Generates a random TileRow.
     
-    It randomly generates a number and uses the result to decide which of the four boxes in a TileRow to color in. The other three boxes are set to the default color. Each TileRow has an enumBox used for later checking functions, which is set here corresponding to the randomly selected tile.
+    It randomly generates a number and uses the result to decide which of the four boxes in a `TileRow` to color in. By using the `didSet` property of the `enumBox` variable, we don't need to set the colors here because they will be set automatically every time the `enumBox` variable of a `TileRow` changes.
     */
     func generateRandomTileRow() {
-        
-        let whiteColor = CCColor(red: 1, green: 1, blue: 1)
-        let blackColor = CCColor(red: 0, green: 0, blue: 0)
         
         // Generate a random number and based on that number, decide which of the four tiles to color.
         var rand = CCRANDOM_0_1()
         if rand < 0.25 {
-            box1.color = whiteColor // White
-            box2.color = blackColor // Black
-            box3.color = blackColor // Black
-            box4.color = blackColor // Black
-            
             enumBox = .Bottom
         }
         else if rand < 0.50 {
-            box1.color = blackColor // Black
-            box2.color = whiteColor // White
-            box3.color = blackColor // Black
-            box4.color = blackColor // Black
-            
             enumBox = .Midbottom
         }
         else if rand < 0.75 {
-            box1.color = blackColor // Black
-            box2.color = blackColor // Black
-            box3.color = whiteColor // White
-            box4.color = blackColor // Black
-            
             enumBox = .Midtop
         }
         else {
-            box1.color = blackColor // Black
-            box2.color = blackColor // Black
-            box3.color = blackColor // Black
-            box4.color = whiteColor // White
-            
             enumBox = .Top
         }
         
