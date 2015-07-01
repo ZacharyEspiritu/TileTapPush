@@ -2831,6 +2831,11 @@
 			<dict>
 				<key>UUID</key>
 				<integer>89</integer>
+				<key>animatedProperties</key>
+				<dict>
+					<key>0</key>
+					<dict/>
+				</dict>
 				<key>baseClass</key>
 				<string>CCNodeGradient</string>
 				<key>children</key>
@@ -2958,6 +2963,10 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
+				<key>seqExpanded</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -3050,9 +3059,9 @@
 						<string>Color3</string>
 						<key>value</key>
 						<array>
+							<real>0.93872708082199097</real>
+							<real>8.9003602624870837e-05</real>
 							<real>1</real>
-							<real>0.50196081399917603</real>
-							<real>0.0</real>
 							<real>1</real>
 						</array>
 					</dict>

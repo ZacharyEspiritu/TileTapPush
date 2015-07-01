@@ -29,6 +29,9 @@ class MainScene: CCNode {
     weak var redCountdownLabel: CCLabelTTF!
     weak var blueCountdownLabel: CCLabelTTF!
     
+    weak var redWarningGradient: CCNode!
+    weak var blueWarningGradient: CCNode!
+    
     weak var dominantColor: DominantColor!
     weak var particleLine: ParticleLine!
     
@@ -118,7 +121,26 @@ class MainScene: CCNode {
             checkIfRightTap(side: .Red, location: taplocation)
         }
         
-        checkIfWin()
+        if !checkIfWin() {
+            checkForWarning()
+        }
+        
+    }
+    
+    func checkForWarning() {
+        
+        var scale = dominantColor.scaleX
+        
+        if scale <= 0.22 {
+            blueWarningGradient.visible = true
+        }
+        else if scale >= 0.78 {
+            redWarningGradient.visible = true
+        }
+        else {
+            blueWarningGradient.visible = false
+            redWarningGradient.visible = false
+        }
         
     }
     
@@ -208,15 +230,19 @@ class MainScene: CCNode {
         }
     }
     
-    func checkIfWin() {
+    func checkIfWin() -> Bool {
         var scale = dominantColor.scaleX
         
         if scale <= 0 {
             redWins()
+            return true
         }
         else if scale >= 1 {
             blueWins()
+            return true
         }
+        
+        return false
     }
 
     func redWins() {
@@ -228,7 +254,7 @@ class MainScene: CCNode {
         world.animationManager.runAnimationsForSequenceNamed("RedWins")
         particleLine.stopParticleGeneration()
         
-        
+        blueWarningGradient.visible = false
     }
     
     func blueWins() {
@@ -239,6 +265,8 @@ class MainScene: CCNode {
         
         world.animationManager.runAnimationsForSequenceNamed("BlueWins")
         particleLine.stopParticleGeneration()
+        
+        redWarningGradient.visible = false
     }
     
     func playAgain() {

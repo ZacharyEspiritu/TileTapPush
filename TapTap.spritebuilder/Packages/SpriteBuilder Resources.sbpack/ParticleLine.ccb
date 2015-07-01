@@ -294,8 +294,8 @@
 						<string>FloatVar</string>
 						<key>value</key>
 						<array>
-							<real>8</real>
-							<real>8</real>
+							<real>7</real>
+							<real>7</real>
 						</array>
 					</dict>
 					<dict>
@@ -589,8 +589,8 @@
 						<string>FloatVar</string>
 						<key>value</key>
 						<array>
-							<real>8</real>
-							<real>8</real>
+							<real>7</real>
+							<real>7</real>
 						</array>
 					</dict>
 					<dict>
@@ -751,6 +751,8 @@
 						<string>ccbResources/ccbTextField.png</string>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
@@ -823,8 +825,6 @@
 				</array>
 			</dict>
 		</array>
-		<key>selected</key>
-		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>
