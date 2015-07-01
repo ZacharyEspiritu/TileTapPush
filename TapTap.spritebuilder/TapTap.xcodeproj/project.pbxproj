@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		550183791B44796D00E134B9 /* WarningGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550183781B44796D00E134B9 /* WarningGradient.swift */; };
 		5537FDB01B43169800C7D7DB /* DominantColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537FDAF1B43169800C7D7DB /* DominantColor.swift */; };
 		5537FDB41B43584B00C7D7DB /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537FDB31B43584B00C7D7DB /* MainScene.swift */; };
 		55CC03B11B438DEA00A0B0E6 /* ParticleLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CC03B01B438DEA00A0B0E6 /* ParticleLine.swift */; };
@@ -151,7 +150,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		550183781B44796D00E134B9 /* WarningGradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WarningGradient.swift; sourceTree = "<group>"; };
 		5537FDAF1B43169800C7D7DB /* DominantColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DominantColor.swift; sourceTree = "<group>"; };
 		5537FDB31B43584B00C7D7DB /* MainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
 		55CC03B01B438DEA00A0B0E6 /* ParticleLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticleLine.swift; sourceTree = "<group>"; };
@@ -442,7 +440,6 @@
 			isa = PBXGroup;
 			children = (
 				5537FDB31B43584B00C7D7DB /* MainScene.swift */,
-				550183781B44796D00E134B9 /* WarningGradient.swift */,
 				55CC03B21B4394D900A0B0E6 /* TileRow.swift */,
 				55CC03B01B438DEA00A0B0E6 /* ParticleLine.swift */,
 				5537FDAF1B43169800C7D7DB /* DominantColor.swift */,
@@ -824,7 +821,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55CC03B31B4394D900A0B0E6 /* TileRow.swift in Sources */,
-				550183791B44796D00E134B9 /* WarningGradient.swift in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
 				55CC03B11B438DEA00A0B0E6 /* ParticleLine.swift in Sources */,
