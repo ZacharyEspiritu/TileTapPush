@@ -11,6 +11,9 @@ import Foundation
 enum Side {
     case Blue, Red
 }
+enum Winner {
+    case Blue, Red, None
+}
 
 class MainScene: CCNode {
     
@@ -43,6 +46,8 @@ class MainScene: CCNode {
     
     weak var world: CCNode!
     
+    weak var topTitleHolderNode, bottomTitleHolderNode: CCNode! // Used to animate title CCLabelTTF nodes attached to these holder nodes.
+    
     // Variables used to handle the infinite generation of tileRows. Two sets exist to handle both players' sets individually.
     weak var blueTileRowNode: CCNode!
     var blueTileRows: [TileRow] = []
@@ -51,8 +56,11 @@ class MainScene: CCNode {
     var redTileRows: [TileRow] = []
     var redIndex: Int = 0
     
+    // Variables used to handle the each of the red X's that appears when you tap on an incorrect box.
     weak var blueX1, blueX2, blueX3, blueX4: CCSprite!
     weak var redX1, redX2, redX3, redX4: CCSprite!
+    
+    var currentWinner: Winner = .None
     
     // MARK: Reset Functions
     
@@ -60,6 +68,8 @@ class MainScene: CCNode {
     Called whenever the `MainScene.ccb` file loads.
     */
     func didLoadFromCCB() {
+        
+        self.animationManager.runAnimationsForSequenceNamed("Gameplay")
         
         for index in 0..<numberOfTileRows {
             
@@ -351,7 +361,6 @@ class MainScene: CCNode {
     Triggers end-game animation sequences.
     */
     func redWins() {
-        println("Red wins")
         self.userInteractionEnabled = false
         
         fadeOutTileRows()
@@ -360,6 +369,8 @@ class MainScene: CCNode {
         particleLine.stopParticleGeneration()
         
         blueWarningGradient.visible = false
+        
+        currentWinner = .Red
     }
     
     /**
@@ -377,6 +388,8 @@ class MainScene: CCNode {
         particleLine.stopParticleGeneration()
         
         redWarningGradient.visible = false
+        
+        currentWinner = .Blue
     }
     
     /**
@@ -399,7 +412,7 @@ class MainScene: CCNode {
     */
     func playAgain() {
         var mainScene = CCBReader.load("MainScene") as! MainScene
-        mainScene.animationManager.runAnimationsForSequenceNamed("Default Timeline")
+        mainScene.animationManager.runAnimationsForSequenceNamed("Gameplay")
         
         var scene = CCScene()
         scene.addChild(mainScene)
@@ -408,8 +421,37 @@ class MainScene: CCNode {
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
     
+    /**
+    Brings the game back to the mainMenu with some animation for polish.
+    */
     func mainMenu() {
         
+        if currentWinner == .Blue {
+            world.animationManager.runAnimationsForSequenceNamed("BlueTransitionToMenu")
+        }
+        else if currentWinner == .Red {
+            world.animationManager.runAnimationsForSequenceNamed("RedTransitionToMenu")
+        }
+        
+        currentWinner == .None
+        
+        world.animationManager.runAnimationsForSequenceNamed("MainMenu")
+        
+        var fadeInAction = CCActionFadeIn(duration: 1)
+        
+        topTitleHolderNode.visible = true
+        bottomTitleHolderNode.visible = true
+        
+        topTitleHolderNode.cascadeOpacityEnabled = true
+        bottomTitleHolderNode.cascadeOpacityEnabled = true
+        
+        topTitleHolderNode.runAction(fadeInAction)
+        bottomTitleHolderNode.runAction(fadeInAction)
+
+    }
+    
+    func play() {
+        playAgain()
     }
     
 }
