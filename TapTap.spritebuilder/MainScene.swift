@@ -110,21 +110,24 @@ class MainScene: CCNode {
         redCountdownLabel.visible = true
         blueCountdownLabel.visible = true
         
-        self.countdown = "3"
-        self.delay(1.0) {
-            self.countdown = "2"
-            self.delay(1.0) {
-                self.countdown = "1"
-                self.delay(1.0) {
-                    // Enable user interaction on "GO!".
-                    self.countdown = "GO!"
-                    self.userInteractionEnabled = true
-                    self.multipleTouchEnabled = true
-                    self.delay(0.4) {
-                        // Remove the "GO!" after a slight pause. No need to wait another full second since the players will already know what to do.
-                        self.redCountdownLabel.visible = false
-                        self.blueCountdownLabel.visible = false
-                        return
+        self.countdown = "READY?"
+        delay(1.2) {
+            self.countdown = "3"
+            self.delay(0.8) {
+                self.countdown = "2"
+                self.delay(0.8) {
+                    self.countdown = "1"
+                    self.delay(0.8) {
+                        // Enable user interaction on "GO!".
+                        self.countdown = "GO!"
+                        self.userInteractionEnabled = true
+                        self.multipleTouchEnabled = true
+                        self.delay(0.4) {
+                            // Remove the "GO!" after a slight pause. No need to wait another full second since the players will already know what to do.
+                            self.redCountdownLabel.visible = false
+                            self.blueCountdownLabel.visible = false
+                            return
+                        }
                     }
                 }
             }
