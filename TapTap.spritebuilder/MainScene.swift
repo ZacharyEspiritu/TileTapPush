@@ -63,6 +63,8 @@ class MainScene: CCNode {
     
     var currentWinner: Winner = .None
     
+    var warningSound = false
+    
     // MARK: Reset Functions
     
     /**
@@ -98,6 +100,8 @@ class MainScene: CCNode {
         
         audio.preloadEffect("siren.mp3")
         audio.preloadEffect("tap.wav")
+        audio.preloadEffect("scratch.wav")
+        audio.playBg("gameplayBG.mp3")
         
         countdownBeforeGameBegins()
 
@@ -200,15 +204,30 @@ class MainScene: CCNode {
                 redWarningGradient.visible = true
             }
             
-            audio.playEffect("siren.mp3", loop: true)
+            // "Locking" mechanism to prevent the `siren.mp3` being repeatedly played on every tap that would result in a "Warning" state.
+            if !warningSound {
+                warningSound = true
+                checkForWarningSound()
+            }
         }
         else {
             blueWarningGradient.visible = false
             redWarningGradient.visible = false
             
             audio.stopAllEffects()
+            
+            warningSound = false // "Unlocks" the locking mechanism detailed above.
         }
         
+    }
+    
+    /**
+    Checks to see if a warning sound should be played.
+    */
+    func checkForWarningSound() {
+        if warningSound {
+            audio.playEffect("siren.mp3", volume: 0.06, pitch: 1.0, pan: 0.0, loop: true)
+        }
     }
     
     /**
@@ -371,6 +390,8 @@ class MainScene: CCNode {
                 blueWins()
             }
             audio.stopAllEffects()
+            audio.playEffect("scratch.wav")
+            audio.playBg("outsideBG.wav")
             return true
         }
         

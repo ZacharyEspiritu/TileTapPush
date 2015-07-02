@@ -13,6 +13,11 @@
 		5537FDB41B43584B00C7D7DB /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537FDB31B43584B00C7D7DB /* MainScene.swift */; };
 		55854D4E1B456BF000DA5C31 /* siren.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 55854D4D1B456BF000DA5C31 /* siren.mp3 */; };
 		55854D5E1B458D6600DA5C31 /* tap.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55854D5D1B458D6600DA5C31 /* tap.wav */; };
+		55975C801B45A0EA00DDAD2A /* backspin.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55975C7F1B45A0EA00DDAD2A /* backspin.wav */; };
+		55975C841B45A0F000DDAD2A /* gameplayBG.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 55975C831B45A0F000DDAD2A /* gameplayBG.mp3 */; };
+		55975C881B45A0FA00DDAD2A /* menuBG.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 55975C851B45A0FA00DDAD2A /* menuBG.mp3 */; };
+		55975C891B45A0FA00DDAD2A /* outsideBG.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55975C861B45A0FA00DDAD2A /* outsideBG.wav */; };
+		55975C8A1B45A0FA00DDAD2A /* scratch.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55975C871B45A0FA00DDAD2A /* scratch.wav */; };
 		55CC03B11B438DEA00A0B0E6 /* ParticleLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CC03B01B438DEA00A0B0E6 /* ParticleLine.swift */; };
 		55CC03B31B4394D900A0B0E6 /* TileRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CC03B21B4394D900A0B0E6 /* TileRow.swift */; };
 		5B121030197484FA004C1E1D /* TapTapActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12102F197484FA004C1E1D /* TapTapActivity.m */; };
@@ -157,6 +162,11 @@
 		5537FDB31B43584B00C7D7DB /* MainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
 		55854D4D1B456BF000DA5C31 /* siren.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = siren.mp3; sourceTree = "<group>"; };
 		55854D5D1B458D6600DA5C31 /* tap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tap.wav; sourceTree = "<group>"; };
+		55975C7F1B45A0EA00DDAD2A /* backspin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = backspin.wav; sourceTree = "<group>"; };
+		55975C831B45A0F000DDAD2A /* gameplayBG.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameplayBG.mp3; sourceTree = "<group>"; };
+		55975C851B45A0FA00DDAD2A /* menuBG.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = menuBG.mp3; sourceTree = "<group>"; };
+		55975C861B45A0FA00DDAD2A /* outsideBG.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = outsideBG.wav; sourceTree = "<group>"; };
+		55975C871B45A0FA00DDAD2A /* scratch.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = scratch.wav; sourceTree = "<group>"; };
 		55CC03B01B438DEA00A0B0E6 /* ParticleLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticleLine.swift; sourceTree = "<group>"; };
 		55CC03B21B4394D900A0B0E6 /* TileRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileRow.swift; sourceTree = "<group>"; };
 		5B12100919748273004C1E1D /* libEGL.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.so; path = /usr/lib/armv7a/libEGL.so; sourceTree = SDKROOT; };
@@ -283,6 +293,11 @@
 		550183981B44CFF200E134B9 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				55975C851B45A0FA00DDAD2A /* menuBG.mp3 */,
+				55975C861B45A0FA00DDAD2A /* outsideBG.wav */,
+				55975C871B45A0FA00DDAD2A /* scratch.wav */,
+				55975C831B45A0F000DDAD2A /* gameplayBG.mp3 */,
+				55975C7F1B45A0EA00DDAD2A /* backspin.wav */,
 				55854D4D1B456BF000DA5C31 /* siren.mp3 */,
 				55854D5D1B458D6600DA5C31 /* tap.wav */,
 			);
@@ -748,6 +763,7 @@
 			files = (
 				55854D5E1B458D6600DA5C31 /* tap.wav in Resources */,
 				B71F5919188484E7003F4D28 /* Settings.png in Resources */,
+				55975C801B45A0EA00DDAD2A /* backspin.wav in Resources */,
 				B7378978180762440076A88C /* Default@2x.png in Resources */,
 				B71F5914188484E7003F4D28 /* iPad@2x.png in Resources */,
 				B71F5913188484E7003F4D28 /* iPad.png in Resources */,
@@ -755,9 +771,13 @@
 				B71F5916188484E7003F4D28 /* iPhone-old@2x.png in Resources */,
 				B737893B180761570076A88C /* Published-iOS in Resources */,
 				B71F591A188484E7003F4D28 /* Settings@2x.png in Resources */,
+				55975C881B45A0FA00DDAD2A /* menuBG.mp3 in Resources */,
+				55975C8A1B45A0FA00DDAD2A /* scratch.wav in Resources */,
 				B7378976180762440076A88C /* Default-Landscape~ipad.png in Resources */,
 				B71F5915188484E7003F4D28 /* iPhone-old.png in Resources */,
 				B71F5917188484E7003F4D28 /* iPhone.png in Resources */,
+				55975C841B45A0F000DDAD2A /* gameplayBG.mp3 in Resources */,
+				55975C891B45A0FA00DDAD2A /* outsideBG.wav in Resources */,
 				B7378975180762440076A88C /* Default-568h@2x.png in Resources */,
 				B7378977180762440076A88C /* Default.png in Resources */,
 				55854D4E1B456BF000DA5C31 /* siren.mp3 in Resources */,
