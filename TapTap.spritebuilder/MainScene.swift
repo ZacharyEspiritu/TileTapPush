@@ -113,11 +113,11 @@ class MainScene: CCNode {
         self.countdown = "READY?"
         delay(1.2) {
             self.countdown = "3"
-            self.delay(0.8) {
+            self.delay(1) {
                 self.countdown = "2"
-                self.delay(0.8) {
+                self.delay(1) {
                     self.countdown = "1"
-                    self.delay(0.8) {
+                    self.delay(1) {
                         // Enable user interaction on "GO!".
                         self.countdown = "GO!"
                         self.userInteractionEnabled = true
