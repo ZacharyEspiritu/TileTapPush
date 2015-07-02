@@ -101,6 +101,7 @@ class MainScene: CCNode {
         audio.preloadEffect("siren.mp3")
         audio.preloadEffect("tap.wav")
         audio.preloadEffect("scratch.wav")
+        audio.preloadEffect("buzz.wav")
         audio.playBg("gameplayBG.mp3")
         
         countdownBeforeGameBegins()
@@ -226,7 +227,7 @@ class MainScene: CCNode {
     */
     func checkForWarningSound() {
         if warningSound {
-            audio.playEffect("siren.mp3", volume: 0.06, pitch: 1.0, pan: 0.0, loop: true)
+            audio.playEffect("siren.mp3", volume: 0.08, pitch: 1.0, pan: 0.0, loop: true)
         }
     }
     
@@ -304,6 +305,8 @@ class MainScene: CCNode {
                     blueX4.visible = true
                     blueX4.runAction(CCActionFadeOut(duration: xDelay))
                 }
+                
+                audio.playEffect("buzz.wav")
             }
             
         }
@@ -368,6 +371,8 @@ class MainScene: CCNode {
                     redX1.visible = true
                     redX1.runAction(CCActionFadeOut(duration: xDelay))
                 }
+                
+                audio.playEffect("buzz.wav")
             }
         }
     }

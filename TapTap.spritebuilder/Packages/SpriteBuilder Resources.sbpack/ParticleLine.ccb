@@ -194,7 +194,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
+							<real>-5</real>
 							<real>0.0</real>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -489,7 +489,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
+							<real>5</real>
 							<real>0.0</real>
 							<integer>0</integer>
 							<integer>0</integer>

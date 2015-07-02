@@ -11,6 +11,7 @@
 		550183971B44B55400E134B9 /* iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 550183961B44B55400E134B9 /* iPhone@2x.png */; };
 		5537FDB01B43169800C7D7DB /* DominantColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537FDAF1B43169800C7D7DB /* DominantColor.swift */; };
 		5537FDB41B43584B00C7D7DB /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537FDB31B43584B00C7D7DB /* MainScene.swift */; };
+		556C4CA41B45CD6800A6007A /* buzz.wav in Resources */ = {isa = PBXBuildFile; fileRef = 556C4CA31B45CD6800A6007A /* buzz.wav */; };
 		55854D4E1B456BF000DA5C31 /* siren.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 55854D4D1B456BF000DA5C31 /* siren.mp3 */; };
 		55854D5E1B458D6600DA5C31 /* tap.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55854D5D1B458D6600DA5C31 /* tap.wav */; };
 		55975C801B45A0EA00DDAD2A /* backspin.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55975C7F1B45A0EA00DDAD2A /* backspin.wav */; };
@@ -160,6 +161,7 @@
 		550183961B44B55400E134B9 /* iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPhone@2x.png"; path = "Icons/iPhone@2x.png"; sourceTree = "<group>"; };
 		5537FDAF1B43169800C7D7DB /* DominantColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DominantColor.swift; sourceTree = "<group>"; };
 		5537FDB31B43584B00C7D7DB /* MainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
+		556C4CA31B45CD6800A6007A /* buzz.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = buzz.wav; sourceTree = "<group>"; };
 		55854D4D1B456BF000DA5C31 /* siren.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = siren.mp3; sourceTree = "<group>"; };
 		55854D5D1B458D6600DA5C31 /* tap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tap.wav; sourceTree = "<group>"; };
 		55975C7F1B45A0EA00DDAD2A /* backspin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = backspin.wav; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				55975C851B45A0FA00DDAD2A /* menuBG.mp3 */,
+				556C4CA31B45CD6800A6007A /* buzz.wav */,
 				55975C861B45A0FA00DDAD2A /* outsideBG.wav */,
 				55975C871B45A0FA00DDAD2A /* scratch.wav */,
 				55975C831B45A0F000DDAD2A /* gameplayBG.mp3 */,
@@ -776,6 +779,7 @@
 				B7378976180762440076A88C /* Default-Landscape~ipad.png in Resources */,
 				B71F5915188484E7003F4D28 /* iPhone-old.png in Resources */,
 				B71F5917188484E7003F4D28 /* iPhone.png in Resources */,
+				556C4CA41B45CD6800A6007A /* buzz.wav in Resources */,
 				55975C841B45A0F000DDAD2A /* gameplayBG.mp3 in Resources */,
 				55975C891B45A0FA00DDAD2A /* outsideBG.wav in Resources */,
 				B7378975180762440076A88C /* Default-568h@2x.png in Resources */,
