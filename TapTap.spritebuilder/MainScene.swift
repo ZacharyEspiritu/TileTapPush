@@ -16,10 +16,12 @@ class MainScene: CCNode {
     
     // MARK: Constants
     
-    let moveAmount: CGFloat = 0.03
+    let moveAmount: CGFloat = 0.03      // How much does the line move on a correct tap?
     
-    let wrongTapPenalty: CGFloat = 0.04
-    let numberOfTileRows: Int = 4
+    let wrongTapPenalty: CGFloat = 0.04 // How much does the line move on an incorrect tap?
+    let numberOfTileRows: Int = 4       // How many tile rows do we generate for each array?
+    
+    let xDelay = 0.15                   // How long does the incorrect X mark appear in milliseconds?
     
     // MARK: Variables
     
@@ -48,6 +50,9 @@ class MainScene: CCNode {
     weak var redTileRowNode: CCNode!
     var redTileRows: [TileRow] = []
     var redIndex: Int = 0
+    
+    weak var blueX1, blueX2, blueX3, blueX4: CCSprite!
+    weak var redX1, redX2, redX3, redX4: CCSprite!
     
     // MARK: Reset Functions
     
@@ -224,11 +229,34 @@ class MainScene: CCNode {
                 // Move the dominantColor towards its goal.
                 dominantColor.left(Float(moveAmount))
             }
-            else { // If the player tapped on the wrong square, move the dominantColor away from its goal.
+            else {
+                
+                // If the player tapped on the wrong square, move the dominantColor away from its goal.
                 dominantColor.right(Float(wrongTapPenalty))
                 
                 // Move the particleLine to stay with the dominantColor edge.
                 particleLine.position.x -= wrongTapPenalty
+                
+                // Have the color of the incorrectly tapped box flash red.
+                let redColor = CCColor(red: 1, green: 0, blue: 0)
+                let blackColor = CCColor(red: 0, green: 0, blue: 0)
+                
+                if yTouch > 0 && yTouch < screenQuartersVertical { // Incorrect tap on Bottom box (box1).
+                    blueX1.visible = true
+                    blueX1.runAction(CCActionFadeOut(duration: xDelay))
+                }
+                else if yTouch > screenQuartersVertical && yTouch < (screenQuartersVertical * 2) { // Incorrect tap on Midbottom box (box2).
+                    blueX2.visible = true
+                    blueX2.runAction(CCActionFadeOut(duration: xDelay))
+                }
+                else if yTouch > (screenQuartersVertical * 2) && yTouch < (screenQuartersVertical * 3) { // Incorrect tap on Midtop box (box3).
+                    blueX3.visible = true
+                    blueX3.runAction(CCActionFadeOut(duration: xDelay))
+                }
+                else if yTouch > (screenQuartersVertical * 3) && yTouch < (screenQuartersVertical * 4) { // Incorrect tap on Top box (box4).
+                    blueX4.visible = true
+                    blueX4.runAction(CCActionFadeOut(duration: xDelay))
+                }
             }
             
         }
@@ -270,6 +298,27 @@ class MainScene: CCNode {
                 
                 // Move the particleLine to stay with the dominantColor edge.
                 particleLine.position.x += wrongTapPenalty
+                
+                // Have the color of the incorrectly tapped box flash red.
+                let redColor = CCColor(red: 1, green: 0, blue: 0)
+                let blackColor = CCColor(red: 0, green: 0, blue: 0)
+                
+                if yTouch > 0 && yTouch < screenQuartersVertical { // Incorrect tap on Bottom box (box4).
+                    redX4.visible = true
+                    redX4.runAction(CCActionFadeOut(duration: xDelay))
+                }
+                else if yTouch > screenQuartersVertical && yTouch < (screenQuartersVertical * 2) { // Incorrect tap on Midbottom box (box3).
+                    redX3.visible = true
+                    redX3.runAction(CCActionFadeOut(duration: xDelay))
+                }
+                else if yTouch > (screenQuartersVertical * 2) && yTouch < (screenQuartersVertical * 3) { // Incorrect tap on Midtop box (box2).
+                    redX2.visible = true
+                    redX2.runAction(CCActionFadeOut(duration: xDelay))
+                }
+                else if yTouch > (screenQuartersVertical * 3) && yTouch < (screenQuartersVertical * 4) { // Incorrect tap on Top box (box1).
+                    redX1.visible = true
+                    redX1.runAction(CCActionFadeOut(duration: xDelay))
+                }
             }
         }
     }
