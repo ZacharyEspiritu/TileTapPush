@@ -11,6 +11,8 @@
 		550183971B44B55400E134B9 /* iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 550183961B44B55400E134B9 /* iPhone@2x.png */; };
 		5537FDB01B43169800C7D7DB /* DominantColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537FDAF1B43169800C7D7DB /* DominantColor.swift */; };
 		5537FDB41B43584B00C7D7DB /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537FDB31B43584B00C7D7DB /* MainScene.swift */; };
+		55854D4E1B456BF000DA5C31 /* siren.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 55854D4D1B456BF000DA5C31 /* siren.mp3 */; };
+		55854D5E1B458D6600DA5C31 /* tap.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55854D5D1B458D6600DA5C31 /* tap.wav */; };
 		55CC03B11B438DEA00A0B0E6 /* ParticleLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CC03B01B438DEA00A0B0E6 /* ParticleLine.swift */; };
 		55CC03B31B4394D900A0B0E6 /* TileRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CC03B21B4394D900A0B0E6 /* TileRow.swift */; };
 		5B121030197484FA004C1E1D /* TapTapActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12102F197484FA004C1E1D /* TapTapActivity.m */; };
@@ -153,6 +155,8 @@
 		550183961B44B55400E134B9 /* iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPhone@2x.png"; path = "Icons/iPhone@2x.png"; sourceTree = "<group>"; };
 		5537FDAF1B43169800C7D7DB /* DominantColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DominantColor.swift; sourceTree = "<group>"; };
 		5537FDB31B43584B00C7D7DB /* MainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
+		55854D4D1B456BF000DA5C31 /* siren.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = siren.mp3; sourceTree = "<group>"; };
+		55854D5D1B458D6600DA5C31 /* tap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tap.wav; sourceTree = "<group>"; };
 		55CC03B01B438DEA00A0B0E6 /* ParticleLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticleLine.swift; sourceTree = "<group>"; };
 		55CC03B21B4394D900A0B0E6 /* TileRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileRow.swift; sourceTree = "<group>"; };
 		5B12100919748273004C1E1D /* libEGL.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.so; path = /usr/lib/armv7a/libEGL.so; sourceTree = SDKROOT; };
@@ -279,6 +283,8 @@
 		550183981B44CFF200E134B9 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				55854D4D1B456BF000DA5C31 /* siren.mp3 */,
+				55854D5D1B458D6600DA5C31 /* tap.wav */,
 			);
 			name = Audio;
 			sourceTree = "<group>";
@@ -740,6 +746,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55854D5E1B458D6600DA5C31 /* tap.wav in Resources */,
 				B71F5919188484E7003F4D28 /* Settings.png in Resources */,
 				B7378978180762440076A88C /* Default@2x.png in Resources */,
 				B71F5914188484E7003F4D28 /* iPad@2x.png in Resources */,
@@ -753,6 +760,7 @@
 				B71F5917188484E7003F4D28 /* iPhone.png in Resources */,
 				B7378975180762440076A88C /* Default-568h@2x.png in Resources */,
 				B7378977180762440076A88C /* Default.png in Resources */,
+				55854D4E1B456BF000DA5C31 /* siren.mp3 in Resources */,
 				550183971B44B55400E134B9 /* iPhone@2x.png in Resources */,
 				550183951B44B16800E134B9 /* Default-568h@3x.png in Resources */,
 				B71F5911188484E7003F4D28 /* iPad-old.png in Resources */,

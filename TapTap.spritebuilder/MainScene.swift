@@ -20,12 +20,14 @@ class MainScene: CCNode {
     // MARK: Constants
     
     let moveAmount: CGFloat = 0.03      // How much does the line move on a correct tap?
-    
     let wrongTapPenalty: CGFloat = 0.04 // How much does the line move on an incorrect tap?
+    
     let numberOfTileRows: Int = 4       // How many tile rows do we generate for each array?
     
     let xDelay = 0.15                   // How long does the incorrect X mark appear in milliseconds?
     
+    let audio = OALSimpleAudio.sharedInstance()
+
     // MARK: Variables
     
     var countdown: String = "0" {
@@ -93,6 +95,9 @@ class MainScene: CCNode {
             blueTileRows.append(blueTileRow)
             redTileRows.append(redTileRow)
         }
+        
+        audio.preloadEffect("siren.mp3")
+        audio.preloadEffect("tap.wav")
         
         countdownBeforeGameBegins()
 
@@ -187,15 +192,21 @@ class MainScene: CCNode {
         
         var scale = dominantColor.scaleX
         
-        if scale <= 0.22 {
-            blueWarningGradient.visible = true
-        }
-        else if scale >= 0.78 {
-            redWarningGradient.visible = true
+        if scale <= 0.22 || scale >= 0.78 {
+            if scale <= 0.22 {
+                blueWarningGradient.visible = true
+            }
+            else if scale >= 0.78 {
+                redWarningGradient.visible = true
+            }
+            
+            audio.playEffect("siren.mp3", loop: true)
         }
         else {
             blueWarningGradient.visible = false
             redWarningGradient.visible = false
+            
+            audio.stopAllEffects()
         }
         
     }
@@ -243,6 +254,8 @@ class MainScene: CCNode {
                 
                 // Move the dominantColor towards its goal.
                 dominantColor.left(Float(moveAmount))
+                
+                audio.playEffect("tap.wav")
             }
             else {
                 
@@ -307,6 +320,8 @@ class MainScene: CCNode {
                 
                 // Since this is the red player, move the dominantColor away its goal.
                 dominantColor.right(Float(moveAmount))
+                
+                audio.playEffect("tap.wav")
             }
             else { // Since this is the red player, when the player taps on the wrong square, move the dominantColor towards its goal.
                 dominantColor.left(Float(wrongTapPenalty))
@@ -348,12 +363,14 @@ class MainScene: CCNode {
     func checkIfWin() -> Bool {
         var scale = dominantColor.scaleX
         
-        if scale <= 0 {
-            redWins()
-            return true
-        }
-        else if scale >= 1 {
-            blueWins()
+        if scale <= -0.01 || scale >= 1.01 {
+            if scale <= -0.01 {
+                redWins()
+            }
+            else if scale >= 1.01 {
+                blueWins()
+            }
+            audio.stopAllEffects()
             return true
         }
         
@@ -441,21 +458,26 @@ class MainScene: CCNode {
         }
         
         currentWinner == .None
+        userInteractionEnabled = false
         
         delay(1.2) { // We need to stick a delay in here because we need to wait for the `TransitionToMenu` sequence to end before playing the `MainMenu` sequence.
+            
             self.world.animationManager.runAnimationsForSequenceNamed("MainMenu")
+            
+            self.topTitleHolderNode.visible = true
+            self.bottomTitleHolderNode.visible = true
+            
+            self.topTitleHolderNode.cascadeOpacityEnabled = true
+            self.bottomTitleHolderNode.cascadeOpacityEnabled = true
+            
+            var fadeInAction = CCActionFadeIn(duration: 1)
+            self.topTitleHolderNode.runAction(fadeInAction)
+            self.bottomTitleHolderNode.runAction(fadeInAction)
+            
+            self.userInteractionEnabled = true
         }
         
-        var fadeInAction = CCActionFadeIn(duration: 1)
         
-        topTitleHolderNode.visible = true
-        bottomTitleHolderNode.visible = true
-        
-        topTitleHolderNode.cascadeOpacityEnabled = true
-        bottomTitleHolderNode.cascadeOpacityEnabled = true
-        
-        topTitleHolderNode.runAction(fadeInAction)
-        bottomTitleHolderNode.runAction(fadeInAction)
 
     }
     
