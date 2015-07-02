@@ -205,6 +205,9 @@ class MainScene: CCNode {
     Called whenever a tap occurs by `touchBegan()`.
     
     Checks to see if the tap landed in the right box on a `TileRow`.
+    
+    @param  side       The Side on which the tap occured.
+    @param  location   The CGPoint at which the tap occured.
     */
     func checkIfRightTap(#side: Side, location: CGPoint) {
         
@@ -339,7 +342,9 @@ class MainScene: CCNode {
     /**
     Checks at every tap if a Win state has occured as a result of the tap.
     
-    Returns a Boolean variable for outside functions to determine if a win occured. Returns true if a win occured. Returns false in all other cases.
+    Returns a Boolean variable for outside functions to determine if a win occured.
+    
+    @returns  Returns `true` if a win occured as a result of the tap; returns `false` in all other cases.
     */
     func checkIfWin() -> Bool {
         var scale = dominantColor.scaleX

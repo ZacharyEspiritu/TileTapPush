@@ -18,7 +18,7 @@ class ParticleLine: CCNode {
     // MARK: Functions
     
     /**
-    Stops the generation of the particles from a ParticleLine object. 
+    Stops the generation of the particles from a `ParticleLine` object.
     
     For whatever reasons that I still don't really know about (and, quite frankly, don't care about right now), there's no need for a `startParticleGeneration()` function because it ends up restarting itself. This might be due to the Default Timeline in Spritebuilder automatically restarting when the `MainScene.ccb` is reloaded.
     */

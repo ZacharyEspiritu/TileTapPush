@@ -52,7 +52,7 @@ class TileRow: CCNode {
     // MARK: Procedural Generation Functions
     
     /**
-    Generates a random TileRow.
+    Generates a random `TileRow`.
     
     It randomly generates a number and uses the result to decide which of the four boxes in a `TileRow` to color in. By using the `didSet` property of the `enumBox` variable, we don't need to set the colors here because they will be set automatically every time the `enumBox` variable of a `TileRow` changes.
     */
