@@ -34,7 +34,6 @@ class MainScene: CCNode {
             blueCountdownLabel.string = String("\(countdown)")
         }
     }
-    
     weak var redCountdownLabel: CCLabelTTF!
     weak var blueCountdownLabel: CCLabelTTF!
     
@@ -443,7 +442,9 @@ class MainScene: CCNode {
         
         currentWinner == .None
         
-        world.animationManager.runAnimationsForSequenceNamed("MainMenu")
+        delay(1.2) { // We need to stick a delay in here because we need to wait for the `TransitionToMenu` sequence to end before playing the `MainMenu` sequence.
+            self.world.animationManager.runAnimationsForSequenceNamed("MainMenu")
+        }
         
         var fadeInAction = CCActionFadeIn(duration: 1)
         
@@ -458,6 +459,9 @@ class MainScene: CCNode {
 
     }
     
+    /**
+    Plays the game.
+    */
     func play() {
         playAgain()
     }
