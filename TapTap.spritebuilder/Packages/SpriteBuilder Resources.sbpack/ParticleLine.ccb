@@ -274,7 +274,7 @@
 						<key>type</key>
 						<string>Integer</string>
 						<key>value</key>
-						<integer>250</integer>
+						<integer>750</integer>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -294,8 +294,8 @@
 						<string>FloatVar</string>
 						<key>value</key>
 						<array>
-							<real>7</real>
-							<real>7</real>
+							<real>5</real>
+							<real>5</real>
 						</array>
 					</dict>
 					<dict>
@@ -305,8 +305,8 @@
 						<string>FloatVar</string>
 						<key>value</key>
 						<array>
-							<real>6</real>
-							<real>4</real>
+							<real>3</real>
+							<real>1.5</real>
 						</array>
 					</dict>
 					<dict>
@@ -569,7 +569,7 @@
 						<key>type</key>
 						<string>Integer</string>
 						<key>value</key>
-						<integer>250</integer>
+						<integer>750</integer>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -589,8 +589,8 @@
 						<string>FloatVar</string>
 						<key>value</key>
 						<array>
-							<real>7</real>
-							<real>7</real>
+							<real>5</real>
+							<real>5</real>
 						</array>
 					</dict>
 					<dict>
@@ -600,8 +600,8 @@
 						<string>FloatVar</string>
 						<key>value</key>
 						<array>
-							<real>6</real>
-							<real>4</real>
+							<real>3</real>
+							<real>1.5</real>
 						</array>
 					</dict>
 					<dict>
