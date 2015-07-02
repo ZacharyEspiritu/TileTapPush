@@ -466,4 +466,11 @@ class MainScene: CCNode {
         playAgain()
     }
     
+    /**
+    Opens up the options menu.
+    */
+    func options() {
+        
+    }
+    
 }
