@@ -14,6 +14,9 @@ enum Side {
 enum Winner {
     case Blue, Red, None
 }
+enum GameState {
+    case Initial, Playing, GameOver
+}
 
 class MainScene: CCNode {
     
@@ -65,6 +68,9 @@ class MainScene: CCNode {
     
     var warningSound = false // Used in the "locking" mechanism for the warningSound. See `checkForWarningSound()` below.
     
+    var gameState: GameState = .Initial // Used to check if the game is in a state where the players are allowed to make moves. Prevents players from discovering a bug where you can continue playing the game even after the game has ended and is in the Main Menu.
+    
+    
     // MARK: Reset Functions
     
     /**
@@ -104,6 +110,7 @@ class MainScene: CCNode {
         audio.preloadEffect("buzz.wav")
         audio.playBg("gameplayBG.mp3")
         
+        gameState = .Playing // Change the gameState to Playing to allow players to begin making moves.
         countdownBeforeGameBegins()
 
     }
@@ -166,22 +173,24 @@ class MainScene: CCNode {
     */
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!) {
         
-        var taplocation = touch.locationInNode(world)
-        
-        var xTouch = taplocation.x
-        var screenHalf = CCDirector.sharedDirector().viewSize().width / 2
-        
-        if xTouch < screenHalf { // A tap on the blue side.
-            checkIfRightTap(side: .Blue, location: taplocation)
+        if gameState == .Playing { // Check to see if the `gameState` is currently Playing. Used to prevent people from continuing to make moves while the game is in the menu phase.
+            var taplocation = touch.locationInNode(world)
             
-        }
-        else { // A tap on the red side.
-            checkIfRightTap(side: .Red, location: taplocation)
-        }
-        
-        // Check to see if the tap caused a win. If not, check to see if the tap caused the game to enter a warning state for one of the players.
-        if !checkIfWin() {
-            checkForWarning()
+            var xTouch = taplocation.x
+            var screenHalf = CCDirector.sharedDirector().viewSize().width / 2
+            
+            if xTouch < screenHalf { // A tap on the blue side.
+                checkIfRightTap(side: .Blue, location: taplocation)
+                
+            }
+            else { // A tap on the red side.
+                checkIfRightTap(side: .Red, location: taplocation)
+            }
+            
+            // Check to see if the tap caused a win. If not, check to see if the tap caused the game to enter a warning state for one of the players.
+            if !checkIfWin() {
+                checkForWarning()
+            }
         }
         
     }
@@ -388,15 +397,22 @@ class MainScene: CCNode {
         var scale = dominantColor.scaleX
         
         if scale <= -0.01 || scale >= 1.01 {
+            
             if scale <= -0.01 {
                 redWins()
             }
             else if scale >= 1.01 {
                 blueWins()
             }
+            
+            // Stop all music and play some end-game tunes.
             audio.stopAllEffects()
             audio.playEffect("scratch.wav")
             audio.playBg("outsideBG.wav")
+            
+            // Change the `gameState` to GameOver to prevent people from continuing to play the game on the now-invisible TileRows.
+            gameState = .GameOver
+            
             return true
         }
         
