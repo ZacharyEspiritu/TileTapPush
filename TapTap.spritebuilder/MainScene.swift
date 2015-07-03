@@ -31,6 +31,7 @@ class MainScene: CCNode {
     
     let audio = OALSimpleAudio.sharedInstance() // OALSimpleAudio instance used for handling sounds.
 
+    
     // MARK: Variables
     
     var countdown: String = "0" {
@@ -115,6 +116,7 @@ class MainScene: CCNode {
 
     }
     
+    
     // MARK: Primed Game State Functions
     
     /**
@@ -162,6 +164,7 @@ class MainScene: CCNode {
             dispatch_get_main_queue(), closure)
     }
     
+    
     // MARK: In-Game Functions
     
     /**
@@ -194,6 +197,7 @@ class MainScene: CCNode {
         }
         
     }
+    
     
     // MARK: Checking Functions
     
@@ -419,6 +423,7 @@ class MainScene: CCNode {
         return false
     }
     
+    
     // MARK: End-Game Functions
 
     /**
@@ -470,6 +475,7 @@ class MainScene: CCNode {
         redTileRowNode.cascadeOpacityEnabled = true
         redTileRowNode.runAction(CCActionFadeOut(duration: 0.3))
     }
+    
     
     // MARK: Button Functions
     
