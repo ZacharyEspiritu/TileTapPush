@@ -1155,7 +1155,7 @@ Public domain sounds found on freesound.org.</string>
 												<key>value</key>
 												<array>
 													<real>58</real>
-													<real>220</real>
+													<real>230</real>
 													<integer>0</integer>
 													<integer>0</integer>
 													<integer>0</integer>
@@ -1194,6 +1194,7 @@ Public domain sounds found on freesound.org.</string>
 												<array>
 													<string>Jorrie Brettin
 Iavor Dekov
+Abby Espiritu
 Avery Espiritu
 Zoe Espiritu
 Jacob Haff
@@ -1349,6 +1350,8 @@ Eric Zhou</string>
 												</array>
 											</dict>
 										</array>
+										<key>selected</key>
+										<true/>
 									</dict>
 									<dict>
 										<key>UUID</key>
@@ -1383,7 +1386,7 @@ Eric Zhou</string>
 												<key>value</key>
 												<array>
 													<real>58</real>
-													<real>450</real>
+													<real>470</real>
 													<integer>0</integer>
 													<integer>0</integer>
 													<integer>0</integer>
@@ -2083,7 +2086,7 @@ Eric Zhou</string>
 										<key>value</key>
 										<array>
 											<real>48</real>
-											<real>852</real>
+											<real>872</real>
 											<integer>0</integer>
 											<integer>0</integer>
 											<integer>0</integer>
