@@ -1155,7 +1155,7 @@ Public domain sounds found on freesound.org.</string>
 												<key>value</key>
 												<array>
 													<real>58</real>
-													<real>200</real>
+													<real>210</real>
 													<integer>0</integer>
 													<integer>0</integer>
 													<integer>0</integer>
@@ -1211,7 +1211,8 @@ Olivia Ross
 Shashank Sharma
 Thanasi Stratigakis
 Monica Ting
-Brandon Troche</string>
+Brandon Troche
+Eric Zhou</string>
 													<false/>
 												</array>
 											</dict>
@@ -1347,6 +1348,8 @@ Brandon Troche</string>
 												</array>
 											</dict>
 										</array>
+										<key>selected</key>
+										<true/>
 									</dict>
 									<dict>
 										<key>UUID</key>
@@ -1381,7 +1384,7 @@ Brandon Troche</string>
 												<key>value</key>
 												<array>
 													<real>58</real>
-													<real>410</real>
+													<real>430</real>
 													<integer>0</integer>
 													<integer>0</integer>
 													<integer>0</integer>
@@ -2081,7 +2084,7 @@ Brandon Troche</string>
 										<key>value</key>
 										<array>
 											<real>48</real>
-											<real>812</real>
+											<real>832</real>
 											<integer>0</integer>
 											<integer>0</integer>
 											<integer>0</integer>
