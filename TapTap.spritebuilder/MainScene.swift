@@ -26,7 +26,7 @@ class MainScene: CCNode {
     
     let xDelay = 0.15                   // How long does the incorrect X mark appear in milliseconds?
     
-    let audio = OALSimpleAudio.sharedInstance()
+    let audio = OALSimpleAudio.sharedInstance() // OALSimpleAudio instance used for handling sounds.
 
     // MARK: Variables
     
@@ -36,16 +36,16 @@ class MainScene: CCNode {
             blueCountdownLabel.string = String("\(countdown)")
         }
     }
-    weak var redCountdownLabel: CCLabelTTF!
-    weak var blueCountdownLabel: CCLabelTTF!
+    weak var redCountdownLabel: CCLabelTTF!  // Countdown labels used at the beginning
+    weak var blueCountdownLabel: CCLabelTTF! // of each game.
     
-    weak var redWarningGradient: CCNode!
-    weak var blueWarningGradient: CCNode!
+    weak var redWarningGradient: CCNode!     // Refers to the CCGradientNodes that appear
+    weak var blueWarningGradient: CCNode!    // when a player is about to lose.
     
-    weak var dominantColor: DominantColor!
-    weak var particleLine: ParticleLine!
+    weak var dominantColor: DominantColor!   // The color that is the one that is actually moving. Defaults to Blue.
+    weak var particleLine: ParticleLine!     // The particle line that hides the color fade between the two sides.
     
-    weak var world: CCNode!
+    weak var world: CCNode!                  // Used for animation handling in MainScene.ccb.
     
     weak var topTitleHolderNode, bottomTitleHolderNode: CCNode! // Used to animate title CCLabelTTF nodes attached to these holder nodes.
     
@@ -61,9 +61,9 @@ class MainScene: CCNode {
     weak var blueX1, blueX2, blueX3, blueX4: CCSprite!
     weak var redX1, redX2, redX3, redX4: CCSprite!
     
-    var currentWinner: Winner = .None
+    var currentWinner: Winner = .None // Used to determine which menu transition animation should be played, because it depends on which side on the last game.
     
-    var warningSound = false
+    var warningSound = false // Used in the "locking" mechanism for the warningSound. See `checkForWarningSound()` below.
     
     // MARK: Reset Functions
     
@@ -232,12 +232,12 @@ class MainScene: CCNode {
     }
     
     /**
-    Called whenever a tap occurs by `touchBegan()`.
+    Checks if a tap landed in the correct box on a `TileRow`.
+
+    Called whenever a tap occurs by `touchBegan()`, which passes the `Side` and the `CGPoint` of the tap location to the function.
     
-    Checks to see if the tap landed in the right box on a `TileRow`.
-    
-    @param  side       The Side on which the tap occured.
-    @param  location   The CGPoint at which the tap occured.
+    :param: side      The `Side` on which the tap occured.
+    :param: location  The `CGPoint` at which the tap occured.
     */
     func checkIfRightTap(#side: Side, location: CGPoint) {
         
@@ -382,7 +382,7 @@ class MainScene: CCNode {
     
     Returns a Boolean variable for outside functions to determine if a win occured.
     
-    @returns  Returns `true` if a win occured as a result of the tap; returns `false` in all other cases.
+    :returns:  Returns `true` if a win occured as a result of the tap. Returns `false` in all other cases.
     */
     func checkIfWin() -> Bool {
         var scale = dominantColor.scaleX
