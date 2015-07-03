@@ -10,6 +10,11 @@ import Foundation
 
 class MainScene: CCNode {
     
+    // MARK: Functions
+    
+    /**
+    Starts a new instance of the game.
+    */
     func play() {
         var gameplayScene = CCBReader.load("Gameplay") as! Gameplay
         gameplayScene.animationManager.runAnimationsForSequenceNamed("Gameplay")
@@ -21,6 +26,9 @@ class MainScene: CCNode {
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
     
+    /**
+    Opens up the options menu.
+    */
     func options() {
         var optionsMenuScene = CCBReader.load("OptionsMenu") as! OptionsMenu
         
