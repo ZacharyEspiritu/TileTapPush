@@ -1155,7 +1155,7 @@ Public domain sounds found on freesound.org.</string>
 												<key>value</key>
 												<array>
 													<real>58</real>
-													<real>210</real>
+													<real>220</real>
 													<integer>0</integer>
 													<integer>0</integer>
 													<integer>0</integer>
@@ -1212,6 +1212,7 @@ Shashank Sharma
 Thanasi Stratigakis
 Monica Ting
 Brandon Troche
+Steven Zhao
 Eric Zhou</string>
 													<false/>
 												</array>
@@ -1348,8 +1349,6 @@ Eric Zhou</string>
 												</array>
 											</dict>
 										</array>
-										<key>selected</key>
-										<true/>
 									</dict>
 									<dict>
 										<key>UUID</key>
@@ -1384,7 +1383,7 @@ Eric Zhou</string>
 												<key>value</key>
 												<array>
 													<real>58</real>
-													<real>430</real>
+													<real>450</real>
 													<integer>0</integer>
 													<integer>0</integer>
 													<integer>0</integer>
@@ -2084,7 +2083,7 @@ Eric Zhou</string>
 										<key>value</key>
 										<array>
 											<real>48</real>
-											<real>832</real>
+											<real>852</real>
 											<integer>0</integer>
 											<integer>0</integer>
 											<integer>0</integer>
