@@ -22,7 +22,7 @@ class TileRow: CCNode {
     weak var box3: CCNodeColor!
     weak var box4: CCNodeColor!
     
-    var enumBox: BoxNumber = .Top /** Default box. We have to put something in for each of our variables otherwise we would have to implement an override init() function somewhere in here, and who really wants to do that? I also don't want to run the risk of implementing a .None enumeration just in case something goes wrong and it becomes impossible to make a move in-game. */ {
+    var enumBox: BoxNumber = .Top /* .Top acts as the default box. We have to put something in for each of our variables otherwise we would have to implement an override init() function somewhere in here, and who really wants to do that? I also don't want to run the risk of implementing a .None enumeration just in case something goes wrong and it becomes impossible to make a move in-game. */ {
         didSet {
             
             let whiteColor = CCColor(red: 1, green: 1, blue: 1)
