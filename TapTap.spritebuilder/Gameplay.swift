@@ -536,11 +536,14 @@ class Gameplay: CCNode {
         playAgain()
     }
     
-    /**
-    Opens up the options menu.
-    */
     func options() {
+        var optionsMenuScene = CCBReader.load("OptionsMenu") as! OptionsMenu
+        optionsMenuScene.animationManager.runAnimationsForSequenceNamed("Default Timeline")
+
+        var scene = CCScene()
+        scene.addChild(optionsMenuScene)
         
+        var transition = CCTransition(fadeWithDuration: 0.5)
+        CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
-    
 }
