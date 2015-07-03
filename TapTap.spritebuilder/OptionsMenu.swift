@@ -10,7 +10,45 @@ import Foundation
 
 class OptionsMenu: CCNode {
     
-    // MARK: Functions
+    // MARK: Constants
+    
+    let defaults = NSUserDefaults.standardUserDefaults()
+    
+    // We use constants to declare our NSUserDefault keys because it adds an extra degree of error prevention - if we misspell something (which also becomes less common since Swift will now be able to auto-fill our key names), we'll get a compile error, not an error during runtime.
+    let hasLoadedBefore = "hasLoadedBefore"
+    let misclickPenaltyKey = "misclickPenaltyKey"
+    let backgroundMusicKey = "backgroundMusicKey"
+    let soundEffectsKey = "soundEffectsKey"
+
+    
+    // MARK: Memory Functions
+    
+    /**
+    Called whenever `OptionsMenu.ccb` is loaded.
+    
+    Used to set the default values for the `NSUserDefaults` object, which is used to handle the options menu.
+    */
+    func didLoadFromCCB() {
+        
+        println(defaults.boolForKey(hasLoadedBefore))
+        
+        if !defaults.boolForKey(hasLoadedBefore) {
+            
+            defaults.setObject(true, forKey: misclickPenaltyKey)
+            defaults.setObject(true, forKey: backgroundMusicKey)
+            defaults.setObject(true, forKey: soundEffectsKey)
+            
+            defaults.setObject(true, forKey: hasLoadedBefore)
+            println("default settings set")
+            
+        }
+        
+        println(defaults.boolForKey(hasLoadedBefore))
+        
+    }
+    
+    
+    // MARK: Button Functions
     
     /**
     Returns the game back to the main menu.
