@@ -90,7 +90,7 @@
 											<key>value</key>
 											<array>
 												<real>0.5</real>
-												<real>1180</real>
+												<real>1240</real>
 											</array>
 										</dict>
 									</array>
@@ -1350,8 +1350,6 @@ Eric Zhou</string>
 												</array>
 											</dict>
 										</array>
-										<key>selected</key>
-										<true/>
 									</dict>
 									<dict>
 										<key>UUID</key>
@@ -2169,7 +2167,7 @@ Eric Zhou</string>
 								<key>value</key>
 								<array>
 									<real>0.5</real>
-									<real>-10</real>
+									<real>1240</real>
 									<integer>3</integer>
 									<integer>2</integer>
 									<integer>0</integer>
@@ -3293,7 +3291,7 @@ Eric Zhou</string>
 			<key>offset</key>
 			<real>0.0</real>
 			<key>position</key>
-			<real>0.0</real>
+			<real>20</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>

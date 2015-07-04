@@ -30,6 +30,16 @@ class Gameplay: CCNode {
     let xDelay = 0.15                   // How long does the incorrect X mark appear in milliseconds?
     
     let audio = OALSimpleAudio.sharedInstance() // OALSimpleAudio instance used for handling sounds.
+    
+    
+    // MARK: Memory Variables
+    
+    let defaults = NSUserDefaults.standardUserDefaults()
+    
+    // See `OptionsMenu.swift` for information on these constants.
+    let misclickPenaltyKey = "misclickPenaltyKey"
+    let backgroundMusicKey = "backgroundMusicKey"
+    let soundEffectsKey = "soundEffectsKey"
 
     
     // MARK: Variables
@@ -105,11 +115,16 @@ class Gameplay: CCNode {
             redTileRows.append(redTileRow)
         }
         
-        audio.preloadEffect("siren.mp3")
-        audio.preloadEffect("tap.wav")
-        audio.preloadEffect("scratch.wav")
-        audio.preloadEffect("buzz.wav")
-        audio.playBg("gameplayBG.mp3")
+        if defaults.boolForKey(soundEffectsKey) { // Check if sound effects are enabled in the options. No need to preload sounds if they aren't!
+            audio.preloadEffect("siren.mp3")
+            audio.preloadEffect("tap.wav")
+            audio.preloadEffect("scratch.wav")
+            audio.preloadEffect("buzz.wav")
+        }
+
+        if defaults.boolForKey(backgroundMusicKey) { // Check if background music/sound is enabled in the options.
+            audio.playBg("gameplayBG.mp3")
+        }
         
         gameState = .Playing // Change the gameState to Playing to allow players to begin making moves.
         countdownBeforeGameBegins()
@@ -239,9 +254,15 @@ class Gameplay: CCNode {
     Checks to see if a warning sound should be played.
     */
     func checkForWarningSound() {
+        
         if warningSound {
-            audio.playEffect("siren.mp3", volume: 0.08, pitch: 1.0, pan: 0.0, loop: true)
+            
+            if defaults.boolForKey(soundEffectsKey) { // Check if sound effects are enabled in the options.
+                audio.playEffect("siren.mp3", volume: 0.08, pitch: 1.0, pan: 0.0, loop: true)
+            }
+            
         }
+        
     }
     
     /**
@@ -288,7 +309,10 @@ class Gameplay: CCNode {
                 // Move the dominantColor towards its goal.
                 dominantColor.left(Float(moveAmount))
                 
-                audio.playEffect("tap.wav")
+                if defaults.boolForKey(soundEffectsKey) { // Check if sound effects are enabled in the options.
+                    audio.playEffect("tap.wav")
+                }
+                
             }
             else {
                 
@@ -319,7 +343,10 @@ class Gameplay: CCNode {
                     blueX4.runAction(CCActionFadeOut(duration: xDelay))
                 }
                 
-                audio.playEffect("buzz.wav")
+                if defaults.boolForKey(soundEffectsKey) { // Check if sound effects are enabled in the options.
+                    audio.playEffect("buzz.wav")
+                }
+                
             }
             
         }
@@ -356,9 +383,14 @@ class Gameplay: CCNode {
                 // Since this is the red player, move the dominantColor away its goal.
                 dominantColor.right(Float(moveAmount))
                 
-                audio.playEffect("tap.wav")
+                if defaults.boolForKey(soundEffectsKey) { // Check if sound effects are enabled in the options.
+                    audio.playEffect("tap.wav")
+                }
+                
             }
-            else { // Since this is the red player, when the player taps on the wrong square, move the dominantColor towards its goal.
+            else {
+                
+                // Since this is the red player, when the player taps on the wrong square, move the dominantColor towards its goal.
                 dominantColor.left(Float(wrongTapPenalty))
                 
                 // Move the particleLine to stay with the dominantColor edge.
@@ -385,7 +417,10 @@ class Gameplay: CCNode {
                     redX1.runAction(CCActionFadeOut(duration: xDelay))
                 }
                 
-                audio.playEffect("buzz.wav")
+                if defaults.boolForKey(soundEffectsKey) { // Check if sound effects are enabled in the options.
+                    audio.playEffect("buzz.wav")
+                }
+                
             }
         }
     }
@@ -411,8 +446,13 @@ class Gameplay: CCNode {
             
             // Stop all music and play some end-game tunes.
             audio.stopAllEffects()
-            audio.playEffect("scratch.wav")
-            audio.playBg("outsideBG.wav")
+            
+            if defaults.boolForKey(soundEffectsKey) { // Check if sound effects are enabled in the options.
+                audio.playEffect("scratch.wav")
+            }
+            if defaults.boolForKey(backgroundMusicKey) { // Check if background music/sound is enabled in the options.
+                audio.playBg("outsideBG.wav")
+            }
             
             // Change the `gameState` to GameOver to prevent people from continuing to play the game on the now-invisible TileRows.
             gameState = .GameOver

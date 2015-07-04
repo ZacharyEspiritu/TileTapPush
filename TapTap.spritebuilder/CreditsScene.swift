@@ -30,6 +30,9 @@ class CreditsScene: CCNode {
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
     
+    /**
+    Checks to see when the animation has finished and calls `back()` when it does.
+    */
     override func update(delta: CCTime) {
         
         var creditsEnclosingNodeCurrentHeight: CGFloat = creditsEnclosingNode.position.y
@@ -40,8 +43,6 @@ class CreditsScene: CCNode {
         if (creditsEnclosingNodeHeight + screenHeight) < creditsEnclosingNodeCurrentHeight {
             back()
         }
-        
-        println("TargetHeight: \(creditsEnclosingNodeHeight + screenHeight) / CurrentNodeHeight: \(creditsEnclosingNodeCurrentHeight)")
         
     }
     

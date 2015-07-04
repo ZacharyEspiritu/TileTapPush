@@ -10,7 +10,7 @@ import Foundation
 
 class OptionsMenu: CCNode {
     
-    // MARK: Constants
+    // MARK: Memory Variables
     
     let defaults = NSUserDefaults.standardUserDefaults()
     
@@ -75,5 +75,9 @@ class OptionsMenu: CCNode {
         var transition = CCTransition(fadeWithDuration: 1)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
+    
+    // TODO: Add toggle button functions to change settings
+    
+    // TODO: Add color change system
     
 }
