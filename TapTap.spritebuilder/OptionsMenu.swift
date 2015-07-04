@@ -20,13 +20,17 @@ class OptionsMenu: CCNode {
     let backgroundMusicKey = "backgroundMusicKey"
     let soundEffectsKey = "soundEffectsKey"
     
+    // Used to make sure that the text on the buttons is spelled correctly and can be easily updated across all buttons if so desired.
+    let onText = "ON"
+    let offText = "OFF"
+    
     
     // MARK: Variables
     
-    weak var misclickPenaltyToggleButton: CCControl!
-    weak var backgroundMusicToggleButton: CCControl!
-    weak var soundEffectsToggleButton: CCControl!
-
+    weak var misclickPenaltyToggleButtonText: CCLabelTTF!
+    weak var backgroundMusicToggleButtonText: CCLabelTTF!
+    weak var soundEffectsToggleButtonText: CCLabelTTF!
+    
     
     // MARK: Memory Functions
     
@@ -49,15 +53,15 @@ class OptionsMenu: CCNode {
         
         // TODO: Fix bug where buttons do not show correct state on OptionsMenu.ccb reload
         
-//        if !defaults.boolForKey(misclickPenaltyKey) {
-//            soundEffectsToggleButton.selected = true
-//        }
-//        if !defaults.boolForKey(backgroundMusicKey) {
-//            soundEffectsToggleButton.selected = true
-//        }
-//        if !defaults.boolForKey(soundEffectsKey) {
-//            soundEffectsToggleButton.selected = true
-//        }
+        if !defaults.boolForKey(misclickPenaltyKey) {
+            misclickPenaltyToggleButtonText.string = offText
+        }
+        if !defaults.boolForKey(backgroundMusicKey) {
+            backgroundMusicToggleButtonText.string = offText
+        }
+        if !defaults.boolForKey(soundEffectsKey) {
+            soundEffectsToggleButtonText.string = offText
+        }
         
     }
     
@@ -101,11 +105,11 @@ class OptionsMenu: CCNode {
         
         if currentState {
             defaults.setBool(false, forKey: misclickPenaltyKey)
-            misclickPenaltyToggleButton.selected = true
+            misclickPenaltyToggleButtonText.string = offText
         }
         else {
             defaults.setBool(true, forKey: misclickPenaltyKey)
-            misclickPenaltyToggleButton.selected = false
+            misclickPenaltyToggleButtonText.string = onText
         }
         
     }
@@ -119,11 +123,11 @@ class OptionsMenu: CCNode {
         
         if currentState {
             defaults.setBool(false, forKey: backgroundMusicKey)
-            backgroundMusicToggleButton.selected = true
+            backgroundMusicToggleButtonText.string = offText
         }
         else {
             defaults.setBool(true, forKey: backgroundMusicKey)
-            backgroundMusicToggleButton.selected = false
+            backgroundMusicToggleButtonText.string = onText
         }
         
     }
@@ -137,11 +141,11 @@ class OptionsMenu: CCNode {
         
         if currentState {
             defaults.setBool(false, forKey: soundEffectsKey)
-            soundEffectsToggleButton.selected = true
+            soundEffectsToggleButtonText.string = offText
         }
         else {
             defaults.setBool(true, forKey: soundEffectsKey)
-            soundEffectsToggleButton.selected = false
+            soundEffectsToggleButtonText.string = onText
         }
         
     }
