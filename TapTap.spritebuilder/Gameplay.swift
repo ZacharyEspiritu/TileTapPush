@@ -121,7 +121,7 @@ class Gameplay: CCNode {
         }
 
         if defaults.boolForKey(backgroundMusicKey) { // Check if background music/sound is enabled in the options.
-            audio.playBg("gameplayBG.mp3")
+            audio.playBg("gameplayBG.mp3", loop: true)
         }
         
         gameState = .Playing // Change the gameState to Playing to allow players to begin making moves.
@@ -433,7 +433,7 @@ class Gameplay: CCNode {
     func checkIfWin() -> Bool {
         var scale = dominantColor.scaleX
         
-        if scale <= -0.01 || scale >= 1.01 {
+        if scale <= -0.01 || scale >= 1.01 { // We have a 0.01 difference on each of the possible win states to ensure that no graphical glitches occur in the end-game state.
             
             if scale <= -0.01 {
                 redWins()
@@ -444,12 +444,10 @@ class Gameplay: CCNode {
             
             // Stop all music and play some end-game tunes.
             audio.stopAllEffects()
-            
-            if defaults.boolForKey(soundEffectsKey) { // Check if sound effects are enabled in the options.
-                audio.playEffect("scratch.wav")
-            }
+
             if defaults.boolForKey(backgroundMusicKey) { // Check if background music/sound is enabled in the options.
-                audio.playBg("outsideBG.wav")
+                audio.playEffect("scratch.wav")
+                audio.playBg("outsideBG.wav", loop: true)
             }
             
             // Change the `gameState` to GameOver to prevent people from continuing to play the game on the now-invisible TileRows.
