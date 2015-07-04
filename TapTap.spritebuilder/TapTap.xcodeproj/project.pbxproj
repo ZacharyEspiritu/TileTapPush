@@ -14,6 +14,7 @@
 		555288541B46DC0000BEC2B1 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555288531B46DC0000BEC2B1 /* MainScene.swift */; };
 		555288561B4729DD00BEC2B1 /* OptionsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555288551B4729DD00BEC2B1 /* OptionsMenu.swift */; };
 		555288581B472E6E00BEC2B1 /* CreditsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555288571B472E6E00BEC2B1 /* CreditsScene.swift */; };
+		555288621B484EEC00BEC2B1 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 555288611B484EEC00BEC2B1 /* Default-Landscape@2x~ipad.png */; };
 		556C4CA41B45CD6800A6007A /* buzz.wav in Resources */ = {isa = PBXBuildFile; fileRef = 556C4CA31B45CD6800A6007A /* buzz.wav */; };
 		55854D4E1B456BF000DA5C31 /* siren.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 55854D4D1B456BF000DA5C31 /* siren.mp3 */; };
 		55854D5E1B458D6600DA5C31 /* tap.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55854D5D1B458D6600DA5C31 /* tap.wav */; };
@@ -166,6 +167,7 @@
 		555288531B46DC0000BEC2B1 /* MainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
 		555288551B4729DD00BEC2B1 /* OptionsMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsMenu.swift; sourceTree = "<group>"; };
 		555288571B472E6E00BEC2B1 /* CreditsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditsScene.swift; sourceTree = "<group>"; };
+		555288611B484EEC00BEC2B1 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 		556C4CA31B45CD6800A6007A /* buzz.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = buzz.wav; sourceTree = "<group>"; };
 		55854D4D1B456BF000DA5C31 /* siren.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = siren.mp3; sourceTree = "<group>"; };
 		55854D5D1B458D6600DA5C31 /* tap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tap.wav; sourceTree = "<group>"; };
@@ -502,6 +504,7 @@
 				B737896B180762440076A88C /* Default-568h@2x.png */,
 				550183941B44B16800E134B9 /* Default-568h@3x.png */,
 				B737896C180762440076A88C /* Default-Landscape~ipad.png */,
+				555288611B484EEC00BEC2B1 /* Default-Landscape@2x~ipad.png */,
 				B737896D180762440076A88C /* Default.png */,
 				B737896E180762440076A88C /* Default@2x.png */,
 			);
@@ -781,6 +784,7 @@
 				B737893B180761570076A88C /* Published-iOS in Resources */,
 				B71F591A188484E7003F4D28 /* Settings@2x.png in Resources */,
 				55975C8A1B45A0FA00DDAD2A /* scratch.wav in Resources */,
+				555288621B484EEC00BEC2B1 /* Default-Landscape@2x~ipad.png in Resources */,
 				B7378976180762440076A88C /* Default-Landscape~ipad.png in Resources */,
 				B71F5915188484E7003F4D28 /* iPhone-old.png in Resources */,
 				B71F5917188484E7003F4D28 /* iPhone.png in Resources */,

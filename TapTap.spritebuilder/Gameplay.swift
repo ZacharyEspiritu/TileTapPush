@@ -20,7 +20,7 @@ class Gameplay: CCNode {
     // MARK: Constants
     
     let moveAmount: CGFloat = 0.03      // How much does the line move on a correct tap?
-    let wrongTapPenalty: CGFloat = 0.04 // How much does the line move on an incorrect tap?
+    let wrongTapPenalty: CGFloat = 0.05 // How much does the line move on an incorrect tap?
     
     let numberOfTileRows: Int = 4       // How many tile rows do we generate for each array?
     
