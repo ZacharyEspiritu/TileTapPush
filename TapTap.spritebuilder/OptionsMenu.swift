@@ -10,15 +10,22 @@ import Foundation
 
 class OptionsMenu: CCNode {
     
-    // MARK: Memory Variables
+    // MARK: Constants
     
-    let defaults = NSUserDefaults.standardUserDefaults()
+    let defaults = NSUserDefaults.standardUserDefaults() // Implement the `NSUserDefaults` object.
     
     // We use constants to declare our NSUserDefault keys because it adds an extra degree of error prevention - if we misspell something (which also becomes less common since Swift will now be able to auto-fill our key names), we'll get a compile error, not an error during runtime.
     let hasLoadedBefore = "hasLoadedBefore"
     let misclickPenaltyKey = "misclickPenaltyKey"
     let backgroundMusicKey = "backgroundMusicKey"
     let soundEffectsKey = "soundEffectsKey"
+    
+    
+    // MARK: Variables
+    
+    weak var misclickPenaltyToggleButton: CCControl!
+    weak var backgroundMusicToggleButton: CCControl!
+    weak var soundEffectsToggleButton: CCControl!
 
     
     // MARK: Memory Functions
@@ -30,8 +37,6 @@ class OptionsMenu: CCNode {
     */
     func didLoadFromCCB() {
         
-        println(defaults.boolForKey(hasLoadedBefore))
-        
         if !defaults.boolForKey(hasLoadedBefore) {
             
             defaults.setObject(true, forKey: misclickPenaltyKey)
@@ -39,11 +44,20 @@ class OptionsMenu: CCNode {
             defaults.setObject(true, forKey: soundEffectsKey)
             
             defaults.setObject(true, forKey: hasLoadedBefore)
-            println("default settings set")
             
         }
         
-        println(defaults.boolForKey(hasLoadedBefore))
+        // TODO: Fix bug where buttons do not show correct state on OptionsMenu.ccb reload
+        
+//        if !defaults.boolForKey(misclickPenaltyKey) {
+//            soundEffectsToggleButton.selected = true
+//        }
+//        if !defaults.boolForKey(backgroundMusicKey) {
+//            soundEffectsToggleButton.selected = true
+//        }
+//        if !defaults.boolForKey(soundEffectsKey) {
+//            soundEffectsToggleButton.selected = true
+//        }
         
     }
     
@@ -76,7 +90,61 @@ class OptionsMenu: CCNode {
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
     
-    // TODO: Add toggle button functions to change settings
+    // MARK: Toggle Functions
+    
+    /**
+    Toggles the state of the misclickPenaltyKey.
+    */
+    func misclickPenaltyToggle() {
+        
+        var currentState = defaults.boolForKey(misclickPenaltyKey)
+        
+        if currentState {
+            defaults.setBool(false, forKey: misclickPenaltyKey)
+            misclickPenaltyToggleButton.selected = true
+        }
+        else {
+            defaults.setBool(true, forKey: misclickPenaltyKey)
+            misclickPenaltyToggleButton.selected = false
+        }
+        
+    }
+    
+    /**
+    Toggles the state of the backgroundMusicKey.
+    */
+    func backgroundMusicToggle() {
+        
+        var currentState = defaults.boolForKey(backgroundMusicKey)
+        
+        if currentState {
+            defaults.setBool(false, forKey: backgroundMusicKey)
+            backgroundMusicToggleButton.selected = true
+        }
+        else {
+            defaults.setBool(true, forKey: backgroundMusicKey)
+            backgroundMusicToggleButton.selected = false
+        }
+        
+    }
+    
+    /**
+    Toggles the state of the soundEffectsKey.
+    */
+    func soundEffectsToggle() {
+        
+        var currentState = defaults.boolForKey(soundEffectsKey)
+        
+        if currentState {
+            defaults.setBool(false, forKey: soundEffectsKey)
+            soundEffectsToggleButton.selected = true
+        }
+        else {
+            defaults.setBool(true, forKey: soundEffectsKey)
+            soundEffectsToggleButton.selected = false
+        }
+        
+    }
     
     // TODO: Add color change system
     

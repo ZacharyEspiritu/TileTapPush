@@ -316,15 +316,15 @@ class Gameplay: CCNode {
             }
             else {
                 
-                // If the player tapped on the wrong square, move the dominantColor away from its goal.
-                dominantColor.right(Float(wrongTapPenalty))
-                
-                // Move the particleLine to stay with the dominantColor edge.
-                particleLine.position.x -= wrongTapPenalty
-                
-                // Have the color of the incorrectly tapped box flash red.
-                let redColor = CCColor(red: 1, green: 0, blue: 0)
-                let blackColor = CCColor(red: 0, green: 0, blue: 0)
+                if defaults.boolForKey(misclickPenaltyKey) { // Check if misclick penalties are enabled.
+                    
+                    // If the player tapped on the wrong square, move the dominantColor away from its goal.
+                    dominantColor.right(Float(wrongTapPenalty))
+                    
+                    // Move the particleLine to stay with the dominantColor edge.
+                    particleLine.position.x -= wrongTapPenalty
+                    
+                }
                 
                 if yTouch > 0 && yTouch < screenQuartersVertical { // Incorrect tap on Bottom box (box1).
                     blueX1.visible = true
@@ -390,15 +390,15 @@ class Gameplay: CCNode {
             }
             else {
                 
-                // Since this is the red player, when the player taps on the wrong square, move the dominantColor towards its goal.
-                dominantColor.left(Float(wrongTapPenalty))
-                
-                // Move the particleLine to stay with the dominantColor edge.
-                particleLine.position.x += wrongTapPenalty
-                
-                // Have the color of the incorrectly tapped box flash red.
-                let redColor = CCColor(red: 1, green: 0, blue: 0)
-                let blackColor = CCColor(red: 0, green: 0, blue: 0)
+                if defaults.boolForKey(misclickPenaltyKey) { // Check if misclick penalties are enabled.
+                    
+                    // Since this is the red player, when the player taps on the wrong square, move the dominantColor towards its goal.
+                    dominantColor.left(Float(wrongTapPenalty))
+                    
+                    // Move the particleLine to stay with the dominantColor edge.
+                    particleLine.position.x += wrongTapPenalty
+                    
+                }
                 
                 if yTouch > 0 && yTouch < screenQuartersVertical { // Incorrect tap on Bottom box (box4).
                     redX4.visible = true
