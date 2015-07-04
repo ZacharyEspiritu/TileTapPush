@@ -75,8 +75,6 @@ class Gameplay: CCNode {
     weak var blueX1, blueX2, blueX3, blueX4: CCSprite!
     weak var redX1, redX2, redX3, redX4: CCSprite!
     
-    var currentWinner: Winner = .None // Used to determine which menu transition animation should be played, because it depends on which side on the last game.
-    
     var warningSound = false // Used in the "locking" mechanism for the warningSound. See `checkForWarningSound()` below.
     
     var gameState: GameState = .Initial // Used to check if the game is in a state where the players are allowed to make moves. Prevents players from discovering a bug where you can continue playing the game even after the game has ended and is in the Main Menu.
@@ -480,8 +478,6 @@ class Gameplay: CCNode {
         particleLine.stopParticleGeneration()
         
         blueWarningGradient.visible = false
-        
-        currentWinner = .Red
     }
     
     /**
@@ -499,8 +495,6 @@ class Gameplay: CCNode {
         particleLine.stopParticleGeneration()
         
         redWarningGradient.visible = false
-        
-        currentWinner = .Blue
     }
     
     /**
@@ -537,36 +531,13 @@ class Gameplay: CCNode {
     Brings the game back to the mainMenu with some animation for polish.
     */
     func mainMenu() {
+        var mainScene = CCBReader.load("MainScene") as! MainScene
         
-        if currentWinner == .Blue {
-            world.animationManager.runAnimationsForSequenceNamed("BlueTransitionToMenu")
-        }
-        else if currentWinner == .Red {
-            world.animationManager.runAnimationsForSequenceNamed("RedTransitionToMenu")
-        }
+        var scene = CCScene()
+        scene.addChild(mainScene)
         
-        currentWinner == .None
-        userInteractionEnabled = false
-        
-        delay(1.2) { // We need to stick a delay in here because we need to wait for the `TransitionToMenu` sequence to end before playing the `MainMenu` sequence.
-            
-            self.world.animationManager.runAnimationsForSequenceNamed("MainMenu")
-            
-            self.topTitleHolderNode.visible = true
-            self.bottomTitleHolderNode.visible = true
-            
-            self.topTitleHolderNode.cascadeOpacityEnabled = true
-            self.bottomTitleHolderNode.cascadeOpacityEnabled = true
-            
-            var fadeInAction = CCActionFadeIn(duration: 1)
-            self.topTitleHolderNode.runAction(fadeInAction)
-            self.bottomTitleHolderNode.runAction(fadeInAction)
-            
-            self.userInteractionEnabled = true
-        }
-        
-        
-
+        var transition = CCTransition(fadeWithDuration: 0.5)
+        CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
     
     /**

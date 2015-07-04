@@ -72,10 +72,10 @@ class OptionsMenu: CCNode {
     Returns the game back to the main menu.
     */
     func back() {
-        var gameplayScene = CCBReader.load("MainScene") as! MainScene
+        var mainScene = CCBReader.load("MainScene") as! MainScene
         
         var scene = CCScene()
-        scene.addChild(gameplayScene)
+        scene.addChild(mainScene)
         
         var transition = CCTransition(fadeWithDuration: 0.5)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
