@@ -11,9 +11,6 @@ import Foundation
 enum Side {
     case Blue, Red
 }
-enum Winner {
-    case Blue, Red, None
-}
 enum GameState {
     case Initial, Playing, GameOver
 }

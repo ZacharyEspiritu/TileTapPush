@@ -436,9 +436,9 @@
 									<key>easing</key>
 									<dict>
 										<key>opt</key>
-										<real>2</real>
+										<real>0.30000001192092896</real>
 										<key>type</key>
-										<integer>4</integer>
+										<integer>11</integer>
 									</dict>
 									<key>name</key>
 									<string>position</string>
@@ -458,7 +458,7 @@
 										<key>opt</key>
 										<real>2</real>
 										<key>type</key>
-										<integer>4</integer>
+										<integer>12</integer>
 									</dict>
 									<key>name</key>
 									<string>position</string>
@@ -469,7 +469,7 @@
 									<key>value</key>
 									<array>
 										<real>0.5</real>
-										<real>44</real>
+										<real>47</real>
 									</array>
 								</dict>
 								<dict>
@@ -533,7 +533,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>43.990123748779297</real>
+							<real>34</real>
 							<integer>1</integer>
 							<integer>2</integer>
 							<integer>0</integer>
@@ -570,7 +570,7 @@
 						<string>Text</string>
 						<key>value</key>
 						<array>
-							<string>taptap</string>
+							<string>tile, tap, push!</string>
 							<false/>
 						</array>
 					</dict>
@@ -742,10 +742,10 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.30000001192092896</real>
+							<real>102.73091125488281</real>
 							<integer>0</integer>
 							<integer>2</integer>
-							<integer>2</integer>
+							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1360,6 +1360,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
@@ -1501,7 +1503,7 @@
 			<key>offset</key>
 			<real>0.0</real>
 			<key>position</key>
-			<real>1.4666666984558105</real>
+			<real>0.0</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>
