@@ -22,9 +22,10 @@ class Gameplay: CCNode {
     let moveAmount: CGFloat = 0.03      // How much does the line move on a correct tap?
     let wrongTapPenalty: CGFloat = 0.05 // How much does the line move on an incorrect tap?
     
-    let numberOfTileRows: Int = 4       // How many tile rows do we generate for each array?
+    let numberOfTileRows: Int = 5       // How many tile rows do we generate for each array?
     
     let xDelay = 0.15                   // How long does the incorrect X mark appear in milliseconds?
+    let animationDelay = 0.04           // How long does it take for a tileRow animation to complete?
     
     let audio = OALSimpleAudio.sharedInstance() // OALSimpleAudio instance used for handling sounds.
     
@@ -97,8 +98,35 @@ class Gameplay: CCNode {
             // Duplicate the tileRow. We have to do this since we can't add the same piece as a child to two different nodes.
             var blueTileRow = CCBReader.load("TileRow") as! TileRow
             var redTileRow = CCBReader.load("TileRow") as! TileRow
+                        
+            var rowWidth = 0
             
-            var rowWidth = blueTileRow.contentSizeInPoints.width * CGFloat(index)
+            blueTileRow.cascadeOpacityEnabled = true
+            redTileRow.cascadeOpacityEnabled = true
+            
+            if index == 1 {
+                blueTileRow.scaleX = 50/70
+                redTileRow.scaleX = 50/70
+                
+                rowWidth = 80
+            }
+            else if index == 2 {
+                blueTileRow.scaleX = 40/70
+                redTileRow.scaleX = 40/70
+                
+                rowWidth = 140
+            }
+            else if index == 3 {
+                blueTileRow.scaleX = 20/70
+                redTileRow.scaleX = 20/70
+                
+                rowWidth = 190
+            }
+            else if index == 4 {
+                blueTileRow.scaleX = 10/70
+                redTileRow.scaleX = 10/70
+                rowWidth = 220
+            }
             
             blueTileRow.position = CGPoint(x: rowWidth, y: 0)
             redTileRow.position = CGPoint(x: rowWidth, y: 0)
@@ -114,6 +142,35 @@ class Gameplay: CCNode {
             // Append the tileRow to the end of its respective TileRow array.
             blueTileRows.append(blueTileRow)
             redTileRows.append(redTileRow)
+            
+        }
+        
+        for index in 0..<blueTileRows.count {
+            
+            var currentBlueRow = blueTileRows[index]
+            var currentRedRow = redTileRows[index]
+            
+            if index == 0 {
+                currentBlueRow.opacity = 0.95
+                currentRedRow.opacity = 0.95
+            }
+            else if index == 1 {
+                currentBlueRow.opacity = 0.85
+                currentRedRow.opacity = 0.85
+            }
+            else if index == 2 {
+                currentBlueRow.opacity = 0.70
+                currentRedRow.opacity = 0.70
+            }
+            else if index == 3 {
+                currentBlueRow.opacity = 0.50
+                currentRedRow.opacity = 0.50
+            }
+            else if index == 4 {
+                currentBlueRow.opacity = 0.25
+                currentRedRow.opacity = 0.25
+            }
+            
         }
         
         if defaults.boolForKey(soundEffectsKey) { // Check if sound effects are enabled in the options. No need to preload sounds if they aren't!
@@ -289,19 +346,57 @@ class Gameplay: CCNode {
             // Compare the tap location against the enumBox of the selected tileRow to see if it was tapped in the right spot.
             if yTouch > 0 && yTouch < screenQuartersVertical && rowBox == .Bottom || yTouch > screenQuartersVertical && yTouch < (screenQuartersVertical * 2) && rowBox == .Midbottom || yTouch > (screenQuartersVertical * 2) && yTouch < (screenQuartersVertical * 3) && rowBox == .Midtop || yTouch > (screenQuartersVertical * 3) && yTouch < (screenQuartersVertical * 4) && rowBox == .Top {
                 
-                // Move the tile row to the top of the tileRow stack.
-                var xDiff = tileRow.contentSize.width * CGFloat(numberOfTileRows)
-                tileRow.position = ccpAdd(tileRow.position, CGPoint(x: xDiff, y: 0))
-                
                 // Change the drawing order.
                 tileRow.zOrder = tileRow.zOrder + 1
                 
                 // Randomly select a new tile to be colored.
                 tileRow.generateRandomTileRow()
                 
-                // Animate the tile falling downwards.
-                var moveTileRowOver = CCActionMoveBy(duration: 0.05, position: CGPoint(x: -tileRow.contentSize.width, y: 0))
-                blueTileRowNode.runAction(moveTileRowOver)
+                // Run animation sequence to adjust each tile row individually and move it into the next slot.
+                for index in 0..<numberOfTileRows {
+                    
+                    var newIndex = (blueIndex + index) % numberOfTileRows
+                    var nextUpRow = blueTileRows[newIndex]
+                    
+                    var scaleUpRow: CCActionScaleTo? = nil
+                    var moveTileRowDown: CCActionMoveTo? = nil
+                    var opacityChange: CCActionFadeTo? = nil
+
+                    if index == 0 {
+                        nextUpRow.scaleX = 10/70
+                        nextUpRow.position = CGPoint(x: 220, y: 0)
+                        nextUpRow.cascadeOpacityEnabled = true
+                        nextUpRow.opacity = 0.25
+                    }
+                    else if index == 1 {
+                        scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: 70/70, scaleY: 1)
+                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 0, y: 0))
+                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: 0.95)
+                    }
+                    else if index == 2 {
+                        scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: 50/70, scaleY: 1)
+                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 80, y: 0))
+                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: 0.85)
+                    }
+                    else if index == 3 {
+                        scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: 40/70, scaleY: 1)
+                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 140, y: 0))
+                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: 0.70)
+                    }
+                    else if index == 4 {
+                        scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: 20/70, scaleY: 1)
+                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 190, y: 0))
+                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: 0.50)
+                    }
+                    
+                    if index != 0 {
+                        nextUpRow.runAction(scaleUpRow!)
+                        nextUpRow.runAction(moveTileRowDown)
+                        nextUpRow.cascadeOpacityEnabled = true
+                        nextUpRow.runAction(opacityChange)
+                    }
+    
+                }
                 
                 // Cycle through the numbers 1 - numberOfTileRows in the blueIndex.
                 blueIndex = (blueIndex + 1) % numberOfTileRows
@@ -363,19 +458,58 @@ class Gameplay: CCNode {
             // Compare the tap location against the enumBox of the selected tileRow to see if it was tapped in the right spot.
             if yTouch > 0 && yTouch < screenQuartersVertical && rowBox == .Top || yTouch > screenQuartersVertical && yTouch < (screenQuartersVertical * 2) && rowBox == .Midtop || yTouch > (screenQuartersVertical * 2) && yTouch < (screenQuartersVertical * 3) && rowBox == .Midbottom || yTouch > (screenQuartersVertical * 3) && yTouch < (screenQuartersVertical * 4) && rowBox == .Bottom {
                 
-                // Move the tile row to the top of the tileRow stack.
-                var xDiff = tileRow.contentSize.width * CGFloat(numberOfTileRows)
-                tileRow.position = ccpAdd(tileRow.position, CGPoint(x: xDiff, y: 0))
-                
                 // Change the drawing order.
                 tileRow.zOrder = tileRow.zOrder + 1
                 
                 // Randomly select a new tile to be colored.
                 tileRow.generateRandomTileRow()
                 
-                // Animate the tile falling downwards.
-                var moveTileRowOver = CCActionMoveBy(duration: 0.05, position: CGPoint(x: -tileRow.contentSize.width, y: 0))
-                redTileRowNode.runAction(moveTileRowOver)
+                // Run animation sequence to adjust each tile row individually and move it into the next slot.
+                for index in 0..<numberOfTileRows {
+                    
+                    var newIndex = (redIndex + index) % numberOfTileRows
+                    var nextUpRow = redTileRows[newIndex]
+                    
+                    var scaleUpRow: CCActionScaleTo? = nil
+                    var moveTileRowDown: CCActionMoveTo? = nil
+                    var opacityChange: CCActionFadeTo? = nil
+                    
+                    if index == 0 {
+                        nextUpRow.scaleX = 10/70
+                        nextUpRow.position = CGPoint(x: 220, y: 0)
+                        nextUpRow.cascadeOpacityEnabled = true
+                        nextUpRow.opacity = 0.25
+                    }
+                    else if index == 1 {
+                        scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: 70/70, scaleY: 1)
+                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 0, y: 0))
+                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: 0.95)
+                    }
+                    else if index == 2 {
+                        scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: 50/70, scaleY: 1)
+                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 80, y: 0))
+                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: 0.85)
+                    }
+                    else if index == 3 {
+                        scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: 40/70, scaleY: 1)
+                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 140, y: 0))
+                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: 0.70)
+                    }
+                    else if index == 4 {
+                        scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: 20/70, scaleY: 1)
+                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 190, y: 0))
+                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: 0.50)
+                        
+                    }
+                    
+                    if index != 0 {
+                        nextUpRow.runAction(scaleUpRow!)
+                        nextUpRow.runAction(moveTileRowDown)
+                        nextUpRow.cascadeOpacityEnabled = true
+                        nextUpRow.runAction(opacityChange)
+                    }
+                    
+                }
                 
                 // Cycle through the numbers 1 - numberOfTileRows in the blueIndex.
                 redIndex = (redIndex + 1) % numberOfTileRows
@@ -383,7 +517,7 @@ class Gameplay: CCNode {
                 // Move the particleLine to stay with the dominantColor edge.
                 particleLine.position.x -= moveAmount
                 
-                // Since this is the red player, move the dominantColor away its goal.
+                // Move the dominantColor towards its goal.
                 dominantColor.right(Float(moveAmount))
                 
                 if defaults.boolForKey(soundEffectsKey) { // Check if sound effects are enabled in the options.

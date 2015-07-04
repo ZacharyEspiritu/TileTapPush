@@ -22,7 +22,6 @@ class OptionsMenu: CCNode {
     let defaults = NSUserDefaults.standardUserDefaults() // Implement the `NSUserDefaults` object.
     
     // We use constants to declare our NSUserDefault keys because it adds an extra degree of error prevention - if we misspell something (which also becomes less common since Swift will now be able to auto-fill our key names), we'll get a compile error, not an error during runtime.
-    let hasLoadedBefore = "hasLoadedBefore"
     let misclickPenaltyKey = "misclickPenaltyKey"
     let backgroundMusicKey = "backgroundMusicKey"
     let soundEffectsKey = "soundEffectsKey"
@@ -34,7 +33,7 @@ class OptionsMenu: CCNode {
     let onText = "ON"
     let offText = "OFF"
     
-    // Used for linking `NSUserDefaults` to the `Color` enumeration.
+    // Used for linking `NSUserDefaults` to the `Color` enumeration. Also, serves as a reference table for convenience.
     let colorDictionary: [Color : Int] = [.Turquoise : 1,
                                           .Gray      : 2,
                                           .Orange    : 3,
@@ -73,21 +72,6 @@ class OptionsMenu: CCNode {
     Used to set the default values for the `NSUserDefaults` object, which is used to handle the options menu.
     */
     func didLoadFromCCB() {
-        
-        if !defaults.boolForKey(hasLoadedBefore) {
-            
-            defaults.setObject(true, forKey: misclickPenaltyKey)
-            defaults.setObject(true, forKey: backgroundMusicKey)
-            defaults.setObject(true, forKey: soundEffectsKey)
-            
-            defaults.setObject(true, forKey: hasLoadedBefore)
-            
-            defaults.setInteger(colorDictionary[.Blue]!, forKey: leftSideColorChoice)
-            defaults.setInteger(colorDictionary[.Red]!, forKey: rightSideColorChoice)
-            
-            println("Default settings loaded.")
-            
-        }
         
         if !defaults.boolForKey(misclickPenaltyKey) {
             misclickPenaltyToggleButtonText.string = offText

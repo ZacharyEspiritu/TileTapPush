@@ -15,6 +15,11 @@ class MainScene: CCNode {
     let defaults = NSUserDefaults.standardUserDefaults()
     
     // See `OptionsMenu.swift` for information on these constants.
+    let hasLoadedBefore = "hasLoadedBefore"
+    let misclickPenaltyKey = "misclickPenaltyKey"
+    let backgroundMusicKey = "backgroundMusicKey"
+    let soundEffectsKey = "soundEffectsKey"
+    
     let leftSideColorChoice = "leftSideColorChoice"
     let rightSideColorChoice = "rightSideColorChoice"
     
@@ -28,9 +33,27 @@ class MainScene: CCNode {
     // MARK: Functions
     
     /**
-    Called whenever `MainScene.ccb` is loaded. Its main purpose is to update the main menu screen with the color choices a user may have selected in the options menu.
+    Called whenever `MainScene.ccb` is loaded. 
+    
+    Its main purpose is to update the main menu screen with the color choices a user may have selected in the options menu, and to set the default settings the first time the game loads.
     */
     func didLoadFromCCB() {
+        
+        if !defaults.boolForKey(hasLoadedBefore) {
+            
+            defaults.setObject(true, forKey: misclickPenaltyKey)
+            defaults.setObject(true, forKey: backgroundMusicKey)
+            defaults.setObject(true, forKey: soundEffectsKey)
+            
+            defaults.setObject(true, forKey: hasLoadedBefore)
+            
+            defaults.setInteger(8, forKey: leftSideColorChoice) // 8 refers to the color blue. See colorDictionary in OptionsMenu.swift.
+            defaults.setInteger(4, forKey: rightSideColorChoice) // 4 refers to the color red. See colorDictionary in OptionsMenu.swift.
+            
+            println("Default settings loaded.")
+            
+        }
+        
         getColorChoicesFromMemory()
     }
     

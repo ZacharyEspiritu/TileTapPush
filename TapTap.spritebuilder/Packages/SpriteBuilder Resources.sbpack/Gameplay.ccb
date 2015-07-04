@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>136</integer>
+	<integer>137</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -139,8 +139,6 @@
 						<real>1</real>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -1662,8 +1660,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>seqExpanded</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -2692,8 +2688,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>seqExpanded</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -5355,7 +5349,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>11</real>
+							<real>19</real>
 							<real>0.5</real>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -5400,6 +5394,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -5910,7 +5906,7 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>-11</real>
+									<real>0.0</real>
 									<real>0.0</real>
 									<integer>2</integer>
 									<integer>0</integer>
@@ -5988,7 +5984,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
+							<real>19</real>
 							<real>0.5</real>
 							<integer>2</integer>
 							<integer>0</integer>
