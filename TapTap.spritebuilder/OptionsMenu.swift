@@ -51,8 +51,6 @@ class OptionsMenu: CCNode {
             
         }
         
-        // TODO: Fix bug where buttons do not show correct state on OptionsMenu.ccb reload
-        
         if !defaults.boolForKey(misclickPenaltyKey) {
             misclickPenaltyToggleButtonText.string = offText
         }
