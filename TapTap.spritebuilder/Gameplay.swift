@@ -37,6 +37,9 @@ class Gameplay: CCNode {
     let misclickPenaltyKey = "misclickPenaltyKey"
     let backgroundMusicKey = "backgroundMusicKey"
     let soundEffectsKey = "soundEffectsKey"
+    
+    let leftSideColorChoice = "leftSideColorChoice"
+    let rightSideColorChoice = "rightSideColorChoice"
 
     
     // MARK: Variables
@@ -53,7 +56,7 @@ class Gameplay: CCNode {
     weak var redWarningGradient: CCNode!     // Refers to the CCGradientNodes that appear
     weak var blueWarningGradient: CCNode!    // when a player is about to lose.
     
-    weak var dominantColor: DominantColor!   // The color that is the one that is actually moving. Defaults to Blue.
+    weak var dominantColor: DominantColor!   // The enclosing node of the color that is the only one that actually "moves". Scales on the x-axis in order to give the impression that it is getting larger/smaller.
     weak var particleLine: ParticleLine!     // The particle line that hides the color fade between the two sides.
     
     weak var world: CCNode!                  // Used for animation handling in Gameplay.ccb.
@@ -75,6 +78,9 @@ class Gameplay: CCNode {
     var warningSound = false // Used in the "locking" mechanism for the warningSound. See `checkForWarningSound()` below.
     
     var gameState: GameState = .Initial // Used to check if the game is in a state where the players are allowed to make moves. Prevents players from discovering a bug where you can continue playing the game even after the game has ended and is in the Main Menu.
+    
+    weak var dominantColorNode: CCNodeColor! // Defaults to blue. Used to change the color as specified in `OptionsMenu.swift`.
+    weak var backgroundColorNode: CCNodeColor! // Defaults to red. Used to change the color as specified in `OptionsMenu.swift`.
     
     
     // MARK: Reset Functions
@@ -121,8 +127,10 @@ class Gameplay: CCNode {
             audio.playBg("gameplayBG.mp3", loop: true)
         }
         
+        getColorChoicesFromMemory() // Load all color choices from `NSUserDefaults` and change the visual appearance of both sides, all in one swoop. See `getColorChoicesFromMemory()` below.
+        
         gameState = .Playing // Change the gameState to Playing to allow players to begin making moves.
-        countdownBeforeGameBegins()
+        countdownBeforeGameBegins() // Start the pre-game countdown, which will automatically begin the game.
 
     }
     
@@ -554,5 +562,84 @@ class Gameplay: CCNode {
         
         var transition = CCTransition(fadeWithDuration: 0.5)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
+        
     }
+    
+    
+    // MARK: Memory Functions
+    
+    func getColorChoicesFromMemory() {
+        
+        // Color presets.
+        var turquoiseColor = CCColor(red: 26/255, green: 188/255, blue: 156/255)
+        var grayColor = CCColor(red: 52/255, green: 73/255, blue: 94/255)
+        var orangeColor = CCColor(red: 230/255, green: 126/255, blue: 34/255)
+        var redColor = CCColor(red: 255/255, green: 102/255, blue: 102/255)
+        var silverColor = CCColor(red: 189/255, green: 195/255, blue: 199/255)
+        var yellowColor = CCColor(red: 241/255, green: 196/255, blue: 15/255)
+        var purpleColor = CCColor(red: 155/255, green: 89/255, blue: 182/255)
+        var blueColor = CCColor(red: 0/255, green: 0/255, blue: 255/255)
+        var greenColor = CCColor(red: 39/255, green: 174/255, blue: 96/255)
+        
+        // Restore previously set color choices.
+        var leftColorChoiceInt = defaults.integerForKey(leftSideColorChoice)
+        if leftColorChoiceInt == 1 { // Turquoise
+            dominantColorNode.color = turquoiseColor
+        }
+        else if leftColorChoiceInt == 2 { // Gray
+            dominantColorNode.color = grayColor
+        }
+        else if leftColorChoiceInt == 3 { // Orange
+            dominantColorNode.color = orangeColor
+        }
+        else if leftColorChoiceInt == 4 { // Red
+            dominantColorNode.color = redColor
+        }
+        else if leftColorChoiceInt == 5 { // Silver
+            dominantColorNode.color = silverColor
+        }
+        else if leftColorChoiceInt == 6 { // Yellow
+            dominantColorNode.color = yellowColor
+        }
+        else if leftColorChoiceInt == 7 { // Purple
+            dominantColorNode.color = purpleColor
+        }
+        else if leftColorChoiceInt == 8 { // Blue
+            dominantColorNode.color = blueColor
+        }
+        else if leftColorChoiceInt == 9 { // Green
+            dominantColorNode.color = greenColor
+        }
+        
+        var rightColorChoiceInt = defaults.integerForKey(rightSideColorChoice)
+        if rightColorChoiceInt == 1 { // Turquoise
+            backgroundColorNode.color = turquoiseColor
+        }
+        else if rightColorChoiceInt == 2 { // Gray
+            backgroundColorNode.color = grayColor
+        }
+        else if rightColorChoiceInt == 3 { // Orange
+            backgroundColorNode.color = orangeColor
+        }
+        else if rightColorChoiceInt == 4 { // Red
+            backgroundColorNode.color = redColor
+        }
+        else if rightColorChoiceInt == 5 { // Silver
+            backgroundColorNode.color = silverColor
+        }
+        else if rightColorChoiceInt == 6 { // Yellow
+            backgroundColorNode.color = yellowColor
+        }
+        else if rightColorChoiceInt == 7 { // Purple
+            backgroundColorNode.color = purpleColor
+        }
+        else if rightColorChoiceInt == 8 { // Blue
+            backgroundColorNode.color = blueColor
+        }
+        else if rightColorChoiceInt == 9 { // Green
+            backgroundColorNode.color = greenColor
+        }
+        
+    }
+    
 }

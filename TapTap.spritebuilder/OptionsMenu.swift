@@ -256,7 +256,7 @@ class OptionsMenu: CCNode {
     
     It takes in the `ColorButtonSide` and `Color` that the tapped button is attached to and uses this information to determine which `ColorButtonSide` to update and which `Color` will be stored in the `NSUserDefaults` memory system.
     
-    **Note:** Since `NSUserDefaults` can only store primitive types and objects, the `color` parameter is converted into an `Int` using the `colorDictionary` found in the Variables section above. This `Int` is the only thing that gets stored in `NSUserDefaults`.
+    **Note:** Since `NSUserDefaults` can only store primitive data types and objects, the `color` parameter is converted into an `Int` using the `colorDictionary` found in the Variables section above. This `Int` is the only thing that gets stored in `NSUserDefaults`.
     
     :param: side   the `ColorButtonSide` that the tapped button is located on
     :param: color  the `Color` that the tapped button is associated with
@@ -374,6 +374,7 @@ class OptionsMenu: CCNode {
     
     
     // MARK: Color Button Functions
+    // See `colorToggle()` for more details.
     
     func leftGreenButtonTapped() {
         colorToggle(side: .Left, color: .Green)

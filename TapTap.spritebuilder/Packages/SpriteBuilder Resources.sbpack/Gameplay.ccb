@@ -53,7 +53,7 @@
 				<key>displayName</key>
 				<string>redBackgroundColorNode</string>
 				<key>memberVarAssignmentName</key>
-				<string></string>
+				<string>backgroundColorNode</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
@@ -139,6 +139,8 @@
 						<real>1</real>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -196,9 +198,9 @@
 						<key>customClass</key>
 						<string></string>
 						<key>displayName</key>
-						<string>blueColorNode</string>
+						<string>dominantColorNode</string>
 						<key>memberVarAssignmentName</key>
-						<string></string>
+						<string>dominantColorNode</string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
 						<key>properties</key>
