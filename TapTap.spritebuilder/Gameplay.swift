@@ -80,9 +80,9 @@ class Gameplay: CCNode {
     
     var gameState: GameState = .Initial // Used to check if the game is in a state where the players are allowed to make moves. Prevents players from discovering a bug where you can continue playing the game even after the game has ended and is in the Main Menu.
     
-    weak var dominantColorNode: CCNodeColor! // Defaults to blue. Used to change the color as specified in `OptionsMenu.swift`.
-    weak var backgroundColorNode: CCNodeColor! // Defaults to red. Used to change the color as specified in `OptionsMenu.swift`.
+    weak var dominantColorNode, backgroundColorNode: CCNodeColor! // Defaults to blue. Used to change the color as specified in `OptionsMenu.swift`.
     
+    weak var dominantColorWinsLabel, backgroundColorWinsLabel: CCLabelTTF! // Used to change the winning player text to the colors specified in the Options Menu.
     
     // MARK: Reset Functions
     
@@ -108,7 +108,7 @@ class Gameplay: CCNode {
                 blueTileRow.scaleX = 50/70
                 redTileRow.scaleX = 50/70
                 
-                rowWidth = 80
+                rowWidth = 81
             }
             else if index == 2 {
                 blueTileRow.scaleX = 40/70
@@ -375,7 +375,7 @@ class Gameplay: CCNode {
                     }
                     else if index == 2 {
                         scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: 50/70, scaleY: 1)
-                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 80, y: 0))
+                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 81, y: 0))
                         opacityChange = CCActionFadeTo(duration: animationDelay, opacity: 0.85)
                     }
                     else if index == 3 {
@@ -487,7 +487,7 @@ class Gameplay: CCNode {
                     }
                     else if index == 2 {
                         scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: 50/70, scaleY: 1)
-                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 80, y: 0))
+                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 81, y: 0))
                         opacityChange = CCActionFadeTo(duration: animationDelay, opacity: 0.85)
                     }
                     else if index == 3 {
@@ -719,59 +719,77 @@ class Gameplay: CCNode {
         var leftColorChoiceInt = defaults.integerForKey(leftSideColorChoice)
         if leftColorChoiceInt == 1 { // Turquoise
             dominantColorNode.color = turquoiseColor
+            dominantColorWinsLabel.string = "TURQUOISE\nWINS!"
         }
         else if leftColorChoiceInt == 2 { // Gray
             dominantColorNode.color = grayColor
+            dominantColorWinsLabel.string = "GRAY\nWINS!"
         }
         else if leftColorChoiceInt == 3 { // Orange
             dominantColorNode.color = orangeColor
+            dominantColorWinsLabel.string = "ORANGE\nWINS!"
         }
         else if leftColorChoiceInt == 4 { // Red
             dominantColorNode.color = redColor
+            dominantColorWinsLabel.string = "RED\nWINS!"
         }
         else if leftColorChoiceInt == 5 { // Silver
             dominantColorNode.color = silverColor
+            dominantColorWinsLabel.string = "SILVER\nWINS!"
         }
         else if leftColorChoiceInt == 6 { // Yellow
             dominantColorNode.color = yellowColor
+            dominantColorWinsLabel.string = "YELLOW\nWINS!"
         }
         else if leftColorChoiceInt == 7 { // Purple
             dominantColorNode.color = purpleColor
+            dominantColorWinsLabel.string = "PURPLE\nWINS!"
         }
         else if leftColorChoiceInt == 8 { // Blue
             dominantColorNode.color = blueColor
+            dominantColorWinsLabel.string = "BLUE\nWINS!"
         }
         else if leftColorChoiceInt == 9 { // Green
             dominantColorNode.color = greenColor
+            dominantColorWinsLabel.string = "GREEN\nWINS!"
         }
         
         var rightColorChoiceInt = defaults.integerForKey(rightSideColorChoice)
         if rightColorChoiceInt == 1 { // Turquoise
             backgroundColorNode.color = turquoiseColor
+            backgroundColorWinsLabel.string = "TURQUOISE\nWINS!"
         }
         else if rightColorChoiceInt == 2 { // Gray
             backgroundColorNode.color = grayColor
+            backgroundColorWinsLabel.string = "GRAY\nWINS!"
         }
         else if rightColorChoiceInt == 3 { // Orange
             backgroundColorNode.color = orangeColor
+            backgroundColorWinsLabel.string = "ORANGE\nWINS!"
         }
         else if rightColorChoiceInt == 4 { // Red
             backgroundColorNode.color = redColor
+            backgroundColorWinsLabel.string = "RED\nWINS!"
         }
         else if rightColorChoiceInt == 5 { // Silver
             backgroundColorNode.color = silverColor
+            backgroundColorWinsLabel.string = "SILVER\nWINS!"
         }
         else if rightColorChoiceInt == 6 { // Yellow
             backgroundColorNode.color = yellowColor
+            backgroundColorWinsLabel.string = "YELLOW\nWINS!"
         }
         else if rightColorChoiceInt == 7 { // Purple
             backgroundColorNode.color = purpleColor
+            backgroundColorWinsLabel.string = "PURPLE\nWINS!"
         }
         else if rightColorChoiceInt == 8 { // Blue
             backgroundColorNode.color = blueColor
+            backgroundColorWinsLabel.string = "BLUE\nWINS!"
         }
         else if rightColorChoiceInt == 9 { // Green
             backgroundColorNode.color = greenColor
+            backgroundColorWinsLabel.string = "GREEN\nWINS!"
         }
         
     }

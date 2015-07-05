@@ -16,7 +16,7 @@
 	<key>currentResolution</key>
 	<integer>0</integer>
 	<key>currentSequenceId</key>
-	<integer>0</integer>
+	<integer>1</integer>
 	<key>docDimensionsType</key>
 	<integer>0</integer>
 	<key>fileType</key>
@@ -1183,7 +1183,7 @@
 										<key>type</key>
 										<string>Check</string>
 										<key>value</key>
-										<false/>
+										<true/>
 									</dict>
 									<dict>
 										<key>name</key>
@@ -1615,8 +1615,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>1.28125</real>
-							<real>0.0</real>
+							<real>-0.011507455259561539</real>
+							<real>0.5</real>
 							<integer>3</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -1629,9 +1629,9 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>270</real>
+							<real>0.5</real>
 							<real>1</real>
-							<integer>3</integer>
+							<integer>2</integer>
 							<integer>2</integer>
 						</array>
 					</dict>
@@ -2657,9 +2657,9 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>250</real>
+							<real>0.5</real>
 							<real>1</real>
-							<integer>3</integer>
+							<integer>2</integer>
 							<integer>2</integer>
 						</array>
 					</dict>
@@ -2746,7 +2746,7 @@
 									<integer>3</integer>
 									<key>value</key>
 									<array>
-										<real>-218</real>
+										<real>-265</real>
 										<real>0.5</real>
 									</array>
 								</dict>
@@ -2764,7 +2764,7 @@
 									<integer>3</integer>
 									<key>value</key>
 									<array>
-										<real>40</real>
+										<real>0.0</real>
 										<real>0.5</real>
 									</array>
 								</dict>
@@ -2808,9 +2808,9 @@
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>redWinsLabel</string>
+				<string>backgroundColorWinsLabel</string>
 				<key>memberVarAssignmentName</key>
-				<string></string>
+				<string>backgroundColorWinsLabel</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
@@ -2941,10 +2941,10 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
-							<integer>0</integer>
-							<integer>0</integer>
+							<real>0.5</real>
+							<real>1</real>
+							<integer>2</integer>
+							<integer>2</integer>
 						</array>
 					</dict>
 					<dict>
@@ -2953,7 +2953,7 @@
 						<key>type</key>
 						<string>IntegerLabeled</string>
 						<key>value</key>
-						<integer>0</integer>
+						<integer>1</integer>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -2961,7 +2961,7 @@
 						<key>type</key>
 						<string>IntegerLabeled</string>
 						<key>value</key>
-						<integer>0</integer>
+						<integer>1</integer>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -3010,7 +3010,7 @@
 							<real>0.0</real>
 							<real>0.0</real>
 							<real>0.0</real>
-							<real>0.0</real>
+							<real>1</real>
 						</array>
 					</dict>
 					<dict>
@@ -3020,7 +3020,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
+							<real>10</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -3039,6 +3039,10 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
+				<key>seqExpanded</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -3067,7 +3071,7 @@
 									<integer>3</integer>
 									<key>value</key>
 									<array>
-										<real>-300</real>
+										<real>-284</real>
 										<real>0.5</real>
 									</array>
 								</dict>
@@ -3085,7 +3089,7 @@
 									<integer>3</integer>
 									<key>value</key>
 									<array>
-										<real>40</real>
+										<real>0.0</real>
 										<real>0.5</real>
 									</array>
 								</dict>
@@ -3131,9 +3135,9 @@
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>blueWinsLabel</string>
+				<string>dominantColorWinsLabel</string>
 				<key>memberVarAssignmentName</key>
-				<string></string>
+				<string>dominantColorWinsLabel</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
@@ -3146,7 +3150,7 @@
 						<key>type</key>
 						<string>Check</string>
 						<key>value</key>
-						<false/>
+						<true/>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -3168,7 +3172,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>20</real>
+							<real>0.0</real>
 							<real>0.5</real>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -3244,10 +3248,10 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
-							<integer>0</integer>
-							<integer>0</integer>
+							<real>0.5</real>
+							<real>1</real>
+							<integer>2</integer>
+							<integer>2</integer>
 						</array>
 					</dict>
 					<dict>
@@ -3256,7 +3260,7 @@
 						<key>type</key>
 						<string>IntegerLabeled</string>
 						<key>value</key>
-						<integer>0</integer>
+						<integer>1</integer>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -3264,7 +3268,7 @@
 						<key>type</key>
 						<string>IntegerLabeled</string>
 						<key>value</key>
-						<integer>0</integer>
+						<integer>1</integer>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -3313,7 +3317,7 @@
 							<real>0.0</real>
 							<real>0.0</real>
 							<real>0.0</real>
-							<real>0.0</real>
+							<real>1</real>
 						</array>
 					</dict>
 					<dict>
@@ -3323,7 +3327,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
+							<real>10</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -3342,6 +3346,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>seqExpanded</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -3905,7 +3911,7 @@
 								<key>value</key>
 								<array>
 									<real>0.0</real>
-									<real>-3</real>
+									<real>0.0</real>
 									<integer>3</integer>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -4105,7 +4111,7 @@
 								<key>value</key>
 								<array>
 									<real>0.0</real>
-									<real>-3</real>
+									<real>0.0</real>
 									<integer>2</integer>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -4392,7 +4398,7 @@
 								<key>value</key>
 								<array>
 									<real>0.0</real>
-									<real>-3</real>
+									<real>0.0</real>
 									<integer>0</integer>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -4590,7 +4596,7 @@
 								<key>value</key>
 								<array>
 									<real>0.0</real>
-									<real>-3</real>
+									<real>0.0</real>
 									<integer>1</integer>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -5394,8 +5400,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -7330,7 +7334,7 @@
 			<key>offset</key>
 			<real>0.0</real>
 			<key>position</key>
-			<real>1</real>
+			<real>0.46666666865348816</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>
