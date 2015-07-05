@@ -14,6 +14,8 @@ class MainScene: CCNode {
     
     let defaults = NSUserDefaults.standardUserDefaults()
     
+    let audio = OALSimpleAudio.sharedInstance()
+    
     // See `OptionsMenu.swift` for information on these constants.
     let hasLoadedBefore = "hasLoadedBefore"
     let ingameParticlesKey = "ingameParticlesKey"
@@ -56,6 +58,10 @@ class MainScene: CCNode {
             
             println("Default settings loaded.")
             
+        }
+        
+        if defaults.boolForKey(backgroundMusicKey) {
+            audio.playBg("outsideBG.wav", loop: true)
         }
         
         getColorChoicesFromMemory()

@@ -90,7 +90,7 @@
 											<key>value</key>
 											<array>
 												<real>0.5</real>
-												<real>4.5</real>
+												<real>4.6999998092651367</real>
 											</array>
 										</dict>
 									</array>
@@ -647,7 +647,7 @@ MakeSchool (www.makeschool.org)</string>
 												<key>value</key>
 												<array>
 													<real>140</real>
-													<real>130</real>
+													<real>170</real>
 													<integer>0</integer>
 													<integer>0</integer>
 													<integer>0</integer>
@@ -689,6 +689,10 @@ Licensed under Creative Commons: By Attribution 3.0
 http://creativecommons.org/licenses/by/3.0/ 
 
 “Scratch 1” by Stumber (freesound.org)
+Licensed under Creative Commons: By Attribution 3.0
+http://creativecommons.org/licenses/by/3.0/ 
+
+“SwishUpMedium” by lonce (freesound.org)
 Licensed under Creative Commons: By Attribution 3.0
 http://creativecommons.org/licenses/by/3.0/ 
 
@@ -866,7 +870,7 @@ Public domain sounds found on freesound.org.</string>
 												<key>value</key>
 												<array>
 													<real>140</real>
-													<real>270</real>
+													<real>350</real>
 													<integer>0</integer>
 													<integer>0</integer>
 													<integer>0</integer>
@@ -1589,7 +1593,7 @@ Eric Zhou</string>
 										<key>value</key>
 										<array>
 											<real>82</real>
-											<real>428</real>
+											<real>508</real>
 											<integer>0</integer>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -2088,7 +2092,7 @@ Eric Zhou</string>
 										<key>value</key>
 										<array>
 											<real>99</real>
-											<real>952</real>
+											<real>1032</real>
 											<integer>0</integer>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -2587,7 +2591,7 @@ Eric Zhou</string>
 										<key>value</key>
 										<array>
 											<real>91</real>
-											<real>1016</real>
+											<real>1096</real>
 											<integer>0</integer>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -2670,7 +2674,7 @@ Eric Zhou</string>
 								<key>value</key>
 								<array>
 									<real>0.5</real>
-									<real>4.5</real>
+									<real>4.6999998092651367</real>
 									<integer>3</integer>
 									<integer>2</integer>
 									<integer>2</integer>
@@ -2720,6 +2724,8 @@ Eric Zhou</string>
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 						<key>seqExpanded</key>
 						<true/>
 					</dict>

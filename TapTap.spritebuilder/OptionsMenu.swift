@@ -29,6 +29,8 @@ class OptionsMenu: CCNode {
     let leftSideColorChoice = "leftSideColorChoice"
     let rightSideColorChoice = "rightSideColorChoice"
     
+    let audio = OALSimpleAudio.sharedInstance()
+    
     // Used to make sure that the text on the buttons is spelled correctly and can be easily updated across all buttons if so desired.
     let onText = "ON"
     let offText = "OFF"
@@ -206,6 +208,7 @@ class OptionsMenu: CCNode {
         if currentState {
             defaults.setBool(false, forKey: backgroundMusicKey)
             backgroundMusicToggleButtonText.string = offText
+            audio.stopEverything()
         }
         else {
             defaults.setBool(true, forKey: backgroundMusicKey)

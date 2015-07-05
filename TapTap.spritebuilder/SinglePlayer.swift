@@ -86,6 +86,14 @@ class SinglePlayer: CCNode {
     var timeRemainingInLevel: Int = 0
     var currentInterval: Double = 0
     
+    weak var highScoreGroupingNode: CCNode!
+    
+    weak var highScoreLabel: CCLabelTTF!
+    var highScore: Int = 0 {
+        didSet {
+            highScoreLabel.string = "\(highScore)"
+        }
+    }
     
     // MARK: Reset Functions
     
@@ -166,6 +174,7 @@ class SinglePlayer: CCNode {
             audio.preloadEffect("tap.wav")
             audio.preloadEffect("scratch.wav")
             audio.preloadEffect("buzz.wav")
+            audio.preloadEffect("faster.wav")
         }
         
         if defaults.boolForKey(backgroundMusicKey) { // Check if background music/sound is enabled in the options.
@@ -286,6 +295,10 @@ class SinglePlayer: CCNode {
         }
     }
     
+    func updateTimeRemainingVariable() {
+        timeRemainingInLevel--
+    }
+    
     func levelTimer() {
         
         self.unschedule("tick")
@@ -297,8 +310,8 @@ class SinglePlayer: CCNode {
             
             self.userInteractionEnabled = false
             
-            dominantColor.runAction(CCActionScaleTo(duration: 0.5, scaleX: 0.5, scaleY: 1))
-            particleLine.runAction(CCActionMoveTo(duration: 0.5, position: CGPoint(x: 0.5, y: 0.5)))
+            dominantColor.runAction(CCActionEaseBounceOut(action: CCActionScaleTo(duration: 0.5, scaleX: 0.5, scaleY: 1)))
+            particleLine.runAction(CCActionEaseBounceOut(action: CCActionMoveTo(duration: 0.5, position: CGPoint(x: 0.5, y: 0.5))))
             
             delay(0.5) {
                 self.userInteractionEnabled = true
@@ -313,14 +326,8 @@ class SinglePlayer: CCNode {
         
     }
     
-    func updateTimeRemainingVariable() {
-        timeRemainingInLevel--
-    }
-    
     /**
-    To be run whenever a state occurs where blue wins.
-    
-    Triggers end-game animation sequences.
+    To be run whenever a state occurs where blue would have won, but instead returns the game back to a 50% state with a score bonus for making it within the level time.
     */
     func overrideLevelComplete() {
         
@@ -332,8 +339,8 @@ class SinglePlayer: CCNode {
         
         displayFasterLabel()
         
-        dominantColor.runAction(CCActionScaleTo(duration: 0.8, scaleX: 0.5, scaleY: 1))
-        particleLine.runAction(CCActionMoveTo(duration: 0.8, position: CGPoint(x: 0.5, y: 0.5)))
+        dominantColor.runAction(CCActionEaseBounceOut(action: CCActionScaleTo(duration: 0.8, scaleX: 0.5, scaleY: 1)))
+        particleLine.runAction(CCActionEaseBounceOut(action: CCActionMoveTo(duration: 0.8, position: CGPoint(x: 0.5, y: 0.5))))
         
         var scoreMultiplier: Double = pow(1.2, Double(level))
         var possiblePointsRemaining: Double = Double(timeRemainingInLevel) / currentInterval
@@ -351,7 +358,7 @@ class SinglePlayer: CCNode {
     func displayFasterLabel() {
         
         let startingPosition: CGPoint = CGPoint(x: 0.5, y: -0.5)
-        let bounceInAction = CCActionEaseBounceIn(action: CCActionMoveTo(duration: 0.5, position: CGPoint(x: 0.5, y: 0.5)))
+        let bounceInAction = CCActionEaseBounceOut(action: CCActionMoveTo(duration: 0.5, position: CGPoint(x: 0.5, y: 0.5)))
         let bounceOutAction = CCActionEaseBounceOut(action: CCActionMoveTo(duration: 0.5, position: CGPoint(x: 0.5, y: 1.5)))
         
         let actionsArray = [bounceInAction, bounceOutAction]
@@ -360,6 +367,10 @@ class SinglePlayer: CCNode {
         fasterLabel.position = startingPosition
         fasterLabel.runAction(sequence)
         
+        if defaults.boolForKey(soundEffectsKey) {
+            audio.playEffect("faster.wav")
+            println("WOOSH!")
+        }
         
     }
     
@@ -625,6 +636,14 @@ class SinglePlayer: CCNode {
         if score > currentHighScore {
             defaults.setInteger(score, forKey: singlePlayerHighScore)
         }
+        
+        highScore = defaults.integerForKey(singlePlayerHighScore)
+        
+        highScoreGroupingNode.opacity = 0
+        highScoreGroupingNode.cascadeOpacityEnabled = true
+        highScoreGroupingNode.visible = true
+        
+        highScoreGroupingNode.runAction(CCActionFadeTo(duration: 0.5, opacity: 1))
     }
     
     /**

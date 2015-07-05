@@ -12,6 +12,7 @@
 		5506E15B1B495C5F001F1C81 /* SinglePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5506E15A1B495C5F001F1C81 /* SinglePlayer.swift */; };
 		5537FDB01B43169800C7D7DB /* DominantColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537FDAF1B43169800C7D7DB /* DominantColor.swift */; };
 		5537FDB41B43584B00C7D7DB /* Gameplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537FDB31B43584B00C7D7DB /* Gameplay.swift */; };
+		5541109F1B49D1690018F2F4 /* faster.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5541109E1B49D1690018F2F4 /* faster.wav */; };
 		555288541B46DC0000BEC2B1 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555288531B46DC0000BEC2B1 /* MainScene.swift */; };
 		555288561B4729DD00BEC2B1 /* OptionsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555288551B4729DD00BEC2B1 /* OptionsMenu.swift */; };
 		555288581B472E6E00BEC2B1 /* CreditsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555288571B472E6E00BEC2B1 /* CreditsScene.swift */; };
@@ -166,6 +167,7 @@
 		5506E15A1B495C5F001F1C81 /* SinglePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglePlayer.swift; sourceTree = "<group>"; };
 		5537FDAF1B43169800C7D7DB /* DominantColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DominantColor.swift; sourceTree = "<group>"; };
 		5537FDB31B43584B00C7D7DB /* Gameplay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gameplay.swift; sourceTree = "<group>"; };
+		5541109E1B49D1690018F2F4 /* faster.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = faster.wav; sourceTree = "<group>"; };
 		555288531B46DC0000BEC2B1 /* MainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
 		555288551B4729DD00BEC2B1 /* OptionsMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsMenu.swift; sourceTree = "<group>"; };
 		555288571B472E6E00BEC2B1 /* CreditsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditsScene.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				55975C7F1B45A0EA00DDAD2A /* backspin.wav */,
 				55854D4D1B456BF000DA5C31 /* siren.mp3 */,
 				55854D5D1B458D6600DA5C31 /* tap.wav */,
+				5541109E1B49D1690018F2F4 /* faster.wav */,
 			);
 			name = Audio;
 			sourceTree = "<group>";
@@ -793,6 +796,7 @@
 				B71F5917188484E7003F4D28 /* iPhone.png in Resources */,
 				556C4CA41B45CD6800A6007A /* buzz.wav in Resources */,
 				55975C841B45A0F000DDAD2A /* gameplayBG.mp3 in Resources */,
+				5541109F1B49D1690018F2F4 /* faster.wav in Resources */,
 				55975C891B45A0FA00DDAD2A /* outsideBG.wav in Resources */,
 				B7378975180762440076A88C /* Default-568h@2x.png in Resources */,
 				B7378977180762440076A88C /* Default.png in Resources */,
