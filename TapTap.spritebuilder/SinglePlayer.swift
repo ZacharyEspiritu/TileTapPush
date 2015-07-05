@@ -8,19 +8,12 @@
 
 import Foundation
 
-enum Side {
-    case Blue, Red
-}
-enum GameState {
-    case Initial, Playing, GameOver
-}
-
-class Gameplay: CCNode {
+class SinglePlayer: CCNode {
     
     // MARK: Constants
     
     let moveAmount: CGFloat = 0.03      // How much does the line move on a correct tap?
-    let wrongTapPenalty: CGFloat = 0.05 // How much does the line move on an incorrect tap?
+    let wrongTapPenalty: CGFloat = 0.07 // How much does the line move on an incorrect tap?
     
     let numberOfTileRows: Int = 5       // How many tile rows do we generate for each array?
     
@@ -41,20 +34,19 @@ class Gameplay: CCNode {
     
     let leftSideColorChoice = "leftSideColorChoice"
     let rightSideColorChoice = "rightSideColorChoice"
-
+    
+    let singlePlayerHighScore = "singlePlayerHighScore"
+    
     
     // MARK: Variables
     
     var countdown: String = "0" {
         didSet { // Called during the `countdownBeforeGameBegins()` sequence. Every time the countdown variable changes, it changes the label output of the `redCountdownLabel` and the `blueCountdownLabel`.
-            redCountdownLabel.string = String("\(countdown)")
             blueCountdownLabel.string = String("\(countdown)")
         }
     }
-    weak var redCountdownLabel: CCLabelTTF!  // Countdown labels used at the beginning
     weak var blueCountdownLabel: CCLabelTTF! // of each game.
     
-    weak var redWarningGradient: CCNode!     // Refers to the CCGradientNodes that appear
     weak var blueWarningGradient: CCNode!    // when a player is about to lose.
     
     weak var dominantColor: DominantColor!   // The enclosing node of the color that is the only one that actually "moves". Scales on the x-axis in order to give the impression that it is getting larger/smaller.
@@ -66,13 +58,9 @@ class Gameplay: CCNode {
     weak var blueTileRowNode: CCNode!
     var blueTileRows: [TileRow] = []
     var blueIndex: Int = 0
-    weak var redTileRowNode: CCNode!
-    var redTileRows: [TileRow] = []
-    var redIndex: Int = 0
     
     // Variables used to handle the each of the red X's that appears when you tap on an incorrect box.
     weak var blueX1, blueX2, blueX3, blueX4: CCSprite!
-    weak var redX1, redX2, redX3, redX4: CCSprite!
     
     var warningSound = false // Used in the "locking" mechanism for the warningSound. See `checkForWarningSound()` below.
     
@@ -80,14 +68,25 @@ class Gameplay: CCNode {
     
     weak var dominantColorNode, backgroundColorNode: CCNodeColor! // Defaults to blue. Used to change the color as specified in `OptionsMenu.swift`.
     
-    weak var dominantColorWinsLabel, backgroundColorWinsLabel: CCLabelTTF! // Used to change the winning player text to the colors specified in the Options Menu.
+    weak var fasterLabel: CCLabelTTF!
     
-    
+    weak var scoreHeader: CCLabelTTF!
+    weak var scoreLabel: CCLabelTTF!
+    var score: Int = 0 {
+        didSet {
+            scoreLabel.string = "\(score)"
+        }
+    }
+    var level: Int = 0 {
+        didSet {
+            scheduleComputerPlayer(level: level)
+        }
+    }
     
     // MARK: Reset Functions
     
     /**
-    Called whenever the `Gameplay.ccb` file loads.
+    Called whenever the `SinglePlayer.ccb` file loads.
     */
     func didLoadFromCCB() {
         
@@ -97,54 +96,41 @@ class Gameplay: CCNode {
             
             // Duplicate the tileRow. We have to do this since we can't add the same piece as a child to two different nodes.
             var blueTileRow = CCBReader.load("TileRow") as! TileRow
-            var redTileRow = CCBReader.load("TileRow") as! TileRow
-                        
+            
             var rowWidth = 0
             
             // Cascade opacity is enabled so we can just apply the opacity to a single node as opposed to having to change each box individually.
             blueTileRow.cascadeOpacityEnabled = true
-            redTileRow.cascadeOpacityEnabled = true
             
             // Depending on the row, modify its properties to achieve the desired effect.
             if index == 1 {
                 blueTileRow.scaleX = 50/70
-                redTileRow.scaleX = 50/70
-                
                 rowWidth = 81
             }
             else if index == 2 {
                 blueTileRow.scaleX = 40/70
-                redTileRow.scaleX = 40/70
-                
                 rowWidth = 140
             }
             else if index == 3 {
                 blueTileRow.scaleX = 20/70
-                redTileRow.scaleX = 20/70
-                
                 rowWidth = 190
             }
             else if index == 4 {
                 blueTileRow.scaleX = 10/70
-                redTileRow.scaleX = 10/70
                 rowWidth = 220
             }
             
             // Update each row's position based on the above control if-statement.
             blueTileRow.position = CGPoint(x: rowWidth, y: 0)
-            redTileRow.position = CGPoint(x: rowWidth, y: 0)
             
             // Generate a random tile row for the redTileRow and the blueTileRow.
             blueTileRow.generateRandomTileRow()
-            redTileRow.generateRandomTileRow()
             
             // Add the tileRow as a child of its respective TileRowNode. This allows us to position it relative to the TileRowNode.
             blueTileRowNode.addChild(blueTileRow)
-            redTileRowNode.addChild(redTileRow)
             
             // Append the tileRow to the end of its respective TileRow array.
             blueTileRows.append(blueTileRow)
-            redTileRows.append(redTileRow)
             
         }
         
@@ -152,27 +138,21 @@ class Gameplay: CCNode {
         for index in 0..<blueTileRows.count {
             
             var currentBlueRow = blueTileRows[index]
-            var currentRedRow = redTileRows[index]
             
             if index == 0 {
                 currentBlueRow.opacity = 0.95
-                currentRedRow.opacity = 0.95
             }
             else if index == 1 {
                 currentBlueRow.opacity = 0.85
-                currentRedRow.opacity = 0.85
             }
             else if index == 2 {
                 currentBlueRow.opacity = 0.70
-                currentRedRow.opacity = 0.70
             }
             else if index == 3 {
                 currentBlueRow.opacity = 0.50
-                currentRedRow.opacity = 0.50
             }
             else if index == 4 {
                 currentBlueRow.opacity = 0.25
-                currentRedRow.opacity = 0.25
             }
             
         }
@@ -183,7 +163,7 @@ class Gameplay: CCNode {
             audio.preloadEffect("scratch.wav")
             audio.preloadEffect("buzz.wav")
         }
-
+        
         if defaults.boolForKey(backgroundMusicKey) { // Check if background music/sound is enabled in the options.
             audio.playBg("gameplayBG.mp3", loop: true)
         }
@@ -196,7 +176,7 @@ class Gameplay: CCNode {
         
         gameState = .Playing // Change the gameState to Playing to allow players to begin making moves.
         countdownBeforeGameBegins() // Start the pre-game countdown, which will automatically begin the game.
-
+        
     }
     
     
@@ -208,7 +188,6 @@ class Gameplay: CCNode {
     `TileRows` are left visible during this countdown on purpose to give a few seconds to the players so they can get acquainted with the starting generation of tiles before the game truly starts.
     */
     func countdownBeforeGameBegins() {
-        redCountdownLabel.visible = true
         blueCountdownLabel.visible = true
         
         self.countdown = "READY?"
@@ -218,6 +197,7 @@ class Gameplay: CCNode {
                 self.countdown = "2"
                 self.delay(1) {
                     self.countdown = "1"
+                    self.scoreHeader.runAction(CCActionFadeOut(duration: 0.7))
                     self.delay(1) {
                         // Enable user interaction on "GO!".
                         self.countdown = "GO!"
@@ -225,8 +205,8 @@ class Gameplay: CCNode {
                         self.multipleTouchEnabled = true
                         self.delay(0.4) {
                             // Remove the "GO!" after a slight pause. No need to wait another full second since the players will already know what to do.
-                            self.redCountdownLabel.visible = false
                             self.blueCountdownLabel.visible = false
+                            self.level = 1
                             return
                         }
                     }
@@ -247,6 +227,107 @@ class Gameplay: CCNode {
             dispatch_get_main_queue(), closure)
     }
     
+    
+    // MARK: Single-Player Specific Functions
+    
+    func scheduleComputerPlayer(#level: Int) {
+        
+        if level == 1 {
+            self.schedule("tick", interval: 0.8)
+        }
+        else if level == 2 {
+            self.schedule("tick", interval: 0.6)
+        }
+        else if level == 3 {
+            self.schedule("tick", interval: 0.5)
+        }
+        else if level == 4 {
+            self.schedule("tick", interval: 0.4)
+        }
+        else if level == 5 {
+            self.schedule("tick", interval: 0.35)
+        }
+        else if level == 6 {
+            self.schedule("tick", interval: 0.3)
+        }
+        else if level == 7 {
+            self.schedule("tick", interval: 0.25)
+        }
+        else if level == 8 {
+            self.schedule("tick", interval: 0.2)
+        }
+        else {
+            var newInterval: Double = 0.2 - (Double(level - 8) * 0.02)
+            self.schedule("tick", interval: newInterval)
+        }
+        
+        self.scheduleOnce("levelTimer", delay: 15)
+        
+    }
+    
+    func tick() {
+        // Move the particleLine to stay with the dominantColor edge.
+        particleLine.position.x -= moveAmount
+        
+        // Move the dominantColor towards its goal.
+        dominantColor.right(Float(moveAmount))
+        
+        score++
+        
+        if !checkIfWin() {
+            checkForWarning()
+        }
+    }
+    
+    func levelTimer() {
+        self.unschedule("tick")
+        
+        displayFasterLabel()
+        
+        level++
+    }
+    
+    /**
+    To be run whenever a state occurs where blue wins.
+    
+    Triggers end-game animation sequences.
+    */
+    func overrideLevelComplete() {
+        
+        self.userInteractionEnabled = false
+        
+        self.unschedule("tick")
+        self.unschedule("levelTimer")
+        
+        displayFasterLabel()
+        
+        dominantColor.runAction(CCActionScaleTo(duration: 0.8, scaleX: 0.5, scaleY: 1))
+        particleLine.runAction(CCActionMoveTo(duration: 0.8, position: CGPoint(x: 0.5, y: 0.5)))
+        
+        delay(0.8) {
+            self.dominantColor.scaleX = 0.5
+            self.particleLine.position.x = 0.5
+            self.userInteractionEnabled = true
+            self.multipleTouchEnabled = true
+            self.level++
+        }
+        
+    }
+    
+    func displayFasterLabel() {
+        
+        let startingPosition: CGPoint = CGPoint(x: 0.5, y: -0.5)
+        let bounceInAction = CCActionEaseBounceIn(action: CCActionMoveTo(duration: 0.5, position: CGPoint(x: 0.5, y: 0.5)))
+        let bounceOutAction = CCActionEaseBounceOut(action: CCActionMoveTo(duration: 0.5, position: CGPoint(x: 0.5, y: 1.5)))
+        
+        let actionsArray = [bounceInAction, bounceOutAction]
+        let sequence = CCActionSequence(array: actionsArray)
+        
+        fasterLabel.position = startingPosition
+        fasterLabel.runAction(sequence)
+        
+        
+    }
     
     // MARK: In-Game Functions
     
@@ -269,9 +350,6 @@ class Gameplay: CCNode {
                 checkIfRightTap(side: .Blue, location: taplocation)
                 
             }
-            else { // A tap on the red side.
-                checkIfRightTap(side: .Red, location: taplocation)
-            }
             
             // Check to see if the tap caused a win. If not, check to see if the tap caused the game to enter a warning state for one of the players.
             if !checkIfWin() {
@@ -285,7 +363,7 @@ class Gameplay: CCNode {
     // MARK: Checking Functions
     
     /**
-    Called whenever a tap occurs by `touchBegan()`. 
+    Called whenever a tap occurs by `touchBegan()`.
     
     Checks to see if the tap caused the game to land in a state where it should display a `warningGradient` to one of the players. Also, checks to see if the tap caused the game to do the reverse - if the tap caused the game to leave one of the two possible warning states.
     */
@@ -293,12 +371,9 @@ class Gameplay: CCNode {
         
         var scale = dominantColor.scaleX
         
-        if scale <= 0.22 || scale >= 0.78 {
+        if scale <= 0.22 {
             if scale <= 0.22 {
                 blueWarningGradient.visible = true
-            }
-            else if scale >= 0.78 {
-                redWarningGradient.visible = true
             }
             
             // "Locking" mechanism to prevent the `siren.mp3` being repeatedly played on every tap that would result in a "Warning" state.
@@ -309,7 +384,6 @@ class Gameplay: CCNode {
         }
         else {
             blueWarningGradient.visible = false
-            redWarningGradient.visible = false
             
             audio.stopAllEffects()
             
@@ -335,7 +409,7 @@ class Gameplay: CCNode {
     
     /**
     Checks if a tap landed in the correct box on a `TileRow`.
-
+    
     Called whenever a tap occurs by `touchBegan()`, which passes the `Side` and the `CGPoint` of the tap location to the function.
     
     :param: side      The `Side` on which the tap occured.
@@ -347,7 +421,7 @@ class Gameplay: CCNode {
             
             var tileRow = blueTileRows[blueIndex]
             var rowBox: BoxNumber = tileRow.enumBox
-
+            
             var yTouch = location.y
             var screenQuartersVertical = CCDirector.sharedDirector().viewSize().height / 4
             
@@ -369,7 +443,7 @@ class Gameplay: CCNode {
                     var scaleUpRow: CCActionScaleTo? = nil
                     var moveTileRowDown: CCActionMoveTo? = nil
                     var opacityChange: CCActionFadeTo? = nil
-
+                    
                     if index == 0 {
                         nextUpRow.scaleX = 10/70
                         nextUpRow.position = CGPoint(x: 220, y: 0)
@@ -403,7 +477,7 @@ class Gameplay: CCNode {
                         nextUpRow.cascadeOpacityEnabled = true
                         nextUpRow.runAction(opacityChange)
                     }
-    
+                    
                 }
                 
                 // Cycle through the numbers 1 - numberOfTileRows in the blueIndex.
@@ -424,7 +498,7 @@ class Gameplay: CCNode {
                 
                 // If the player tapped on the wrong square, move the dominantColor away from its goal.
                 dominantColor.right(Float(wrongTapPenalty))
-                    
+                
                 // Move the particleLine to stay with the dominantColor edge.
                 particleLine.position.x -= wrongTapPenalty
                 
@@ -452,115 +526,7 @@ class Gameplay: CCNode {
             }
             
         }
-        else if side == .Red { // Red side tapped.
-            var tileRow = redTileRows[redIndex]
-            var rowBox: BoxNumber = tileRow.enumBox
-            
-            var yTouch = location.y
-            var screenQuartersVertical = CCDirector.sharedDirector().viewSize().height / 4
-            
-            // Compare the tap location against the enumBox of the selected tileRow to see if it was tapped in the right spot.
-            if yTouch > 0 && yTouch < screenQuartersVertical && rowBox == .Top || yTouch > screenQuartersVertical && yTouch < (screenQuartersVertical * 2) && rowBox == .Midtop || yTouch > (screenQuartersVertical * 2) && yTouch < (screenQuartersVertical * 3) && rowBox == .Midbottom || yTouch > (screenQuartersVertical * 3) && yTouch < (screenQuartersVertical * 4) && rowBox == .Bottom {
-                
-                // Change the drawing order.
-                tileRow.zOrder = tileRow.zOrder + 1
-                
-                // Randomly select a new tile to be colored.
-                tileRow.generateRandomTileRow()
-                
-                // Run animation sequence to adjust each tile row individually and move it into the next slot.
-                for index in 0..<numberOfTileRows {
-                    
-                    var newIndex = (redIndex + index) % numberOfTileRows
-                    var nextUpRow = redTileRows[newIndex]
-                    
-                    var scaleUpRow: CCActionScaleTo? = nil
-                    var moveTileRowDown: CCActionMoveTo? = nil
-                    var opacityChange: CCActionFadeTo? = nil
-                    
-                    if index == 0 {
-                        nextUpRow.scaleX = 10/70
-                        nextUpRow.position = CGPoint(x: 220, y: 0)
-                        nextUpRow.cascadeOpacityEnabled = true
-                        nextUpRow.opacity = 0.25
-                    }
-                    else if index == 1 {
-                        scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: 70/70, scaleY: 1)
-                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 0, y: 0))
-                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: 0.95)
-                    }
-                    else if index == 2 {
-                        scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: 50/70, scaleY: 1)
-                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 81, y: 0))
-                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: 0.85)
-                    }
-                    else if index == 3 {
-                        scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: 40/70, scaleY: 1)
-                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 140, y: 0))
-                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: 0.70)
-                    }
-                    else if index == 4 {
-                        scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: 20/70, scaleY: 1)
-                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 190, y: 0))
-                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: 0.50)
-                        
-                    }
-                    
-                    if index != 0 {
-                        nextUpRow.runAction(scaleUpRow!)
-                        nextUpRow.runAction(moveTileRowDown)
-                        nextUpRow.cascadeOpacityEnabled = true
-                        nextUpRow.runAction(opacityChange)
-                    }
-                    
-                }
-                
-                // Cycle through the numbers 1 - numberOfTileRows in the blueIndex.
-                redIndex = (redIndex + 1) % numberOfTileRows
-                
-                // Move the particleLine to stay with the dominantColor edge.
-                particleLine.position.x -= moveAmount
-                
-                // Move the dominantColor towards its goal.
-                dominantColor.right(Float(moveAmount))
-                
-                if defaults.boolForKey(soundEffectsKey) { // Check if sound effects are enabled in the options.
-                    audio.playEffect("tap.wav")
-                }
-                
-            }
-            else {
-                
-                // Since this is the red player, when the player taps on the wrong square, move the dominantColor towards its goal.
-                dominantColor.left(Float(wrongTapPenalty))
-                    
-                // Move the particleLine to stay with the dominantColor edge.
-                particleLine.position.x += wrongTapPenalty
-                    
-                
-                if yTouch > 0 && yTouch < screenQuartersVertical { // Incorrect tap on Bottom box (box4).
-                    redX4.visible = true
-                    redX4.runAction(CCActionFadeOut(duration: xDelay))
-                }
-                else if yTouch > screenQuartersVertical && yTouch < (screenQuartersVertical * 2) { // Incorrect tap on Midbottom box (box3).
-                    redX3.visible = true
-                    redX3.runAction(CCActionFadeOut(duration: xDelay))
-                }
-                else if yTouch > (screenQuartersVertical * 2) && yTouch < (screenQuartersVertical * 3) { // Incorrect tap on Midtop box (box2).
-                    redX2.visible = true
-                    redX2.runAction(CCActionFadeOut(duration: xDelay))
-                }
-                else if yTouch > (screenQuartersVertical * 3) && yTouch < (screenQuartersVertical * 4) { // Incorrect tap on Top box (box1).
-                    redX1.visible = true
-                    redX1.runAction(CCActionFadeOut(duration: xDelay))
-                }
-                
-                if defaults.boolForKey(soundEffectsKey) { // Check if sound effects are enabled in the options.
-                    audio.playEffect("buzz.wav")
-                }
-                
-            }
-        }
+        
     }
     
     /**
@@ -573,18 +539,12 @@ class Gameplay: CCNode {
     func checkIfWin() -> Bool {
         var scale = dominantColor.scaleX
         
-        if scale <= -0.01 || scale >= 1.01 { // We have a 0.01 difference on each of the possible win states to ensure that no graphical glitches occur in the end-game state.
+        if scale <= -0.01 { // We have a 0.01 difference on each of the possible win states to ensure that no graphical glitches occur in the end-game state.
             
-            if scale <= -0.01 {
-                redWins()
-            }
-            else if scale >= 1.01 {
-                blueWins()
-            }
+            redWins()
             
             // Stop all music and play some end-game tunes.
             audio.stopAllEffects()
-
             if defaults.boolForKey(backgroundMusicKey) { // Check if background music/sound is enabled in the options.
                 audio.playEffect("scratch.wav")
                 audio.playBg("outsideBG.wav", loop: true)
@@ -595,13 +555,16 @@ class Gameplay: CCNode {
             
             return true
         }
+        else if scale >= 1.01 {
+            overrideLevelComplete()
+        }
         
         return false
     }
     
     
     // MARK: End-Game Functions
-
+    
     /**
     To be run whenever a state occurs where red wins.
     
@@ -610,28 +573,22 @@ class Gameplay: CCNode {
     func redWins() {
         self.userInteractionEnabled = false
         
+        self.unschedule("tick")
+        self.unschedule("levelTimer")
+        
         fadeOutTileRows()
         
         world.animationManager.runAnimationsForSequenceNamed("RedWins")
         particleLine.stopParticleGeneration()
         
         blueWarningGradient.visible = false
-    }
-    
-    /**
-    To be run whenever a state occurs where blue wins.
-    
-    Triggers end-game animation sequences.
-    */
-    func blueWins() {
-        self.userInteractionEnabled = false
+        scoreHeader.opacity = 1
         
-        fadeOutTileRows()
+        var currentHighScore = defaults.integerForKey(singlePlayerHighScore)
         
-        world.animationManager.runAnimationsForSequenceNamed("BlueWins")
-        particleLine.stopParticleGeneration()
-        
-        redWarningGradient.visible = false
+        if score > currentHighScore {
+            defaults.setInteger(score, forKey: singlePlayerHighScore)
+        }
     }
     
     /**
@@ -642,9 +599,6 @@ class Gameplay: CCNode {
     func fadeOutTileRows() {
         blueTileRowNode.cascadeOpacityEnabled = true
         blueTileRowNode.runAction(CCActionFadeOut(duration: 0.3))
-        
-        redTileRowNode.cascadeOpacityEnabled = true
-        redTileRowNode.runAction(CCActionFadeOut(duration: 0.3))
     }
     
     
@@ -654,12 +608,12 @@ class Gameplay: CCNode {
     Resets the Gameplay to its original state and restarts the game.
     */
     func playAgain() {
-        var gameplayScene = CCBReader.load("Gameplay") as! Gameplay
+        var gameplayScene = CCBReader.load("SinglePlayer") as! SinglePlayer
         gameplayScene.animationManager.runAnimationsForSequenceNamed("Gameplay")
         
         var scene = CCScene()
         scene.addChild(gameplayScene)
-                
+        
         var transition = CCTransition(fadeWithDuration: 0.5)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
@@ -697,77 +651,59 @@ class Gameplay: CCNode {
         var leftColorChoiceInt = defaults.integerForKey(leftSideColorChoice)
         if leftColorChoiceInt == 1 { // Turquoise
             dominantColorNode.color = turquoiseColor
-            dominantColorWinsLabel.string = "TURQUOISE\nWINS!"
         }
         else if leftColorChoiceInt == 2 { // Gray
             dominantColorNode.color = grayColor
-            dominantColorWinsLabel.string = "GRAY\nWINS!"
         }
         else if leftColorChoiceInt == 3 { // Orange
             dominantColorNode.color = orangeColor
-            dominantColorWinsLabel.string = "ORANGE\nWINS!"
         }
         else if leftColorChoiceInt == 4 { // Red
             dominantColorNode.color = redColor
-            dominantColorWinsLabel.string = "RED\nWINS!"
         }
         else if leftColorChoiceInt == 5 { // Silver
             dominantColorNode.color = silverColor
-            dominantColorWinsLabel.string = "SILVER\nWINS!"
         }
         else if leftColorChoiceInt == 6 { // Yellow
             dominantColorNode.color = yellowColor
-            dominantColorWinsLabel.string = "YELLOW\nWINS!"
         }
         else if leftColorChoiceInt == 7 { // Purple
             dominantColorNode.color = purpleColor
-            dominantColorWinsLabel.string = "PURPLE\nWINS!"
         }
         else if leftColorChoiceInt == 8 { // Blue
             dominantColorNode.color = blueColor
-            dominantColorWinsLabel.string = "BLUE\nWINS!"
         }
         else if leftColorChoiceInt == 9 { // Green
             dominantColorNode.color = greenColor
-            dominantColorWinsLabel.string = "GREEN\nWINS!"
         }
         
         var rightColorChoiceInt = defaults.integerForKey(rightSideColorChoice)
         if rightColorChoiceInt == 1 { // Turquoise
             backgroundColorNode.color = turquoiseColor
-            backgroundColorWinsLabel.string = "TURQUOISE\nWINS!"
         }
         else if rightColorChoiceInt == 2 { // Gray
             backgroundColorNode.color = grayColor
-            backgroundColorWinsLabel.string = "GRAY\nWINS!"
         }
         else if rightColorChoiceInt == 3 { // Orange
             backgroundColorNode.color = orangeColor
-            backgroundColorWinsLabel.string = "ORANGE\nWINS!"
         }
         else if rightColorChoiceInt == 4 { // Red
             backgroundColorNode.color = redColor
-            backgroundColorWinsLabel.string = "RED\nWINS!"
         }
         else if rightColorChoiceInt == 5 { // Silver
             backgroundColorNode.color = silverColor
-            backgroundColorWinsLabel.string = "SILVER\nWINS!"
         }
         else if rightColorChoiceInt == 6 { // Yellow
             backgroundColorNode.color = yellowColor
-            backgroundColorWinsLabel.string = "YELLOW\nWINS!"
         }
         else if rightColorChoiceInt == 7 { // Purple
             backgroundColorNode.color = purpleColor
-            backgroundColorWinsLabel.string = "PURPLE\nWINS!"
         }
         else if rightColorChoiceInt == 8 { // Blue
             backgroundColorNode.color = blueColor
-            backgroundColorWinsLabel.string = "BLUE\nWINS!"
         }
         else if rightColorChoiceInt == 9 { // Green
             backgroundColorNode.color = greenColor
-            backgroundColorWinsLabel.string = "GREEN\nWINS!"
         }
         
     }

@@ -23,6 +23,8 @@ class MainScene: CCNode {
     let leftSideColorChoice = "leftSideColorChoice"
     let rightSideColorChoice = "rightSideColorChoice"
     
+    let singlePlayerHighScore = "singlePlayerHighScore"
+    
     
     // MARK: Variables
     
@@ -50,6 +52,8 @@ class MainScene: CCNode {
             defaults.setInteger(8, forKey: leftSideColorChoice) // 8 refers to the color blue. See colorDictionary in OptionsMenu.swift.
             defaults.setInteger(4, forKey: rightSideColorChoice) // 4 refers to the color red. See colorDictionary in OptionsMenu.swift.
             
+            defaults.setInteger(0, forKey: singlePlayerHighScore) // 4 refers to the color red. See colorDictionary in OptionsMenu.swift.
+            
             println("Default settings loaded.")
             
         }
@@ -60,7 +64,21 @@ class MainScene: CCNode {
     /**
     Starts a new instance of the game.
     */
-    func play() {
+    func playOnePlayer() {
+        var gameplayScene = CCBReader.load("SinglePlayer") as! SinglePlayer
+        gameplayScene.animationManager.runAnimationsForSequenceNamed("Gameplay")
+        
+        var scene = CCScene()
+        scene.addChild(gameplayScene)
+        
+        var transition = CCTransition(fadeWithDuration: 0.5)
+        CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
+    }
+    
+    /**
+    Starts a new instance of the game.
+    */
+    func playTwoPlayer() {
         var gameplayScene = CCBReader.load("Gameplay") as! Gameplay
         gameplayScene.animationManager.runAnimationsForSequenceNamed("Gameplay")
         
