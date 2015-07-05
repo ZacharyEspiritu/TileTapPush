@@ -95,6 +95,8 @@ class SinglePlayer: CCNode {
         }
     }
     
+    weak var speedBonusLabel: CCLabelTTF!
+    
     // MARK: Reset Functions
     
     /**
@@ -344,8 +346,11 @@ class SinglePlayer: CCNode {
         
         var scoreMultiplier: Double = pow(1.2, Double(level))
         var possiblePointsRemaining: Double = Double(timeRemainingInLevel) / currentInterval
+        var scoreBonus: Int = Int(possiblePointsRemaining * scoreMultiplier)
         
-        score += Int(possiblePointsRemaining * scoreMultiplier)
+        score += scoreBonus
+        
+        displaySpeedBonusLabel(bonus: scoreBonus)
         
         delay(0.8) {
             self.userInteractionEnabled = true
@@ -373,6 +378,28 @@ class SinglePlayer: CCNode {
         }
         
     }
+    
+    func displaySpeedBonusLabel(#bonus: Int) {
+        speedBonusLabel.string = "+ \(bonus)\nspeed bonus"
+        speedBonusLabel.opacity = 0
+        speedBonusLabel.visible = true
+        
+        speedBonusLabel.position = CGPoint(x: 0, y: 0)
+        
+        let bounceInAction = CCActionEaseBounceOut(action: CCActionMoveTo(duration: 0.5, position: CGPoint(x: -66, y: 0)))
+        let fadeInAction = CCActionFadeTo(duration: 0.5, opacity: 1)
+        
+        speedBonusLabel.runAction(bounceInAction)
+        speedBonusLabel.runAction(fadeInAction)
+        
+        delay(1.0) {
+            
+            let fadeOutAction = CCActionFadeTo(duration: 0.5, opacity: 0)
+            self.speedBonusLabel.runAction(fadeOutAction)
+            
+        }
+    }
+    
     
     // MARK: In-Game Functions
     
@@ -617,6 +644,7 @@ class SinglePlayer: CCNode {
     */
     func redWins() {
         fasterLabel.visible = false
+        speedBonusLabel.visible = false
         
         self.userInteractionEnabled = false
         
