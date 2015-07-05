@@ -16,7 +16,7 @@ class MainScene: CCNode {
     
     // See `OptionsMenu.swift` for information on these constants.
     let hasLoadedBefore = "hasLoadedBefore"
-    let ingameParticlesKey = "ingameParticlesKeym"
+    let ingameParticlesKey = "ingameParticlesKey"
     let backgroundMusicKey = "backgroundMusicKey"
     let soundEffectsKey = "soundEffectsKey"
     
