@@ -83,6 +83,10 @@ class SinglePlayer: CCNode {
         }
     }
     
+    var timeRemainingInLevel: Int = 0
+    var currentInterval: Double = 0
+    
+    
     // MARK: Reset Functions
     
     /**
@@ -233,35 +237,38 @@ class SinglePlayer: CCNode {
     func scheduleComputerPlayer(#level: Int) {
         
         if level == 1 {
-            self.schedule("tick", interval: 0.8)
+            currentInterval = 0.8
         }
         else if level == 2 {
-            self.schedule("tick", interval: 0.6)
+            currentInterval = 0.6
         }
         else if level == 3 {
-            self.schedule("tick", interval: 0.5)
+            currentInterval = 0.5
         }
         else if level == 4 {
-            self.schedule("tick", interval: 0.4)
+            currentInterval = 0.4
         }
         else if level == 5 {
-            self.schedule("tick", interval: 0.35)
+            currentInterval = 0.35
         }
         else if level == 6 {
-            self.schedule("tick", interval: 0.3)
+            currentInterval = 0.3
         }
         else if level == 7 {
-            self.schedule("tick", interval: 0.25)
+            currentInterval = 0.25
         }
         else if level == 8 {
-            self.schedule("tick", interval: 0.2)
+            currentInterval = 0.2
         }
         else {
-            var newInterval: Double = 0.2 - (Double(level - 8) * 0.02)
-            self.schedule("tick", interval: newInterval)
+            currentInterval = 0.2 - (Double(level - 8) * 0.02)
         }
         
+        self.schedule("tick", interval: currentInterval)
+        
         self.scheduleOnce("levelTimer", delay: 15)
+        self.schedule("updateTimeRemainingVariable", interval: 1)
+        timeRemainingInLevel = 15
         
     }
     
@@ -280,11 +287,34 @@ class SinglePlayer: CCNode {
     }
     
     func levelTimer() {
+        
         self.unschedule("tick")
+        self.unschedule("updateTimeRemainingVariable")
         
         displayFasterLabel()
         
-        level++
+        if dominantColor.scaleX > 0.5 {
+            
+            self.userInteractionEnabled = false
+            
+            dominantColor.runAction(CCActionScaleTo(duration: 0.5, scaleX: 0.5, scaleY: 1))
+            particleLine.runAction(CCActionMoveTo(duration: 0.5, position: CGPoint(x: 0.5, y: 0.5)))
+            
+            delay(0.5) {
+                self.userInteractionEnabled = true
+                self.multipleTouchEnabled = true
+                self.level++
+            }
+            
+        }
+        else {
+            level++
+        }
+        
+    }
+    
+    func updateTimeRemainingVariable() {
+        timeRemainingInLevel--
     }
     
     /**
@@ -298,15 +328,19 @@ class SinglePlayer: CCNode {
         
         self.unschedule("tick")
         self.unschedule("levelTimer")
+        self.unschedule("updateTimeRemainingVariable")
         
         displayFasterLabel()
         
         dominantColor.runAction(CCActionScaleTo(duration: 0.8, scaleX: 0.5, scaleY: 1))
         particleLine.runAction(CCActionMoveTo(duration: 0.8, position: CGPoint(x: 0.5, y: 0.5)))
         
+        var scoreMultiplier: Double = pow(1.2, Double(level))
+        var possiblePointsRemaining: Double = Double(timeRemainingInLevel) / currentInterval
+        
+        score += Int(possiblePointsRemaining * scoreMultiplier)
+        
         delay(0.8) {
-            self.dominantColor.scaleX = 0.5
-            self.particleLine.position.x = 0.5
             self.userInteractionEnabled = true
             self.multipleTouchEnabled = true
             self.level++
@@ -571,6 +605,8 @@ class SinglePlayer: CCNode {
     Triggers end-game animation sequences.
     */
     func redWins() {
+        fasterLabel.visible = false
+        
         self.userInteractionEnabled = false
         
         self.unschedule("tick")
