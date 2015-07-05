@@ -90,7 +90,7 @@
 											<key>value</key>
 											<array>
 												<real>0.5</real>
-												<real>4.3000001907348633</real>
+												<real>4.5</real>
 											</array>
 										</dict>
 									</array>
@@ -2637,8 +2637,6 @@ Eric Zhou</string>
 										</array>
 									</dict>
 								</array>
-								<key>selected</key>
-								<true/>
 							</dict>
 						</array>
 						<key>customClass</key>
@@ -2672,7 +2670,7 @@ Eric Zhou</string>
 								<key>value</key>
 								<array>
 									<real>0.5</real>
-									<real>4.3000001907348633</real>
+									<real>4.5</real>
 									<integer>3</integer>
 									<integer>2</integer>
 									<integer>2</integer>

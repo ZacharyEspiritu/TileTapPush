@@ -35,10 +35,13 @@ class CreditsScene: CCNode {
     */
     override func update(delta: CCTime) {
         
-        var creditsEnclosingNodeCurrentHeight: CGFloat = creditsEnclosingNode.position.y
+        var creditsEnclosingNodeCurrentHeight: CGFloat = creditsEnclosingNode.positionInPoints.y
         var creditsEnclosingNodeHeight: CGFloat = creditsEnclosingNode.contentSize.height
         
         var screenHeight = UIScreen.mainScreen().bounds.size.height
+        
+        println("Target Height:  \((creditsEnclosingNodeHeight + screenHeight))")
+        println("Current Height: \(creditsEnclosingNodeCurrentHeight)")
         
         if (creditsEnclosingNodeHeight + screenHeight) < creditsEnclosingNodeCurrentHeight {
             back()

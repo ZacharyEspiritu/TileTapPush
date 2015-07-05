@@ -2366,7 +2366,7 @@
 								<key>customClass</key>
 								<string></string>
 								<key>displayName</key>
-								<string>"Misclick Penalty"</string>
+								<string>"Ingame Particles"</string>
 								<key>memberVarAssignmentName</key>
 								<string></string>
 								<key>memberVarAssignmentType</key>
@@ -2426,7 +2426,7 @@
 										<string>Text</string>
 										<key>value</key>
 										<array>
-											<string>Misclick Penalty</string>
+											<string>In-Game Particles</string>
 											<false/>
 										</array>
 									</dict>
@@ -2580,7 +2580,7 @@
 										<key>customClass</key>
 										<string></string>
 										<key>displayName</key>
-										<string>misclickPenaltyToggle</string>
+										<string>ingameParticlesToggle</string>
 										<key>memberVarAssignmentName</key>
 										<string></string>
 										<key>memberVarAssignmentType</key>
@@ -2640,7 +2640,7 @@
 												<string>Block</string>
 												<key>value</key>
 												<array>
-													<string>misclickPenaltyToggle</string>
+													<string>ingameParticlesToggle</string>
 													<integer>1</integer>
 												</array>
 											</dict>
@@ -2906,9 +2906,9 @@
 										<key>customClass</key>
 										<string></string>
 										<key>displayName</key>
-										<string>misclickPenaltyToggleButtonText</string>
+										<string>ingameParticlesToggleButton</string>
 										<key>memberVarAssignmentName</key>
-										<string>misclickPenaltyToggleButtonText</string>
+										<string>ingameParticlesToggleButtonText</string>
 										<key>memberVarAssignmentType</key>
 										<integer>1</integer>
 										<key>properties</key>
@@ -3102,6 +3102,8 @@
 												</array>
 											</dict>
 										</array>
+										<key>selected</key>
+										<true/>
 									</dict>
 								</array>
 								<key>customClass</key>
@@ -7269,8 +7271,6 @@
 														<real>1</real>
 													</dict>
 												</array>
-												<key>selected</key>
-												<true/>
 											</dict>
 											<dict>
 												<key>UUID</key>

@@ -16,7 +16,7 @@ class MainScene: CCNode {
     
     // See `OptionsMenu.swift` for information on these constants.
     let hasLoadedBefore = "hasLoadedBefore"
-    let misclickPenaltyKey = "misclickPenaltyKey"
+    let ingameParticlesKey = "ingameParticlesKeym"
     let backgroundMusicKey = "backgroundMusicKey"
     let soundEffectsKey = "soundEffectsKey"
     
@@ -41,7 +41,7 @@ class MainScene: CCNode {
         
         if !defaults.boolForKey(hasLoadedBefore) {
             
-            defaults.setObject(true, forKey: misclickPenaltyKey)
+            defaults.setObject(true, forKey: ingameParticlesKey)
             defaults.setObject(true, forKey: backgroundMusicKey)
             defaults.setObject(true, forKey: soundEffectsKey)
             

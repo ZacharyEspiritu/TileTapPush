@@ -22,7 +22,7 @@ class OptionsMenu: CCNode {
     let defaults = NSUserDefaults.standardUserDefaults() // Implement the `NSUserDefaults` object.
     
     // We use constants to declare our NSUserDefault keys because it adds an extra degree of error prevention - if we misspell something (which also becomes less common since Swift will now be able to auto-fill our key names), we'll get a compile error, not an error during runtime.
-    let misclickPenaltyKey = "misclickPenaltyKey"
+    let ingameParticlesKey = "ingameParticlesKey"
     let backgroundMusicKey = "backgroundMusicKey"
     let soundEffectsKey = "soundEffectsKey"
     
@@ -48,7 +48,7 @@ class OptionsMenu: CCNode {
     // MARK: Variables
     
     // Used to change the text displayed on the ON/OFF toggle buttons.
-    weak var misclickPenaltyToggleButtonText: CCLabelTTF!
+    weak var ingameParticlesToggleButtonText: CCLabelTTF!
     weak var backgroundMusicToggleButtonText: CCLabelTTF!
     weak var soundEffectsToggleButtonText: CCLabelTTF!
     
@@ -73,8 +73,8 @@ class OptionsMenu: CCNode {
     */
     func didLoadFromCCB() {
         
-        if !defaults.boolForKey(misclickPenaltyKey) {
-            misclickPenaltyToggleButtonText.string = offText
+        if !defaults.boolForKey(ingameParticlesKey) {
+            ingameParticlesToggleButtonText.string = offText
         }
         if !defaults.boolForKey(backgroundMusicKey) {
             backgroundMusicToggleButtonText.string = offText
@@ -179,19 +179,19 @@ class OptionsMenu: CCNode {
     // MARK: Toggle Functions
     
     /**
-    Toggles the state of the misclickPenaltyKey.
+    Toggles the state of the ingameParticlesKey.
     */
-    func misclickPenaltyToggle() {
+    func ingameParticlesToggle() {
         
-        var currentState = defaults.boolForKey(misclickPenaltyKey)
+        var currentState = defaults.boolForKey(ingameParticlesKey)
         
         if currentState {
-            defaults.setBool(false, forKey: misclickPenaltyKey)
-            misclickPenaltyToggleButtonText.string = offText
+            defaults.setBool(false, forKey: ingameParticlesKey)
+            ingameParticlesToggleButtonText.string = offText
         }
         else {
-            defaults.setBool(true, forKey: misclickPenaltyKey)
-            misclickPenaltyToggleButtonText.string = onText
+            defaults.setBool(true, forKey: ingameParticlesKey)
+            ingameParticlesToggleButtonText.string = onText
         }
         
     }

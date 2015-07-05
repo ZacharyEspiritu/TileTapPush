@@ -3039,8 +3039,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>
@@ -3924,7 +3922,7 @@
 								<string>Size</string>
 								<key>value</key>
 								<array>
-									<real>100</real>
+									<real>240</real>
 									<real>100</real>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -3948,7 +3946,7 @@
 								<string>ScaleLock</string>
 								<key>value</key>
 								<array>
-									<real>2.5935037136077881</real>
+									<real>1</real>
 									<real>0.65429693460464478</real>
 									<false/>
 									<integer>0</integer>
@@ -4124,7 +4122,7 @@
 								<string>Size</string>
 								<key>value</key>
 								<array>
-									<real>100</real>
+									<real>240</real>
 									<real>100</real>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -4148,7 +4146,7 @@
 								<string>ScaleLock</string>
 								<key>value</key>
 								<array>
-									<real>2.5935037136077881</real>
+									<real>1</real>
 									<real>0.65429693460464478</real>
 									<false/>
 									<integer>0</integer>
@@ -4411,7 +4409,7 @@
 								<string>Size</string>
 								<key>value</key>
 								<array>
-									<real>100</real>
+									<real>240</real>
 									<real>100</real>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -4435,7 +4433,7 @@
 								<string>ScaleLock</string>
 								<key>value</key>
 								<array>
-									<real>2.5935037136077881</real>
+									<real>1</real>
 									<real>0.65429693460464478</real>
 									<false/>
 									<integer>0</integer>
@@ -4609,7 +4607,7 @@
 								<string>Size</string>
 								<key>value</key>
 								<array>
-									<real>100</real>
+									<real>240</real>
 									<real>100</real>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -4633,7 +4631,7 @@
 								<string>ScaleLock</string>
 								<key>value</key>
 								<array>
-									<real>2.5935037136077881</real>
+									<real>1</real>
 									<real>0.65429693460464478</real>
 									<false/>
 									<integer>0</integer>
@@ -4685,6 +4683,8 @@
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 						<key>seqExpanded</key>
 						<true/>
 					</dict>

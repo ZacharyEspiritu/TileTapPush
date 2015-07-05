@@ -35,7 +35,7 @@ class Gameplay: CCNode {
     let defaults = NSUserDefaults.standardUserDefaults()
     
     // See `OptionsMenu.swift` for information on these constants.
-    let misclickPenaltyKey = "misclickPenaltyKey"
+    let ingameParticlesKey = "ingameParticlesKey"
     let backgroundMusicKey = "backgroundMusicKey"
     let soundEffectsKey = "soundEffectsKey"
     
@@ -182,6 +182,10 @@ class Gameplay: CCNode {
 
         if defaults.boolForKey(backgroundMusicKey) { // Check if background music/sound is enabled in the options.
             audio.playBg("gameplayBG.mp3", loop: true)
+        }
+        
+        if !defaults.boolForKey(ingameParticlesKey) {
+            particleLine.stopParticleGeneration()
         }
         
         getColorChoicesFromMemory() // Load all color choices from `NSUserDefaults` and change the visual appearance of both sides, all in one swoop. See `getColorChoicesFromMemory()` below.
@@ -414,15 +418,11 @@ class Gameplay: CCNode {
             }
             else {
                 
-                if defaults.boolForKey(misclickPenaltyKey) { // Check if misclick penalties are enabled.
+                // If the player tapped on the wrong square, move the dominantColor away from its goal.
+                dominantColor.right(Float(wrongTapPenalty))
                     
-                    // If the player tapped on the wrong square, move the dominantColor away from its goal.
-                    dominantColor.right(Float(wrongTapPenalty))
-                    
-                    // Move the particleLine to stay with the dominantColor edge.
-                    particleLine.position.x -= wrongTapPenalty
-                    
-                }
+                // Move the particleLine to stay with the dominantColor edge.
+                particleLine.position.x -= wrongTapPenalty
                 
                 if yTouch > 0 && yTouch < screenQuartersVertical { // Incorrect tap on Bottom box (box1).
                     blueX1.visible = true
@@ -527,15 +527,12 @@ class Gameplay: CCNode {
             }
             else {
                 
-                if defaults.boolForKey(misclickPenaltyKey) { // Check if misclick penalties are enabled.
+                // Since this is the red player, when the player taps on the wrong square, move the dominantColor towards its goal.
+                dominantColor.left(Float(wrongTapPenalty))
                     
-                    // Since this is the red player, when the player taps on the wrong square, move the dominantColor towards its goal.
-                    dominantColor.left(Float(wrongTapPenalty))
+                // Move the particleLine to stay with the dominantColor edge.
+                particleLine.position.x += wrongTapPenalty
                     
-                    // Move the particleLine to stay with the dominantColor edge.
-                    particleLine.position.x += wrongTapPenalty
-                    
-                }
                 
                 if yTouch > 0 && yTouch < screenQuartersVertical { // Incorrect tap on Bottom box (box4).
                     redX4.visible = true
