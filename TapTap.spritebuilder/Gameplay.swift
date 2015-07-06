@@ -19,13 +19,13 @@ class Gameplay: CCNode {
     
     // MARK: Constants
     
-    let moveAmount: CGFloat = 0.03      // How much does the line move on a correct tap?
-    let wrongTapPenalty: CGFloat = 0.05 // How much does the line move on an incorrect tap?
+    let moveAmount: CGFloat = 0.03         // How much does the line move on a correct tap?
+    let wrongTapPenalty: CGFloat = 0.05    // How much does the line move on an incorrect tap?
     
-    let numberOfTileRows: Int = 5       // How many tile rows do we generate for each array?
+    let numberOfTileRows: Int = 5          // How many tile rows do we generate for each array?
     
-    let xDelay = 0.15                   // How long does the incorrect X mark appear in milliseconds?
-    let animationDelay = 0.04           // How long does it take for a tileRow animation to complete?
+    let wrongTapNotificationLength = 0.15  // How long does the incorrect X mark appear in milliseconds?
+    let animationDelay = 0.04              // How long does it take for a tileRow animation to complete?
     
     // The widths that each of the `TileRow` objects are supposed to be. Chances are, though, that because my game architecture sucks, you're still going to have to dig into the code to manually change some of the numbers.
     let topTileRowWidth: Float = 10
@@ -33,6 +33,12 @@ class Gameplay: CCNode {
     let middleTileRowWidth: Float = 40
     let midbaseTileRowWidth: Float = 50
     let baseTileRowWidth: Float = 70
+    
+    let topTileRowOpacity: CGFloat = 0.25
+    let midtopTileRowOpacity: CGFloat = 0.50
+    let middleTileRowOpacity: CGFloat = 0.70
+    let midbaseTileRowOpacity: CGFloat = 0.85
+    let baseTileRowOpacity: CGFloat = 0.95
     
     let audio = OALSimpleAudio.sharedInstance() // OALSimpleAudio instance used for handling sounds.
 
@@ -134,6 +140,7 @@ class Gameplay: CCNode {
             else if index == 4 {
                 blueTileRow.scaleX = topTileRowWidth / baseTileRowWidth
                 redTileRow.scaleX = topTileRowWidth / baseTileRowWidth
+                
                 rowWidth = 220
             }
             
@@ -162,24 +169,24 @@ class Gameplay: CCNode {
             var currentRedRow = redTileRows[index]
             
             if index == 0 {
-                currentBlueRow.opacity = 0.95
-                currentRedRow.opacity = 0.95
+                currentBlueRow.opacity = baseTileRowOpacity
+                currentRedRow.opacity = baseTileRowOpacity
             }
             else if index == 1 {
-                currentBlueRow.opacity = 0.85
-                currentRedRow.opacity = 0.85
+                currentBlueRow.opacity = midbaseTileRowOpacity
+                currentRedRow.opacity = midbaseTileRowOpacity
             }
             else if index == 2 {
-                currentBlueRow.opacity = 0.70
-                currentRedRow.opacity = 0.70
+                currentBlueRow.opacity = middleTileRowOpacity
+                currentRedRow.opacity = middleTileRowOpacity
             }
             else if index == 3 {
-                currentBlueRow.opacity = 0.50
-                currentRedRow.opacity = 0.50
+                currentBlueRow.opacity = midtopTileRowOpacity
+                currentRedRow.opacity = midtopTileRowOpacity
             }
             else if index == 4 {
-                currentBlueRow.opacity = 0.25
-                currentRedRow.opacity = 0.25
+                currentBlueRow.opacity = topTileRowOpacity
+                currentRedRow.opacity = topTileRowOpacity
             }
             
         }
@@ -381,27 +388,27 @@ class Gameplay: CCNode {
                         nextUpRow.scaleX = topTileRowWidth / baseTileRowWidth
                         nextUpRow.position = CGPoint(x: 220, y: 0)
                         nextUpRow.cascadeOpacityEnabled = true
-                        nextUpRow.opacity = 0.25
+                        nextUpRow.opacity = topTileRowOpacity
                     }
                     else if index == 1 {
                         scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: baseTileRowWidth / baseTileRowWidth, scaleY: 1)
                         moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 0, y: 0))
-                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: 0.95)
+                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: baseTileRowOpacity)
                     }
                     else if index == 2 {
                         scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: midbaseTileRowWidth / baseTileRowWidth, scaleY: 1)
                         moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 81, y: 0))
-                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: 0.85)
+                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: midbaseTileRowOpacity)
                     }
                     else if index == 3 {
                         scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: middleTileRowWidth / baseTileRowWidth, scaleY: 1)
                         moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 140, y: 0))
-                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: 0.70)
+                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: middleTileRowOpacity)
                     }
                     else if index == 4 {
                         scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: midtopTileRowWidth / baseTileRowWidth, scaleY: 1)
                         moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 190, y: 0))
-                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: 0.50)
+                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: midtopTileRowOpacity)
                     }
                     
                     if index != 0 {
@@ -437,19 +444,19 @@ class Gameplay: CCNode {
                 
                 if yTouch > 0 && yTouch < screenQuartersVertical { // Incorrect tap on Bottom box (box1).
                     blueX1.visible = true
-                    blueX1.runAction(CCActionFadeOut(duration: xDelay))
+                    blueX1.runAction(CCActionFadeOut(duration: wrongTapNotificationLength))
                 }
                 else if yTouch > screenQuartersVertical && yTouch < (screenQuartersVertical * 2) { // Incorrect tap on Midbottom box (box2).
                     blueX2.visible = true
-                    blueX2.runAction(CCActionFadeOut(duration: xDelay))
+                    blueX2.runAction(CCActionFadeOut(duration: wrongTapNotificationLength))
                 }
                 else if yTouch > (screenQuartersVertical * 2) && yTouch < (screenQuartersVertical * 3) { // Incorrect tap on Midtop box (box3).
                     blueX3.visible = true
-                    blueX3.runAction(CCActionFadeOut(duration: xDelay))
+                    blueX3.runAction(CCActionFadeOut(duration: wrongTapNotificationLength))
                 }
                 else if yTouch > (screenQuartersVertical * 3) && yTouch < (screenQuartersVertical * 4) { // Incorrect tap on Top box (box4).
                     blueX4.visible = true
-                    blueX4.runAction(CCActionFadeOut(duration: xDelay))
+                    blueX4.runAction(CCActionFadeOut(duration: wrongTapNotificationLength))
                 }
                 
                 if defaults.boolForKey(soundEffectsKey) { // Check if sound effects are enabled in the options.
@@ -489,27 +496,27 @@ class Gameplay: CCNode {
                         nextUpRow.scaleX = topTileRowWidth / baseTileRowWidth
                         nextUpRow.position = CGPoint(x: 220, y: 0)
                         nextUpRow.cascadeOpacityEnabled = true
-                        nextUpRow.opacity = 0.25
+                        nextUpRow.opacity = topTileRowOpacity
                     }
                     else if index == 1 {
                         scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: baseTileRowWidth / baseTileRowWidth, scaleY: 1)
                         moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 0, y: 0))
-                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: 0.95)
+                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: baseTileRowOpacity)
                     }
                     else if index == 2 {
                         scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: midbaseTileRowWidth / baseTileRowWidth, scaleY: 1)
                         moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 81, y: 0))
-                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: 0.85)
+                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: midbaseTileRowOpacity)
                     }
                     else if index == 3 {
                         scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: middleTileRowWidth / baseTileRowWidth, scaleY: 1)
                         moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 140, y: 0))
-                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: 0.70)
+                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: middleTileRowOpacity)
                     }
                     else if index == 4 {
                         scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: midtopTileRowWidth / baseTileRowWidth, scaleY: 1)
                         moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 190, y: 0))
-                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: 0.50)
+                        opacityChange = CCActionFadeTo(duration: animationDelay, opacity: midtopTileRowOpacity)
                         
                     }
                     
@@ -547,19 +554,19 @@ class Gameplay: CCNode {
                 
                 if yTouch > 0 && yTouch < screenQuartersVertical { // Incorrect tap on Bottom box (box4).
                     redX4.visible = true
-                    redX4.runAction(CCActionFadeOut(duration: xDelay))
+                    redX4.runAction(CCActionFadeOut(duration: wrongTapNotificationLength))
                 }
                 else if yTouch > screenQuartersVertical && yTouch < (screenQuartersVertical * 2) { // Incorrect tap on Midbottom box (box3).
                     redX3.visible = true
-                    redX3.runAction(CCActionFadeOut(duration: xDelay))
+                    redX3.runAction(CCActionFadeOut(duration: wrongTapNotificationLength))
                 }
                 else if yTouch > (screenQuartersVertical * 2) && yTouch < (screenQuartersVertical * 3) { // Incorrect tap on Midtop box (box2).
                     redX2.visible = true
-                    redX2.runAction(CCActionFadeOut(duration: xDelay))
+                    redX2.runAction(CCActionFadeOut(duration: wrongTapNotificationLength))
                 }
                 else if yTouch > (screenQuartersVertical * 3) && yTouch < (screenQuartersVertical * 4) { // Incorrect tap on Top box (box1).
                     redX1.visible = true
-                    redX1.runAction(CCActionFadeOut(duration: xDelay))
+                    redX1.runAction(CCActionFadeOut(duration: wrongTapNotificationLength))
                 }
                 
                 if defaults.boolForKey(soundEffectsKey) { // Check if sound effects are enabled in the options.
