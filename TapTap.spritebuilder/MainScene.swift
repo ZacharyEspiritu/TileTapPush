@@ -33,6 +33,8 @@ class MainScene: CCNode {
     weak var dominantColorNode: CCNodeColor!
     weak var backgroundColorNode: CCNodeColor!
     
+    weak var particleLine: ParticleLine!
+    
     
     // MARK: Functions
     
@@ -60,7 +62,12 @@ class MainScene: CCNode {
             
         }
         
-        getColorChoicesFromMemory()
+        if !defaults.boolForKey(ingameParticlesKey) { // Check if particles are enabled in the options.
+            particleLine.stopParticleGeneration()
+        }
+        
+        getColorChoicesFromMemory() // Load color choices from `NSUserDefaults`.
+    
     }
     
     /**
@@ -110,15 +117,15 @@ class MainScene: CCNode {
     func getColorChoicesFromMemory() {
         
         // Color presets.
-        var turquoiseColor = CCColor(red: 26/255, green: 188/255, blue: 156/255)
-        var grayColor = CCColor(red: 52/255, green: 73/255, blue: 94/255)
-        var orangeColor = CCColor(red: 230/255, green: 126/255, blue: 34/255)
-        var redColor = CCColor(red: 255/255, green: 102/255, blue: 102/255)
-        var silverColor = CCColor(red: 189/255, green: 195/255, blue: 199/255)
-        var yellowColor = CCColor(red: 241/255, green: 196/255, blue: 15/255)
-        var purpleColor = CCColor(red: 155/255, green: 89/255, blue: 182/255)
-        var blueColor = CCColor(red: 0/255, green: 0/255, blue: 255/255)
-        var greenColor = CCColor(red: 39/255, green: 174/255, blue: 96/255)
+        let turquoiseColor = CCColor(red: 26/255, green: 188/255, blue: 156/255)
+        let grayColor = CCColor(red: 52/255, green: 73/255, blue: 94/255)
+        let orangeColor = CCColor(red: 230/255, green: 126/255, blue: 34/255)
+        let redColor = CCColor(red: 255/255, green: 102/255, blue: 102/255)
+        let silverColor = CCColor(red: 189/255, green: 195/255, blue: 199/255)
+        let yellowColor = CCColor(red: 241/255, green: 196/255, blue: 15/255)
+        let purpleColor = CCColor(red: 155/255, green: 89/255, blue: 182/255)
+        let blueColor = CCColor(red: 0/255, green: 0/255, blue: 255/255)
+        let greenColor = CCColor(red: 39/255, green: 174/255, blue: 96/255)
         
         // Restore previously set color choices.
         var leftColorChoiceInt = defaults.integerForKey(leftSideColorChoice)

@@ -40,7 +40,14 @@ class Gameplay: CCNode {
     let midbaseTileRowOpacity: CGFloat = 0.85
     let baseTileRowOpacity: CGFloat = 0.95
     
-    let audio = OALSimpleAudio.sharedInstance() // OALSimpleAudio instance used for handling sounds.
+    let topTileRowPosition: CGFloat = 220
+    let midtopTileRowPosition: CGFloat = 190
+    let middleTileRowPosition: CGFloat = 140
+    let midbaseTileRowPosition: CGFloat = 81
+    let baseTileRowPosition: CGFloat = 0
+    
+    // OALSimpleAudio instance used for handling sounds.
+    let audio = OALSimpleAudio.sharedInstance()
 
     
     // MARK: Memory Variables
@@ -51,7 +58,6 @@ class Gameplay: CCNode {
     let ingameParticlesKey = "ingameParticlesKey"
     let backgroundMusicKey = "backgroundMusicKey"
     let soundEffectsKey = "soundEffectsKey"
-    
     let leftSideColorChoice = "leftSideColorChoice"
     let rightSideColorChoice = "rightSideColorChoice"
 
@@ -112,7 +118,7 @@ class Gameplay: CCNode {
             var blueTileRow = CCBReader.load("TileRow") as! TileRow
             var redTileRow = CCBReader.load("TileRow") as! TileRow
                         
-            var rowWidth = 0
+            var rowWidth = baseTileRowPosition
             
             // Cascade opacity is enabled so we can just apply the opacity to a single node as opposed to having to change each box individually.
             blueTileRow.cascadeOpacityEnabled = true
@@ -123,25 +129,25 @@ class Gameplay: CCNode {
                 blueTileRow.scaleX = midbaseTileRowWidth / baseTileRowWidth
                 redTileRow.scaleX = midbaseTileRowWidth / baseTileRowWidth
                 
-                rowWidth = 81
+                rowWidth = midbaseTileRowPosition
             }
             else if index == 2 {
                 blueTileRow.scaleX = middleTileRowWidth / baseTileRowWidth
                 redTileRow.scaleX = middleTileRowWidth / baseTileRowWidth
                 
-                rowWidth = 140
+                rowWidth = middleTileRowPosition
             }
             else if index == 3 {
                 blueTileRow.scaleX = midtopTileRowWidth / baseTileRowWidth
                 redTileRow.scaleX = midtopTileRowWidth / baseTileRowWidth
                 
-                rowWidth = 190
+                rowWidth = midtopTileRowPosition
             }
             else if index == 4 {
                 blueTileRow.scaleX = topTileRowWidth / baseTileRowWidth
                 redTileRow.scaleX = topTileRowWidth / baseTileRowWidth
                 
-                rowWidth = 220
+                rowWidth = topTileRowPosition
             }
             
             // Update each row's position based on the above control if-statement.
@@ -386,28 +392,28 @@ class Gameplay: CCNode {
 
                     if index == 0 {
                         nextUpRow.scaleX = topTileRowWidth / baseTileRowWidth
-                        nextUpRow.position = CGPoint(x: 220, y: 0)
+                        nextUpRow.position = CGPoint(x: topTileRowPosition, y: 0)
                         nextUpRow.cascadeOpacityEnabled = true
                         nextUpRow.opacity = topTileRowOpacity
                     }
                     else if index == 1 {
                         scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: baseTileRowWidth / baseTileRowWidth, scaleY: 1)
-                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 0, y: 0))
+                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: baseTileRowPosition, y: 0))
                         opacityChange = CCActionFadeTo(duration: animationDelay, opacity: baseTileRowOpacity)
                     }
                     else if index == 2 {
                         scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: midbaseTileRowWidth / baseTileRowWidth, scaleY: 1)
-                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 81, y: 0))
+                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: midbaseTileRowPosition, y: 0))
                         opacityChange = CCActionFadeTo(duration: animationDelay, opacity: midbaseTileRowOpacity)
                     }
                     else if index == 3 {
                         scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: middleTileRowWidth / baseTileRowWidth, scaleY: 1)
-                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 140, y: 0))
+                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: middleTileRowPosition, y: 0))
                         opacityChange = CCActionFadeTo(duration: animationDelay, opacity: middleTileRowOpacity)
                     }
                     else if index == 4 {
                         scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: midtopTileRowWidth / baseTileRowWidth, scaleY: 1)
-                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 190, y: 0))
+                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: midtopTileRowPosition, y: 0))
                         opacityChange = CCActionFadeTo(duration: animationDelay, opacity: midtopTileRowOpacity)
                     }
                     
@@ -494,28 +500,28 @@ class Gameplay: CCNode {
                     
                     if index == 0 {
                         nextUpRow.scaleX = topTileRowWidth / baseTileRowWidth
-                        nextUpRow.position = CGPoint(x: 220, y: 0)
+                        nextUpRow.position = CGPoint(x: topTileRowPosition, y: 0)
                         nextUpRow.cascadeOpacityEnabled = true
                         nextUpRow.opacity = topTileRowOpacity
                     }
                     else if index == 1 {
                         scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: baseTileRowWidth / baseTileRowWidth, scaleY: 1)
-                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 0, y: 0))
+                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: baseTileRowPosition, y: 0))
                         opacityChange = CCActionFadeTo(duration: animationDelay, opacity: baseTileRowOpacity)
                     }
                     else if index == 2 {
                         scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: midbaseTileRowWidth / baseTileRowWidth, scaleY: 1)
-                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 81, y: 0))
+                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: midbaseTileRowPosition, y: 0))
                         opacityChange = CCActionFadeTo(duration: animationDelay, opacity: midbaseTileRowOpacity)
                     }
                     else if index == 3 {
                         scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: middleTileRowWidth / baseTileRowWidth, scaleY: 1)
-                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 140, y: 0))
+                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: middleTileRowPosition, y: 0))
                         opacityChange = CCActionFadeTo(duration: animationDelay, opacity: middleTileRowOpacity)
                     }
                     else if index == 4 {
                         scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: midtopTileRowWidth / baseTileRowWidth, scaleY: 1)
-                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 190, y: 0))
+                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: midtopTileRowPosition, y: 0))
                         opacityChange = CCActionFadeTo(duration: animationDelay, opacity: midtopTileRowOpacity)
                         
                     }
@@ -697,15 +703,15 @@ class Gameplay: CCNode {
     func getColorChoicesFromMemory() {
         
         // Color presets.
-        var turquoiseColor = CCColor(red: 26/255, green: 188/255, blue: 156/255)
-        var grayColor = CCColor(red: 52/255, green: 73/255, blue: 94/255)
-        var orangeColor = CCColor(red: 230/255, green: 126/255, blue: 34/255)
-        var redColor = CCColor(red: 255/255, green: 102/255, blue: 102/255)
-        var silverColor = CCColor(red: 189/255, green: 195/255, blue: 199/255)
-        var yellowColor = CCColor(red: 241/255, green: 196/255, blue: 15/255)
-        var purpleColor = CCColor(red: 155/255, green: 89/255, blue: 182/255)
-        var blueColor = CCColor(red: 0/255, green: 0/255, blue: 255/255)
-        var greenColor = CCColor(red: 39/255, green: 174/255, blue: 96/255)
+        let turquoiseColor = CCColor(red: 26/255, green: 188/255, blue: 156/255)
+        let grayColor = CCColor(red: 52/255, green: 73/255, blue: 94/255)
+        let orangeColor = CCColor(red: 230/255, green: 126/255, blue: 34/255)
+        let redColor = CCColor(red: 255/255, green: 102/255, blue: 102/255)
+        let silverColor = CCColor(red: 189/255, green: 195/255, blue: 199/255)
+        let yellowColor = CCColor(red: 241/255, green: 196/255, blue: 15/255)
+        let purpleColor = CCColor(red: 155/255, green: 89/255, blue: 182/255)
+        let blueColor = CCColor(red: 0/255, green: 0/255, blue: 255/255)
+        let greenColor = CCColor(red: 39/255, green: 174/255, blue: 96/255)
         
         // Restore previously set color choices.
         var leftColorChoiceInt = defaults.integerForKey(leftSideColorChoice)

@@ -20,7 +20,7 @@ class SinglePlayer: CCNode {
     let wrongTapNotificationLength = 0.15  // How long does the incorrect X mark appear in milliseconds?
     let animationDelay = 0.04              // How long does it take for a tileRow animation to complete?
     
-    // The widths that each of the `TileRow` objects are supposed to be. Chances are, though, that because my game architecture sucks, you're still going to have to dig into the code to manually change some of the numbers.
+    // The widths, opacities, and positions that each of the `TileRow` objects are supposed to be. Chances are though, that because I didn't really plan out my game architecture before this because I didn't really know this game was actually going to be that popular, you're still going to have to dig into the code to manually change some of the numbers.
     let topTileRowWidth: Float = 10
     let midtopTileRowWidth: Float = 20
     let middleTileRowWidth: Float = 40
@@ -33,7 +33,14 @@ class SinglePlayer: CCNode {
     let midbaseTileRowOpacity: CGFloat = 0.85
     let baseTileRowOpacity: CGFloat = 0.95
     
-    let audio = OALSimpleAudio.sharedInstance() // OALSimpleAudio instance used for handling sounds.
+    let topTileRowPosition: CGFloat = 220
+    let midtopTileRowPosition: CGFloat = 190
+    let middleTileRowPosition: CGFloat = 140
+    let midbaseTileRowPosition: CGFloat = 81
+    let baseTileRowPosition: CGFloat = 0
+    
+    // OALSimpleAudio instance used for handling sounds.
+    let audio = OALSimpleAudio.sharedInstance()
     
     
     // MARK: Memory Variables
@@ -44,10 +51,8 @@ class SinglePlayer: CCNode {
     let ingameParticlesKey = "ingameParticlesKey"
     let backgroundMusicKey = "backgroundMusicKey"
     let soundEffectsKey = "soundEffectsKey"
-    
     let leftSideColorChoice = "leftSideColorChoice"
     let rightSideColorChoice = "rightSideColorChoice"
-    
     let singlePlayerHighScore = "singlePlayerHighScore"
     
     
@@ -128,7 +133,7 @@ class SinglePlayer: CCNode {
             // Duplicate the tileRow. We have to do this since we can't add the same piece as a child to two different nodes.
             var blueTileRow = CCBReader.load("TileRow") as! TileRow
             
-            var rowWidth = 0
+            var rowWidth = baseTileRowPosition
             
             // Cascade opacity is enabled so we can just apply the opacity to a single node as opposed to having to change each box individually.
             blueTileRow.cascadeOpacityEnabled = true
@@ -136,19 +141,19 @@ class SinglePlayer: CCNode {
             // Depending on the row, modify its properties to achieve the desired effect.
             if index == 1 {
                 blueTileRow.scaleX = midbaseTileRowWidth / baseTileRowWidth
-                rowWidth = 81
+                rowWidth = midbaseTileRowPosition
             }
             else if index == 2 {
                 blueTileRow.scaleX = middleTileRowWidth / baseTileRowWidth
-                rowWidth = 140
+                rowWidth = middleTileRowPosition
             }
             else if index == 3 {
                 blueTileRow.scaleX = midtopTileRowWidth / baseTileRowWidth
-                rowWidth = 190
+                rowWidth = midtopTileRowPosition
             }
             else if index == 4 {
                 blueTileRow.scaleX = topTileRowWidth / baseTileRowWidth
-                rowWidth = 220
+                rowWidth = topTileRowPosition
             }
             
             // Update each row's position based on the above control if-statement.
@@ -200,7 +205,7 @@ class SinglePlayer: CCNode {
             audio.playBg("gameplayBG.mp3", loop: true)
         }
         
-        if !defaults.boolForKey(ingameParticlesKey) {
+        if !defaults.boolForKey(ingameParticlesKey) { // Check if particles are enabled in the options.
             particleLine.stopParticleGeneration()
         }
         
@@ -263,13 +268,13 @@ class SinglePlayer: CCNode {
     // MARK: Single-Player Specific Functions
     
     /**
-    Schedules the interval between `tick()` calls for the "computer player". Responsible for controlling the difficulty.
+    Schedules the interval between `simulateComputerPlayerTap()` calls for the "computer player". Responsible for controlling the difficulty.
     
     :param: level  the new level of difficulty to set the game at
     */
     func scheduleComputerPlayer(#level: Int) {
         
-        // Determine the interval between `tick()` calls based on the level.
+        // Determine the interval between `simulateComputerPlayerTap()` calls based on the level.
         if level == 1 {
             currentInterval = 0.8
         }
@@ -298,11 +303,11 @@ class SinglePlayer: CCNode {
             currentInterval = 0.21 - (Double(level - 9) * 0.01)
         }
         
-        // Schedule the `tick()` call at the determined `currentInterval`.
-        self.schedule("tick", interval: currentInterval)
+        // Schedule the `simulateComputerPlayerTap()` call at the determined `currentInterval`.
+        self.schedule("simulateComputerPlayerTap", interval: currentInterval)
         
-        // Schedule a `levelTimer()` call to occur after 15 seconds, and reset the `timeRemainingInLevel` variable to 15 seconds (the variable is used in the score bonus calculation).
-        self.scheduleOnce("levelTimer", delay: 15)
+        // Schedule a `levelTimerRanOut()` call to occur after 15 seconds, and reset the `timeRemainingInLevel` variable to 15 seconds (the variable is used in the score bonus calculation).
+        self.scheduleOnce("levelTimerRanOut", delay: 15)
         timeRemainingInLevel = 15
         
         // Schedule the `updateTimeRemainingVariable()` function to be called every 1 second. The function decreases the `timeRemainingInLevel` variable by 1 every second to make the score bonus calculation more realistic.
@@ -313,20 +318,26 @@ class SinglePlayer: CCNode {
     /**
     Performs actions for the "computer player".
     
-    `scheduleComputerPlayer()` declares how long the interval between `tick()` calls should be, thereby handling the difficulty.
+    `scheduleComputerPlayer()` declares how long the interval between `simulateComputerPlayerTap()` calls should be, thereby handling the difficulty.
     */
-    func tick() {
-        // Move the particleLine to stay with the dominantColor edge.
-        particleLine.position.x -= moveAmount
+    func simulateComputerPlayerTap() {
         
-        // Move the dominantColor towards its goal.
-        dominantColor.right(Float(moveAmount))
-        
-        score++
-        
-        if !checkIfWin() {
-            checkForWarning()
+        if !isLineResetInProgress {
+            
+            // Move the particleLine to stay with the dominantColor edge.
+            particleLine.position.x -= moveAmount
+            
+            // Move the dominantColor towards its goal.
+            dominantColor.right(Float(moveAmount))
+            
+            score++
+            
+            if !checkIfWin() {
+                checkForWarning()
+            }
+            
         }
+        
     }
     
     /**
@@ -339,9 +350,9 @@ class SinglePlayer: CCNode {
     /**
     Called whenever the level timer runs out. It moves the game state to the following level.
     */
-    func levelTimer() {
+    func levelTimerRanOut() {
         
-        self.unschedule("tick")
+        self.unschedule("simulateComputerPlayerTap")
         self.unschedule("updateTimeRemainingVariable")
         
         displayFasterLabel()
@@ -378,8 +389,8 @@ class SinglePlayer: CCNode {
         
         isLineResetInProgress = true
         
-        self.unschedule("tick")
-        self.unschedule("levelTimer")
+        self.unschedule("simulateComputerPlayerTap")
+        self.unschedule("levelTimerRanOut")
         self.unschedule("updateTimeRemainingVariable")
         
         displayFasterLabel()
@@ -576,28 +587,28 @@ class SinglePlayer: CCNode {
                     
                     if index == 0 {
                         nextUpRow.scaleX = topTileRowWidth / baseTileRowWidth
-                        nextUpRow.position = CGPoint(x: 220, y: 0)
+                        nextUpRow.position = CGPoint(x: topTileRowPosition, y: 0)
                         nextUpRow.cascadeOpacityEnabled = true
                         nextUpRow.opacity = topTileRowOpacity
                     }
                     else if index == 1 {
                         scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: baseTileRowWidth / baseTileRowWidth, scaleY: 1)
-                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 0, y: 0))
+                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: baseTileRowPosition, y: 0))
                         opacityChange = CCActionFadeTo(duration: animationDelay, opacity: baseTileRowOpacity)
                     }
                     else if index == 2 {
                         scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: midbaseTileRowWidth / baseTileRowWidth, scaleY: 1)
-                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 81, y: 0))
+                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: midbaseTileRowPosition, y: 0))
                         opacityChange = CCActionFadeTo(duration: animationDelay, opacity: midbaseTileRowOpacity)
                     }
                     else if index == 3 {
                         scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: middleTileRowWidth / baseTileRowWidth, scaleY: 1)
-                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 140, y: 0))
+                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: middleTileRowPosition, y: 0))
                         opacityChange = CCActionFadeTo(duration: animationDelay, opacity: middleTileRowOpacity)
                     }
                     else if index == 4 {
                         scaleUpRow = CCActionScaleTo(duration: animationDelay, scaleX: midtopTileRowWidth / baseTileRowWidth, scaleY: 1)
-                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: 190, y: 0))
+                        moveTileRowDown = CCActionMoveTo(duration: animationDelay, position: CGPoint(x: midtopTileRowPosition, y: 0))
                         opacityChange = CCActionFadeTo(duration: animationDelay, opacity: midtopTileRowOpacity)
                     }
                     
@@ -678,7 +689,7 @@ class SinglePlayer: CCNode {
         
         if scale <= -0.01 { // We have a 0.01 difference on each of the possible win states to ensure that no graphical glitches occur in the end-game state.
             
-            redWins()
+            gameOver()
             
             // Stop all music and play some end-game tunes.
             audio.stopAllEffects()
@@ -705,39 +716,49 @@ class SinglePlayer: CCNode {
     // MARK: End-Game Functions
     
     /**
-    To be run whenever a state occurs where red wins.
-    
-    Triggers end-game animation sequences.
+    Ends the game and triggers end-game animation sequences.
     */
-    func redWins() {
+    func gameOver() {
+        
+        // Disable user interaction to make sure the player doesn't continue playing the game while in a game over state.
+        self.userInteractionEnabled = false
+        
+        // Hides the `fasterLabel` and the `speedBonusLabel` immediately just in case they're visible on the screen at the same time the `gameOver()` function is called.
         fasterLabel.visible = false
         speedBonusLabel.visible = false
         
-        self.userInteractionEnabled = false
+        // Unschedule all possibly scheduled events to make sure that no game events occur while in the game over screen.
+        self.unschedule("simulateComputerPlayerTap")
+        self.unschedule("levelTimerRanOut")
         
-        self.unschedule("tick")
-        self.unschedule("levelTimer")
-        
+        // Hide the tile rows.
         fadeOutTileRows()
         
+        // Run the end-game animation sequence.
         world.animationManager.runAnimationsForSequenceNamed("RedWins")
+        
+        // Stop particles from generating so they don't continue spawning from off the edge of the screen.
         particleLine.stopParticleGeneration()
         
+        // Hides the `blueWarningGradient`, which is most likely on the screen right now because the user must have lost the game coming directly from a state where the warning gradient would be displaying.
         blueWarningGradient.visible = false
+        
+        // Make the "SCORE" label visible once again.
         scoreHeader.opacity = 1
         
+        // Grab the current high score, and check to see if the score from this game is higher than the high score currently stored in `NSUserDefaults`. If it is, replace the old high score with the new score.
         var currentHighScore = defaults.integerForKey(singlePlayerHighScore)
-        
         if score > currentHighScore {
             defaults.setInteger(score, forKey: singlePlayerHighScore)
         }
         
+        // Display the high score stored in `NSUserDefaults` on the `highScoreLabel`. The `highScore` label has a didSet property that automatically does this for us; we just have to set the variable to what we want.
         highScore = defaults.integerForKey(singlePlayerHighScore)
         
+        // Set some visual properties of the `highScoreGroupingNode` to set up an animation sequence, then run that animation sequence to achieve the desired effect.
         highScoreGroupingNode.opacity = 0
         highScoreGroupingNode.cascadeOpacityEnabled = true
         highScoreGroupingNode.visible = true
-        
         highScoreGroupingNode.runAction(CCActionFadeTo(duration: 0.5, opacity: 1))
     }
     
@@ -787,15 +808,15 @@ class SinglePlayer: CCNode {
     func getColorChoicesFromMemory() {
         
         // Color presets.
-        var turquoiseColor = CCColor(red: 26/255, green: 188/255, blue: 156/255)
-        var grayColor = CCColor(red: 52/255, green: 73/255, blue: 94/255)
-        var orangeColor = CCColor(red: 230/255, green: 126/255, blue: 34/255)
-        var redColor = CCColor(red: 255/255, green: 102/255, blue: 102/255)
-        var silverColor = CCColor(red: 189/255, green: 195/255, blue: 199/255)
-        var yellowColor = CCColor(red: 241/255, green: 196/255, blue: 15/255)
-        var purpleColor = CCColor(red: 155/255, green: 89/255, blue: 182/255)
-        var blueColor = CCColor(red: 0/255, green: 0/255, blue: 255/255)
-        var greenColor = CCColor(red: 39/255, green: 174/255, blue: 96/255)
+        let turquoiseColor = CCColor(red: 26/255, green: 188/255, blue: 156/255)
+        let grayColor = CCColor(red: 52/255, green: 73/255, blue: 94/255)
+        let orangeColor = CCColor(red: 230/255, green: 126/255, blue: 34/255)
+        let redColor = CCColor(red: 255/255, green: 102/255, blue: 102/255)
+        let silverColor = CCColor(red: 189/255, green: 195/255, blue: 199/255)
+        let yellowColor = CCColor(red: 241/255, green: 196/255, blue: 15/255)
+        let purpleColor = CCColor(red: 155/255, green: 89/255, blue: 182/255)
+        let blueColor = CCColor(red: 0/255, green: 0/255, blue: 255/255)
+        let greenColor = CCColor(red: 39/255, green: 174/255, blue: 96/255)
         
         // Restore previously set color choices.
         var leftColorChoiceInt = defaults.integerForKey(leftSideColorChoice)

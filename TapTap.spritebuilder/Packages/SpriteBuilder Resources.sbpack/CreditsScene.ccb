@@ -90,7 +90,7 @@
 											<key>value</key>
 											<array>
 												<real>0.5</real>
-												<real>4.6999998092651367</real>
+												<real>5</real>
 											</array>
 										</dict>
 									</array>
@@ -145,7 +145,7 @@
 												<key>value</key>
 												<array>
 													<real>90</real>
-													<real>40</real>
+													<real>50</real>
 													<integer>0</integer>
 													<integer>0</integer>
 													<integer>0</integer>
@@ -182,9 +182,10 @@
 												<string>Text</string>
 												<key>value</key>
 												<array>
-													<string>Caroline Christie
+													<string>Jorrie Brettin
 Cassandra Kane
 Yeon Jun Kim
+Luke Solomon
 MakeSchool (www.makeschool.org)</string>
 													<false/>
 												</array>
@@ -355,7 +356,7 @@ MakeSchool (www.makeschool.org)</string>
 												<key>value</key>
 												<array>
 													<real>90</real>
-													<real>90</real>
+													<real>110</real>
 													<integer>0</integer>
 													<integer>0</integer>
 													<integer>0</integer>
@@ -555,7 +556,7 @@ MakeSchool (www.makeschool.org)</string>
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>50</real>
+											<real>51</real>
 											<real>0.0</real>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -646,7 +647,7 @@ MakeSchool (www.makeschool.org)</string>
 												<string>Position</string>
 												<key>value</key>
 												<array>
-													<real>140</real>
+													<real>141</real>
 													<real>170</real>
 													<integer>0</integer>
 													<integer>0</integer>
@@ -684,7 +685,11 @@ MakeSchool (www.makeschool.org)</string>
 												<string>Text</string>
 												<key>value</key>
 												<array>
-													<string>"Outside” by Otakua (freesound.org)
+													<string> “Electro Cabello” by Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 3.0
+http://creativecommons.org/licenses/by/3.0/ 
+
+"Outside” by Otakua (freesound.org)
 Licensed under Creative Commons: By Attribution 3.0
 http://creativecommons.org/licenses/by/3.0/ 
 
@@ -694,11 +699,7 @@ http://creativecommons.org/licenses/by/3.0/
 
 “SwishUpMedium” by lonce (freesound.org)
 Licensed under Creative Commons: By Attribution 3.0
-http://creativecommons.org/licenses/by/3.0/ 
-
-“Electro Cabello” by Kevin MacLeod (incompetech.com)
-Licensed under Creative Commons: By Attribution 3.0
-http://creativecommons.org/licenses/by/3.0/ 
+http://creativecommons.org/licenses/by/3.0/
 
 Public domain sounds found on freesound.org.</string>
 													<false/>
@@ -869,7 +870,7 @@ Public domain sounds found on freesound.org.</string>
 												<string>Position</string>
 												<key>value</key>
 												<array>
-													<real>140</real>
+													<real>141</real>
 													<real>350</real>
 													<integer>0</integer>
 													<integer>0</integer>
@@ -1071,7 +1072,7 @@ Public domain sounds found on freesound.org.</string>
 										<key>value</key>
 										<array>
 											<real>0.0</real>
-											<real>124</real>
+											<real>144</real>
 											<integer>0</integer>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -1162,7 +1163,7 @@ Public domain sounds found on freesound.org.</string>
 												<key>value</key>
 												<array>
 													<real>58</real>
-													<real>240</real>
+													<real>280</real>
 													<integer>0</integer>
 													<integer>0</integer>
 													<integer>0</integer>
@@ -1200,6 +1201,7 @@ Public domain sounds found on freesound.org.</string>
 												<key>value</key>
 												<array>
 													<string>Jorrie Brettin
+Frank Boccia
 Iavor Dekov
 Abby Espiritu
 Avery Espiritu
@@ -1207,18 +1209,21 @@ Zoe Espiritu
 Jacob Haff
 Juliana Hong
 Cassandra Kane
+Siobhan Kiernan
 Eric Kim
 Yeon Jun Kim
 David Maliglowka
 Rohan Mishra
+Otavio Monteagudo
 Shriya Nevatia
 Rebecca Poch
 Liam Rahav
 Brian Ramirez de Leon
 Adam Reis
-Olivia Ross
+Aman Sawhney
 Shashank Sharma
 Thanasi Stratigakis
+Julian Thessling
 Monica Ting
 Brandon Troche
 Steven Zhao
@@ -1392,7 +1397,7 @@ Eric Zhou</string>
 												<key>value</key>
 												<array>
 													<real>58</real>
-													<real>490</real>
+													<real>570</real>
 													<integer>0</integer>
 													<integer>0</integer>
 													<integer>0</integer>
@@ -1592,8 +1597,8 @@ Eric Zhou</string>
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>82</real>
-											<real>508</real>
+											<real>83</real>
+											<real>528</real>
 											<integer>0</integer>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -2091,8 +2096,8 @@ Eric Zhou</string>
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>99</real>
-											<real>1032</real>
+											<real>100</real>
+											<real>1132</real>
 											<integer>0</integer>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -2356,6 +2361,8 @@ Eric Zhou</string>
 												</array>
 											</dict>
 										</array>
+										<key>selected</key>
+										<true/>
 									</dict>
 									<dict>
 										<key>UUID</key>
@@ -2590,8 +2597,8 @@ Eric Zhou</string>
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>91</real>
-											<real>1096</real>
+											<real>92</real>
+											<real>1196</real>
 											<integer>0</integer>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -2674,7 +2681,7 @@ Eric Zhou</string>
 								<key>value</key>
 								<array>
 									<real>0.5</real>
-									<real>4.6999998092651367</real>
+									<real>5</real>
 									<integer>3</integer>
 									<integer>2</integer>
 									<integer>2</integer>
@@ -2724,8 +2731,6 @@ Eric Zhou</string>
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 						<key>seqExpanded</key>
 						<true/>
 					</dict>
@@ -3798,7 +3803,7 @@ Eric Zhou</string>
 			<key>name</key>
 			<string>Default Timeline</string>
 			<key>offset</key>
-			<real>6.875</real>
+			<real>15.9375</real>
 			<key>position</key>
 			<real>25</real>
 			<key>resolution</key>
@@ -3819,7 +3824,7 @@ Eric Zhou</string>
 		</dict>
 	</array>
 	<key>stageBorder</key>
-	<integer>0</integer>
+	<integer>1</integer>
 	<key>stageColor</key>
 	<integer>0</integer>
 </dict>
