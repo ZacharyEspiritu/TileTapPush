@@ -97,6 +97,10 @@ class SinglePlayer: CCNode {
     
     weak var speedBonusLabel: CCLabelTTF!
     
+    var isLineResetInProgress: Bool = false
+    var scalingDuration: Double = 0.8
+    
+    
     // MARK: Reset Functions
     
     /**
@@ -325,21 +329,23 @@ class SinglePlayer: CCNode {
         
         if dominantColor.scaleX > 0.5 {
             
-            self.userInteractionEnabled = false
+            dominantColor.runAction(CCActionEaseBounceOut(action: CCActionScaleTo(duration: scalingDuration, scaleX: 0.5, scaleY: 1)))
+            particleLine.runAction(CCActionEaseBounceOut(action: CCActionMoveTo(duration: scalingDuration, position: CGPoint(x: 0.5, y: 0.5))))
             
-            dominantColor.runAction(CCActionEaseBounceOut(action: CCActionScaleTo(duration: 0.5, scaleX: 0.5, scaleY: 1)))
-            particleLine.runAction(CCActionEaseBounceOut(action: CCActionMoveTo(duration: 0.5, position: CGPoint(x: 0.5, y: 0.5))))
+            isLineResetInProgress = true
             
-            delay(0.5) {
-                self.userInteractionEnabled = true
-                self.multipleTouchEnabled = true
+            delay(scalingDuration) {
                 self.level++
+                
+                self.isLineResetInProgress = false
             }
             
         }
         else {
             level++
         }
+        
+        self.scalingDuration -= 0.03
         
     }
     
@@ -350,7 +356,7 @@ class SinglePlayer: CCNode {
     */
     func overrideLevelComplete() {
         
-        self.userInteractionEnabled = false
+        isLineResetInProgress = true
         
         self.unschedule("tick")
         self.unschedule("levelTimer")
@@ -358,8 +364,8 @@ class SinglePlayer: CCNode {
         
         displayFasterLabel()
 
-        dominantColor.runAction(CCActionEaseBounceOut(action: CCActionScaleTo(duration: 0.8, scaleX: 0.5, scaleY: 1)))
-        particleLine.runAction(CCActionEaseBounceOut(action: CCActionMoveTo(duration: 0.8, position: CGPoint(x: 0.5, y: 0.5))))
+        dominantColor.runAction(CCActionEaseBounceOut(action: CCActionScaleTo(duration: scalingDuration, scaleX: 0.5, scaleY: 1)))
+        particleLine.runAction(CCActionEaseBounceOut(action: CCActionMoveTo(duration: scalingDuration, position: CGPoint(x: 0.5, y: 0.5))))
         
         var scoreMultiplier: Double = pow(1.2, Double(level))
         var possiblePointsRemaining: Double = Double(timeRemainingInLevel) / currentInterval
@@ -369,10 +375,12 @@ class SinglePlayer: CCNode {
         
         displaySpeedBonusLabel(bonus: scoreBonus)
         
-        delay(0.8) {
-            self.userInteractionEnabled = true
-            self.multipleTouchEnabled = true
+        delay(scalingDuration) {
             self.level++
+            
+            self.isLineResetInProgress = false
+            
+            self.scalingDuration -= 0.03
         }
     }
     
@@ -585,11 +593,15 @@ class SinglePlayer: CCNode {
                 // Cycle through the numbers 1 - numberOfTileRows in the blueIndex.
                 blueIndex = (blueIndex + 1) % numberOfTileRows
                 
-                // Move the particleLine to stay with the dominantColor edge.
-                particleLine.position.x += moveAmount
-                
-                // Move the dominantColor towards its goal.
-                dominantColor.left(Float(moveAmount))
+                if !isLineResetInProgress {
+                    
+                    // Move the particleLine to stay with the dominantColor edge.
+                    particleLine.position.x += moveAmount
+                    
+                    // Move the dominantColor towards its goal.
+                    dominantColor.left(Float(moveAmount))
+                    
+                }
                 
                 if defaults.boolForKey(soundEffectsKey) { // Check if sound effects are enabled in the options.
                     audio.playEffect("tap.wav")
@@ -598,11 +610,13 @@ class SinglePlayer: CCNode {
             }
             else {
                 
-                // If the player tapped on the wrong square, move the dominantColor away from its goal.
-                dominantColor.right(Float(wrongTapPenalty))
-                
-                // Move the particleLine to stay with the dominantColor edge.
-                particleLine.position.x -= wrongTapPenalty
+                if !isLineResetInProgress {
+                    // If the player tapped on the wrong square, move the dominantColor away from its goal.
+                    dominantColor.right(Float(wrongTapPenalty))
+                    
+                    // Move the particleLine to stay with the dominantColor edge.
+                    particleLine.position.x -= wrongTapPenalty
+                }
                 
                 if yTouch > 0 && yTouch < screenQuartersVertical { // Incorrect tap on Bottom box (box1).
                     blueX1.visible = true
