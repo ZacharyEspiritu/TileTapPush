@@ -264,6 +264,8 @@ class SinglePlayer: CCNode {
     
     /**
     Schedules the interval between `tick()` calls for the "computer player". Responsible for controlling the difficulty.
+    
+    :param: level  the new level of difficulty to set the game at
     */
     func scheduleComputerPlayer(#level: Int) {
         
@@ -347,12 +349,12 @@ class SinglePlayer: CCNode {
         
         if dominantColor.scaleX > 0.5 {
             
+            isLineResetInProgress = true
+            
             dominantColor.runAction(CCActionEaseBounceOut(action: CCActionScaleTo(duration: scalingDuration, scaleX: 0.5, scaleY: 1)))
             particleLine.runAction(CCActionEaseBounceOut(action: CCActionMoveTo(duration: scalingDuration, position: CGPoint(x: 0.5, y: 0.5))))
             
-            isLineResetInProgress = true
-            
-            delay(scalingDuration) {
+            delay(scalingDuration + 0.05) { // 0.05 seconds is added as a safety just in case the animation didn't fully complete for some reason.
                 self.level++
                 
                 self.isLineResetInProgress = false
@@ -393,7 +395,7 @@ class SinglePlayer: CCNode {
         
         displaySpeedBonusLabel(bonus: scoreBonus)
         
-        delay(scalingDuration) {
+        delay(scalingDuration + 0.05) { // 0.05 seconds is added as a safety just in case the animation didn't fully complete for some reason.
             self.level++
             
             self.isLineResetInProgress = false
