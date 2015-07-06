@@ -245,6 +245,9 @@ class SinglePlayer: CCNode {
     
     // MARK: Single-Player Specific Functions
     
+    /**
+    Schedules the interval between `tick()` calls for the "computer player". Responsible for controlling the difficulty.
+    */
     func scheduleComputerPlayer(#level: Int) {
         
         if level == 1 {
@@ -257,22 +260,22 @@ class SinglePlayer: CCNode {
             currentInterval = 0.5
         }
         else if level == 4 {
-            currentInterval = 0.4
+            currentInterval = 0.42
         }
         else if level == 5 {
             currentInterval = 0.35
         }
         else if level == 6 {
-            currentInterval = 0.3
+            currentInterval = 0.29
         }
         else if level == 7 {
-            currentInterval = 0.25
+            currentInterval = 0.24
         }
         else if level == 8 {
-            currentInterval = 0.2
+            currentInterval = 0.21
         }
         else {
-            currentInterval = 0.2 - (Double(level - 8) * 0.02)
+            currentInterval = 0.21 - (Double(level - 8) * 0.02)
         }
         
         self.schedule("tick", interval: currentInterval)
@@ -283,6 +286,11 @@ class SinglePlayer: CCNode {
         
     }
     
+    /**
+    Performs actions for the "computer player".
+    
+    `scheduleComputerPlayer()` declares how long the interval between `tick()` calls should be, thereby handling the difficulty.
+    */
     func tick() {
         // Move the particleLine to stay with the dominantColor edge.
         particleLine.position.x -= moveAmount
@@ -297,16 +305,23 @@ class SinglePlayer: CCNode {
         }
     }
     
+    /**
+    Updates the `timeRemaining` variable, which is used in the "speed bonus" calculation.
+    */
     func updateTimeRemainingVariable() {
         timeRemainingInLevel--
     }
     
+    /**
+    Called whenever the level timer runs out. It moves the game state to the following level.
+    */
     func levelTimer() {
         
         self.unschedule("tick")
         self.unschedule("updateTimeRemainingVariable")
         
         displayFasterLabel()
+        playWooshSound()
         
         if dominantColor.scaleX > 0.5 {
             
@@ -329,7 +344,9 @@ class SinglePlayer: CCNode {
     }
     
     /**
-    To be run whenever a state occurs where blue would have won, but instead returns the game back to a 50% state with a score bonus for making it within the level time.
+    To be run whenever a state occurs where blue would have won.
+    
+    Returns the game back to a 50% state with a score bonus for making it within the level time, and moves the game state to the following level.
     */
     func overrideLevelComplete() {
         
@@ -340,7 +357,7 @@ class SinglePlayer: CCNode {
         self.unschedule("updateTimeRemainingVariable")
         
         displayFasterLabel()
-        
+
         dominantColor.runAction(CCActionEaseBounceOut(action: CCActionScaleTo(duration: 0.8, scaleX: 0.5, scaleY: 1)))
         particleLine.runAction(CCActionEaseBounceOut(action: CCActionMoveTo(duration: 0.8, position: CGPoint(x: 0.5, y: 0.5))))
         
@@ -357,9 +374,11 @@ class SinglePlayer: CCNode {
             self.multipleTouchEnabled = true
             self.level++
         }
-        
     }
     
+    /**
+    Displays the "FASTER!" label with animations.
+    */
     func displayFasterLabel() {
         
         let startingPosition: CGPoint = CGPoint(x: 0.5, y: -0.5)
@@ -371,14 +390,23 @@ class SinglePlayer: CCNode {
         
         fasterLabel.position = startingPosition
         fasterLabel.runAction(sequence)
-        
+    }
+    
+    /**
+    Plays a Woosh! sound, or `faster.wav`.
+    */
+    func playWooshSound() {
         if defaults.boolForKey(soundEffectsKey) {
             audio.playEffect("faster.wav")
             println("WOOSH!")
         }
-        
     }
     
+    /**
+    Displays the "speed bonus" label underneath the score, with animations.
+    
+    :param: bonus  the score bonus to display underneath the label.
+    */
     func displaySpeedBonusLabel(#bonus: Int) {
         speedBonusLabel.string = "+ \(bonus)\nspeed bonus"
         speedBonusLabel.opacity = 0
@@ -457,7 +485,9 @@ class SinglePlayer: CCNode {
         else {
             blueWarningGradient.visible = false
             
-            audio.stopAllEffects()
+            if warningSound {
+                audio.stopAllEffects()
+            }
             
             warningSound = false // "Unlocks" the locking mechanism detailed above.
         }
@@ -609,6 +639,7 @@ class SinglePlayer: CCNode {
     :returns:  Returns `true` if a win occured as a result of the tap. Returns `false` in all other cases.
     */
     func checkIfWin() -> Bool {
+        
         var scale = dominantColor.scaleX
         
         if scale <= -0.01 { // We have a 0.01 difference on each of the possible win states to ensure that no graphical glitches occur in the end-game state.
@@ -628,10 +659,12 @@ class SinglePlayer: CCNode {
             return true
         }
         else if scale >= 1.01 {
+            playWooshSound()
             overrideLevelComplete()
         }
         
         return false
+        
     }
     
     

@@ -60,10 +60,6 @@ class MainScene: CCNode {
             
         }
         
-        if defaults.boolForKey(backgroundMusicKey) {
-            audio.playBg("outsideBG.wav", loop: true)
-        }
-        
         getColorChoicesFromMemory()
     }
     
