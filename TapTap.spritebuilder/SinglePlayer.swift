@@ -77,8 +77,7 @@ class SinglePlayer: CCNode {
     var blueTileRows: [TileRow] = []
     var blueIndex: Int = 0
     
-    // Variables used to handle the each of the red X's that appears when you tap on an incorrect box.
-    weak var blueX1, blueX2, blueX3, blueX4: CCSprite!
+    weak var blueX1, blueX2, blueX3, blueX4: CCSprite! // Variables used to handle the each of the red X's that appears when you tap on an incorrect box.
     
     var warningSound = false // Used in the "locking" mechanism for the warningSound. See `checkForWarningSound()` below.
     
@@ -86,26 +85,21 @@ class SinglePlayer: CCNode {
     
     weak var dominantColorNode, backgroundColorNode: CCNodeColor! // Defaults to blue. Used to change the color as specified in `OptionsMenu.swift`.
     
-    weak var fasterLabel: CCLabelTTF!
+    weak var fasterLabel: CCLabelTTF! // Refers to the "FASTER!" text that appears at the end of each level. Variable is used to animate the node.
     
+    // Variables used to display and handle the scoring system.
     weak var scoreHeader: CCLabelTTF!
     weak var scoreLabel: CCLabelTTF!
+    weak var speedBonusLabel: CCLabelTTF!
     var score: Int = 0 {
         didSet {
             scoreLabel.string = "\(score)"
         }
     }
-    var level: Int = 0 {
-        didSet {
-            scheduleComputerPlayer(level: level)
-        }
-    }
+    var timeRemainingInLevel: Int = 0 // Used in the scoring system to calculate how much of a "Speed Bonus" to give to the user.
     
-    var timeRemainingInLevel: Int = 0
-    var currentInterval: Double = 0
-    
+    // Variables used to display the current high score at the end of a round.
     weak var highScoreGroupingNode: CCNode!
-    
     weak var highScoreLabel: CCLabelTTF!
     var highScore: Int = 0 {
         didSet {
@@ -113,8 +107,17 @@ class SinglePlayer: CCNode {
         }
     }
     
-    weak var speedBonusLabel: CCLabelTTF!
+    // Variable used to handle the level speed system. In order to run all the required code to transfer the game to the next level, all you have to do is set the level variable to whatever level you want to set the game to next, and the didSet property will handle the rest.
+    var level: Int = 0 {
+        didSet {
+            scheduleComputerPlayer(level: level)
+        }
+    }
     
+    // Determines how long the game should wait between computer player "taps". Controlled by `scheduleComputerPlayer()`.
+    var currentInterval: Double = 0
+    
+    // Variables used to dynamically affect certain animation sequences. 'isLineResetInProgress' tells the program whether or not a end-of-level reset is in progress, so the game can tell whether or not to run any potentially conflicting game animation sequences when they are called at the same time as the line reset. `scalingDuration` determines the animation speed of the falling line at the end of a level, and is decreased slowly as time goes on to give the impression that the game is moving faster.
     var isLineResetInProgress: Bool = false
     var scalingDuration: Double = 0.8
     
