@@ -2165,7 +2165,7 @@ Eric Zhou</string>
 										<key>customClass</key>
 										<string></string>
 										<key>displayName</key>
-										<string>"Programming &amp; Art Design"</string>
+										<string>"tile, tap, push!"</string>
 										<key>memberVarAssignmentName</key>
 										<string></string>
 										<key>memberVarAssignmentType</key>
@@ -2225,7 +2225,7 @@ Eric Zhou</string>
 												<string>Text</string>
 												<key>value</key>
 												<array>
-													<string>tap, tile, push!
+													<string>tile, tap, push!
 </string>
 													<false/>
 												</array>
@@ -2362,12 +2362,14 @@ Eric Zhou</string>
 												</array>
 											</dict>
 										</array>
+										<key>selected</key>
+										<true/>
 									</dict>
 								</array>
 								<key>customClass</key>
 								<string></string>
 								<key>displayName</key>
-								<string>Programming and Art Design</string>
+								<string>Header</string>
 								<key>memberVarAssignmentName</key>
 								<string></string>
 								<key>memberVarAssignmentType</key>
