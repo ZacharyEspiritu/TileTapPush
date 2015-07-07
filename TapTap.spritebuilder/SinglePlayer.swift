@@ -18,7 +18,7 @@ class SinglePlayer: CCNode {
     let numberOfTileRows: Int = 5          // How many tile rows do we generate for each array?
     
     let wrongTapNotificationLength = 0.15  // How long does the incorrect X mark appear in milliseconds?
-    let animationDelay = 0.06              // How long does it take for a tileRow animation to complete?
+    let animationDelay = 0.055              // How long does it take for a tileRow animation to complete?
     
     // The widths, opacities, and positions that each of the `TileRow` objects are supposed to be. Chances are though, that because I didn't really plan out my game architecture before this because I didn't really know this game was actually going to be that popular, you're still going to have to dig into the code to manually change some of the numbers.
     let topTileRowWidth: Float = 10
@@ -402,7 +402,9 @@ class SinglePlayer: CCNode {
         var possiblePointsRemaining: Double = Double(timeRemainingInLevel) / currentInterval
         var scoreBonus: Int = Int(possiblePointsRemaining * scoreMultiplier)
         
-        score += scoreBonus
+        var pointTickerDelay = scalingDuration / Double(scoreBonus)
+        
+        self.schedule("addPointToScoreLabel", interval: CCTime(pointTickerDelay), repeat: UInt(scoreBonus), delay: CCTime(0))
         
         displaySpeedBonusLabel(bonus: scoreBonus)
         
@@ -413,6 +415,10 @@ class SinglePlayer: CCNode {
             
             self.scalingDuration -= 0.03
         }
+    }
+    
+    func addPointToScoreLabel() {
+        score++
     }
     
     /**

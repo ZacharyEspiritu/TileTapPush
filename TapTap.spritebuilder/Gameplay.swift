@@ -208,7 +208,7 @@ class Gameplay: CCNode {
             audio.playBg("gameplayBG.mp3", loop: true)
         }
         
-        if !defaults.boolForKey(ingameParticlesKey) {
+        if !defaults.boolForKey(ingameParticlesKey) { // Check if particles are disabled in the options.
             particleLine.stopParticleGeneration()
         }
         
@@ -595,7 +595,7 @@ class Gameplay: CCNode {
     func checkIfWin() -> Bool {
         var scale = dominantColor.scaleX
         
-        if scale <= -0.01 || scale >= 1.01 { // We have a 0.01 difference on each of the possible win states to ensure that no graphical glitches occur in the end-game state.
+        if scale <= -0.01 || scale >= 1.01 { // We have a +-0.01 varience on each of the possible win states to ensure that no graphical glitches occur in the end-game state where the edge of the gradient that hides the line between the dominant color and the background color is still slightly visible.
             
             if scale <= -0.01 {
                 redWins()
