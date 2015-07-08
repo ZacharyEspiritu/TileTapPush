@@ -547,7 +547,7 @@ class SinglePlayer: CCNode {
     */
     func checkForWarningSound() {
         
-        if warningSound {
+        if warningSound && gameState != .GameOver {
             
             if defaults.boolForKey(soundEffectsKey) { // Check if sound effects are enabled in the options.
                 audio.playEffect("siren.mp3", volume: 0.08, pitch: 1.0, pan: 0.0, loop: true)
@@ -704,9 +704,9 @@ class SinglePlayer: CCNode {
             
             // Stop all music and play some end-game tunes.
             audio.stopAllEffects()
-            if defaults.boolForKey(backgroundMusicKey) { // Check if background music/sound is enabled in the options.
+            if defaults.boolForKey(soundEffectsKey) { // Check if background music/sound is enabled in the options.
                 audio.playEffect("scratch.wav")
-                audio.playBg("outsideBG.wav", loop: true)
+                audio.stopBg()
             }
             
             // Change the `gameState` to GameOver to prevent people from continuing to play the game on the now-invisible TileRows.
