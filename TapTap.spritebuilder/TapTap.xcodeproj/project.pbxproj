@@ -20,6 +20,7 @@
 		556C4CA41B45CD6800A6007A /* buzz.wav in Resources */ = {isa = PBXBuildFile; fileRef = 556C4CA31B45CD6800A6007A /* buzz.wav */; };
 		55854D4E1B456BF000DA5C31 /* siren.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 55854D4D1B456BF000DA5C31 /* siren.mp3 */; };
 		55854D5E1B458D6600DA5C31 /* tap.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55854D5D1B458D6600DA5C31 /* tap.wav */; };
+		5596AB8D1B4DE8800089D1BA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5596AB8C1B4DE8800089D1BA /* Images.xcassets */; };
 		55975C801B45A0EA00DDAD2A /* backspin.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55975C7F1B45A0EA00DDAD2A /* backspin.wav */; };
 		55975C841B45A0F000DDAD2A /* gameplayBG.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 55975C831B45A0F000DDAD2A /* gameplayBG.mp3 */; };
 		55975C8A1B45A0FA00DDAD2A /* scratch.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55975C871B45A0FA00DDAD2A /* scratch.wav */; };
@@ -174,6 +175,7 @@
 		556C4CA31B45CD6800A6007A /* buzz.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = buzz.wav; sourceTree = "<group>"; };
 		55854D4D1B456BF000DA5C31 /* siren.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = siren.mp3; sourceTree = "<group>"; };
 		55854D5D1B458D6600DA5C31 /* tap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tap.wav; sourceTree = "<group>"; };
+		5596AB8C1B4DE8800089D1BA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "TapTap iOS/Images.xcassets"; sourceTree = SOURCE_ROOT; };
 		55975C7F1B45A0EA00DDAD2A /* backspin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = backspin.wav; sourceTree = "<group>"; };
 		55975C831B45A0F000DDAD2A /* gameplayBG.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameplayBG.mp3; sourceTree = "<group>"; };
 		55975C871B45A0FA00DDAD2A /* scratch.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = scratch.wav; sourceTree = "<group>"; };
@@ -567,6 +569,7 @@
 		B77F1B4617B978D7009739AE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5596AB8C1B4DE8800089D1BA /* Images.xcassets */,
 				550183981B44CFF200E134B9 /* Audio */,
 				7A40366119DDF8C2007B6E8F /* Platforms */,
 				5B12100D197483EE004C1E1D /* res */,
@@ -777,6 +780,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55854D5E1B458D6600DA5C31 /* tap.wav in Resources */,
+				5596AB8D1B4DE8800089D1BA /* Images.xcassets in Resources */,
 				B71F5919188484E7003F4D28 /* Settings.png in Resources */,
 				55975C801B45A0EA00DDAD2A /* backspin.wav in Resources */,
 				B7378978180762440076A88C /* Default@2x.png in Resources */,
@@ -1162,6 +1166,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -1186,7 +1192,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = TapTap;
-				PROVISIONING_PROFILE = "e1e1089d-06ce-49bf-8f98-cbc3d13a318e";
+				PROVISIONING_PROFILE = "2be10fee-1ebd-4be7-ba67-c07b8f51ec9f";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = app;
@@ -1197,6 +1203,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -1219,7 +1227,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = TapTap;
-				PROVISIONING_PROFILE = "e1e1089d-06ce-49bf-8f98-cbc3d13a318e";
+				PROVISIONING_PROFILE = "2be10fee-1ebd-4be7-ba67-c07b8f51ec9f";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/Bridging-Header.h";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
