@@ -16,6 +16,8 @@ class MainScene: CCNode {
     
     let audio = OALSimpleAudio.sharedInstance()
     
+    let mixpanel: Mixpanel = Mixpanel.sharedInstance()
+    
     // See `OptionsMenu.swift` for information on these constants.
     let hasLoadedBefore = "hasLoadedBefore"
     let ingameParticlesKey = "ingameParticlesKey"
@@ -82,6 +84,10 @@ class MainScene: CCNode {
         
         var transition = CCTransition(fadeWithDuration: 0.5)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
+        
+        mixpanel.track("One Player Mode Inititated")
+        mixpanel.timeEvent("One Player Mode Session Duration")
+        
     }
     
     /**
@@ -96,6 +102,8 @@ class MainScene: CCNode {
         
         var transition = CCTransition(fadeWithDuration: 0.5)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
+        
+        mixpanel.track("Two Player Mode Inititated")
     }
     
     /**

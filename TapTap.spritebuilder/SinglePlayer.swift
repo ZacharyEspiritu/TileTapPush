@@ -42,6 +42,7 @@ class SinglePlayer: CCNode {
     // OALSimpleAudio instance used for handling sounds.
     let audio = OALSimpleAudio.sharedInstance()
     
+    let mixpanel = Mixpanel.sharedInstance()
     
     // MARK: Memory Variables
     
@@ -128,6 +129,8 @@ class SinglePlayer: CCNode {
     Called whenever the `SinglePlayer.ccb` file loads.
     */
     func didLoadFromCCB() {
+        
+        mixpanel.people.increment("One Player Mode Rounds Played", by: 1)
         
         self.animationManager.runAnimationsForSequenceNamed("Gameplay")
         
@@ -811,6 +814,8 @@ class SinglePlayer: CCNode {
         
         var transition = CCTransition(fadeWithDuration: 0.5)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
+        
+        mixpanel.track("One Player Mode Session Duration")
     }
     
     
