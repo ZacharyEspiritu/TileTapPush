@@ -28,23 +28,23 @@ class Gameplay: CCNode {
     let animationDelay = 0.065              // How long does it take for a tileRow animation to complete?
     
     // The widths, opacities, and positions that each of the `TileRow` objects are supposed to be. Chances are though, that because I didn't really plan out my game architecture before this because I didn't really know this game was actually going to be that popular, you're still going to have to dig into the code to manually change some of the numbers.
-    let topTileRowWidth: Float = 10
-    let midtopTileRowWidth: Float = 20
-    let middleTileRowWidth: Float = 40
+    let topTileRowWidth:     Float = 10
+    let midtopTileRowWidth:  Float = 20
+    let middleTileRowWidth:  Float = 40
     let midbaseTileRowWidth: Float = 50
-    let baseTileRowWidth: Float = 70
+    let baseTileRowWidth:    Float = 70
     
-    let topTileRowOpacity: CGFloat = 0.25
-    let midtopTileRowOpacity: CGFloat = 0.50
-    let middleTileRowOpacity: CGFloat = 0.70
+    let topTileRowOpacity:     CGFloat = 0.25
+    let midtopTileRowOpacity:  CGFloat = 0.50
+    let middleTileRowOpacity:  CGFloat = 0.70
     let midbaseTileRowOpacity: CGFloat = 0.85
-    let baseTileRowOpacity: CGFloat = 0.95
+    let baseTileRowOpacity:    CGFloat = 0.95
     
-    let topTileRowPosition: CGFloat = 220
-    let midtopTileRowPosition: CGFloat = 190
-    let middleTileRowPosition: CGFloat = 140
+    let topTileRowPosition:     CGFloat = 220
+    let midtopTileRowPosition:  CGFloat = 190
+    let middleTileRowPosition:  CGFloat = 140
     let midbaseTileRowPosition: CGFloat = 81
-    let baseTileRowPosition: CGFloat = 0
+    let baseTileRowPosition:    CGFloat = 0
     
     // OALSimpleAudio instance used for handling sounds.
     let audio = OALSimpleAudio.sharedInstance()
@@ -57,10 +57,10 @@ class Gameplay: CCNode {
     let defaults = NSUserDefaults.standardUserDefaults()
     
     // See `OptionsMenu.swift` for information on these constants.
-    let ingameParticlesKey = "ingameParticlesKey"
-    let backgroundMusicKey = "backgroundMusicKey"
-    let soundEffectsKey = "soundEffectsKey"
-    let leftSideColorChoice = "leftSideColorChoice"
+    let ingameParticlesKey   = "ingameParticlesKey"
+    let backgroundMusicKey   = "backgroundMusicKey"
+    let soundEffectsKey      = "soundEffectsKey"
+    let leftSideColorChoice  = "leftSideColorChoice"
     let rightSideColorChoice = "rightSideColorChoice"
 
     
@@ -72,10 +72,10 @@ class Gameplay: CCNode {
             blueCountdownLabel.string = String("\(countdown)")
         }
     }
-    weak var redCountdownLabel: CCLabelTTF!  // Countdown labels used at the beginning
+    weak var redCountdownLabel:  CCLabelTTF! // Countdown labels used at the beginning
     weak var blueCountdownLabel: CCLabelTTF! // of each game.
     
-    weak var redWarningGradient: CCNode!     // Refers to the CCGradientNodes that appear
+    weak var redWarningGradient:  CCNode!    // Refers to the CCGradientNodes that appear
     weak var blueWarningGradient: CCNode!    // when a player is about to lose.
     
     weak var dominantColor: DominantColor!   // The enclosing node of the color that is the only one that actually "moves". Scales on the x-axis in order to give the impression that it is getting larger/smaller.
@@ -93,7 +93,7 @@ class Gameplay: CCNode {
     
     // Variables used to handle the each of the red X's that appears when you tap on an incorrect box.
     weak var blueX1, blueX2, blueX3, blueX4: CCSprite!
-    weak var redX1, redX2, redX3, redX4: CCSprite!
+    weak var redX1,  redX2,  redX3,  redX4:  CCSprite!
     
     var warningSound = false // Used in the "locking" mechanism for the warningSound. See `checkForWarningSound()` below.
     

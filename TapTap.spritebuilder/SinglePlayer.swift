@@ -21,23 +21,23 @@ class SinglePlayer: CCNode {
     let animationDelay = 0.055              // How long does it take for a tileRow animation to complete?
     
     // The widths, opacities, and positions that each of the `TileRow` objects are supposed to be. Chances are though, that because I didn't really plan out my game architecture before this because I didn't really know this game was actually going to be that popular, you're still going to have to dig into the code to manually change some of the numbers.
-    let topTileRowWidth: Float = 10
-    let midtopTileRowWidth: Float = 20
-    let middleTileRowWidth: Float = 40
+    let topTileRowWidth:     Float = 10
+    let midtopTileRowWidth:  Float = 20
+    let middleTileRowWidth:  Float = 40
     let midbaseTileRowWidth: Float = 50
-    let baseTileRowWidth: Float = 70
+    let baseTileRowWidth:    Float = 70
     
-    let topTileRowOpacity: CGFloat = 0.25
-    let midtopTileRowOpacity: CGFloat = 0.50
-    let middleTileRowOpacity: CGFloat = 0.70
+    let topTileRowOpacity:     CGFloat = 0.25
+    let midtopTileRowOpacity:  CGFloat = 0.50
+    let middleTileRowOpacity:  CGFloat = 0.70
     let midbaseTileRowOpacity: CGFloat = 0.85
-    let baseTileRowOpacity: CGFloat = 0.95
+    let baseTileRowOpacity:    CGFloat = 0.95
     
-    let topTileRowPosition: CGFloat = 220
-    let midtopTileRowPosition: CGFloat = 190
-    let middleTileRowPosition: CGFloat = 140
+    let topTileRowPosition:     CGFloat = 220
+    let midtopTileRowPosition:  CGFloat = 190
+    let middleTileRowPosition:  CGFloat = 140
     let midbaseTileRowPosition: CGFloat = 81
-    let baseTileRowPosition: CGFloat = 0
+    let baseTileRowPosition:    CGFloat = 0
     
     // OALSimpleAudio instance used for handling sounds.
     let audio = OALSimpleAudio.sharedInstance()
@@ -49,11 +49,11 @@ class SinglePlayer: CCNode {
     let defaults = NSUserDefaults.standardUserDefaults()
     
     // See `OptionsMenu.swift` for information on these constants.
-    let ingameParticlesKey = "ingameParticlesKey"
-    let backgroundMusicKey = "backgroundMusicKey"
-    let soundEffectsKey = "soundEffectsKey"
-    let leftSideColorChoice = "leftSideColorChoice"
-    let rightSideColorChoice = "rightSideColorChoice"
+    let ingameParticlesKey    = "ingameParticlesKey"
+    let backgroundMusicKey    = "backgroundMusicKey"
+    let soundEffectsKey       = "soundEffectsKey"
+    let leftSideColorChoice   = "leftSideColorChoice"
+    let rightSideColorChoice  = "rightSideColorChoice"
     let singlePlayerHighScore = "singlePlayerHighScore"
     
     
@@ -89,8 +89,8 @@ class SinglePlayer: CCNode {
     weak var fasterLabel: CCLabelTTF! // Refers to the "FASTER!" text that appears at the end of each level. Variable is used to animate the node.
     
     // Variables used to display and handle the scoring system.
-    weak var scoreHeader: CCLabelTTF!
-    weak var scoreLabel: CCLabelTTF!
+    weak var scoreHeader:     CCLabelTTF!
+    weak var scoreLabel:      CCLabelTTF!
     weak var speedBonusLabel: CCLabelTTF!
     var score: Int = 0 {
         didSet {
@@ -101,7 +101,7 @@ class SinglePlayer: CCNode {
     
     // Variables used to display the current high score at the end of a round.
     weak var highScoreGroupingNode: CCNode!
-    weak var highScoreLabel: CCLabelTTF!
+    weak var highScoreLabel:    CCLabelTTF!
     var highScore: Int = 0 {
         didSet {
             highScoreLabel.string = "\(highScore)"
@@ -330,11 +330,11 @@ class SinglePlayer: CCNode {
         
         if !isLineResetInProgress {
             
-            // Move the particleLine to stay with the dominantColor edge.
-            particleLine.position.x -= moveAmount
-            
             // Move the dominantColor towards its goal.
             dominantColor.right(Float(moveAmount))
+            
+            // Move the particleLine to stay with the dominantColor edge.
+            particleLine.position.x = CGFloat(dominantColor.scaleX)
             
             score++
             
@@ -640,11 +640,11 @@ class SinglePlayer: CCNode {
                 
                 if !isLineResetInProgress {
                     
-                    // Move the particleLine to stay with the dominantColor edge.
-                    particleLine.position.x += moveAmount
-                    
                     // Move the dominantColor towards its goal.
                     dominantColor.left(Float(moveAmount))
+                    
+                    // Move the particleLine to stay with the dominantColor edge.
+                    particleLine.position.x = CGFloat(dominantColor.scaleX)
                     
                 }
                 
@@ -660,7 +660,7 @@ class SinglePlayer: CCNode {
                     dominantColor.right(Float(wrongTapPenalty))
                     
                     // Move the particleLine to stay with the dominantColor edge.
-                    particleLine.position.x -= wrongTapPenalty
+                    particleLine.position.x = CGFloat(dominantColor.scaleX)
                 }
                 
                 if yTouch > 0 && yTouch < screenQuartersVertical { // Incorrect tap on Bottom box (box1).

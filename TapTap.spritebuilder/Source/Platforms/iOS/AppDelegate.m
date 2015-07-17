@@ -64,8 +64,10 @@
     // Later, you can get your instance with
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     
-    [mixpanel track:@"Game Launched"];
+    // Call .identify to flush the People record to Mixpanel
     [mixpanel identify:mixpanel.distinctId];
+    
+    [mixpanel track:@"Game Launched"];
     
     return YES;
 }
