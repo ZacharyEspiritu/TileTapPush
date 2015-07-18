@@ -132,6 +132,9 @@ class MainScene: CCNode {
         mixpanel.track("Viewed Options Menu")
     }
     
+    /**
+    Calls the Game Center leaderboard.
+    */
     func leaderboard() {
         mixpanel.track("Viewed Leaderboard")
         showLeaderboard()
