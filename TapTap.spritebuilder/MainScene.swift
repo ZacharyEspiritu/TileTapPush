@@ -104,6 +104,7 @@ class MainScene: CCNode {
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
         
         mixpanel.track("Two Player Mode Inititated")
+        mixpanel.timeEvent("Two Player Mode Session Duration")
     }
     
     /**
@@ -117,6 +118,8 @@ class MainScene: CCNode {
         
         var transition = CCTransition(fadeWithDuration: 0.5)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
+        
+        mixpanel.track("Viewed Options Menu")
     }
     
     
@@ -139,59 +142,77 @@ class MainScene: CCNode {
         var leftColorChoiceInt = defaults.integerForKey(leftSideColorChoice)
         if leftColorChoiceInt == 1 { // Turquoise
             dominantColorNode.color = turquoiseColor
+            mixpanel.track("Color Choice", properties: ["Color" : "Turquoise"])
         }
         else if leftColorChoiceInt == 2 { // Gray
             dominantColorNode.color = grayColor
+            mixpanel.track("Color Choice", properties: ["Color" : "Gray"])
         }
         else if leftColorChoiceInt == 3 { // Orange
             dominantColorNode.color = orangeColor
+            mixpanel.track("Color Choice", properties: ["Color" : "Orange"])
         }
         else if leftColorChoiceInt == 4 { // Red
             dominantColorNode.color = redColor
+            mixpanel.track("Color Choice", properties: ["Color" : "Red"])
         }
         else if leftColorChoiceInt == 5 { // Silver
             dominantColorNode.color = silverColor
+            mixpanel.track("Color Choice", properties: ["Color" : "Silver"])
         }
         else if leftColorChoiceInt == 6 { // Yellow
             dominantColorNode.color = yellowColor
+            mixpanel.track("Color Choice", properties: ["Color" : "Yellow"])
         }
         else if leftColorChoiceInt == 7 { // Purple
             dominantColorNode.color = purpleColor
+            mixpanel.track("Color Choice", properties: ["Color" : "Purple"])
         }
         else if leftColorChoiceInt == 8 { // Blue
             dominantColorNode.color = blueColor
+            mixpanel.track("Color Choice", properties: ["Color" : "Blue"])
         }
         else if leftColorChoiceInt == 9 { // Green
             dominantColorNode.color = greenColor
+            mixpanel.track("Color Choice", properties: ["Color" : "Green"])
         }
         
         var rightColorChoiceInt = defaults.integerForKey(rightSideColorChoice)
         if rightColorChoiceInt == 1 { // Turquoise
             backgroundColorNode.color = turquoiseColor
+            mixpanel.track("Color Choice", properties: ["Color" : "Turquoise"])
         }
         else if rightColorChoiceInt == 2 { // Gray
             backgroundColorNode.color = grayColor
+            mixpanel.track("Color Choice", properties: ["Color" : "Gray"])
         }
         else if rightColorChoiceInt == 3 { // Orange
             backgroundColorNode.color = orangeColor
+            mixpanel.track("Color Choice", properties: ["Color" : "Orange"])
         }
         else if rightColorChoiceInt == 4 { // Red
             backgroundColorNode.color = redColor
+            mixpanel.track("Color Choice", properties: ["Color" : "Red"])
         }
         else if rightColorChoiceInt == 5 { // Silver
             backgroundColorNode.color = silverColor
+            mixpanel.track("Color Choice", properties: ["Color" : "Silver"])
         }
         else if rightColorChoiceInt == 6 { // Yellow
             backgroundColorNode.color = yellowColor
+            mixpanel.track("Color Choice", properties: ["Color" : "Yellow"])
         }
         else if rightColorChoiceInt == 7 { // Purple
             backgroundColorNode.color = purpleColor
+            mixpanel.track("Color Choice", properties: ["Color" : "Purple"])
         }
         else if rightColorChoiceInt == 8 { // Blue
             backgroundColorNode.color = blueColor
+            mixpanel.track("Color Choice", properties: ["Color" : "Blue"])
         }
         else if rightColorChoiceInt == 9 { // Green
             backgroundColorNode.color = greenColor
+            mixpanel.track("Color Choice", properties: ["Color" : "Green"])
         }
         
     }

@@ -14,6 +14,8 @@ class CreditsScene: CCNode {
     
     weak var creditsEnclosingNode: CCNode!
     
+    let mixpanel = Mixpanel.sharedInstance()
+    
     
     // MARK: Functions
     
@@ -46,7 +48,6 @@ class CreditsScene: CCNode {
         if (creditsEnclosingNodeHeight + screenHeight) < creditsEnclosingNodeCurrentHeight {
             back()
         }
-        
     }
     
 }

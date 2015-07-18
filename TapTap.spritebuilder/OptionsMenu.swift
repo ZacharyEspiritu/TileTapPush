@@ -21,6 +21,8 @@ class OptionsMenu: CCNode {
     
     let defaults = NSUserDefaults.standardUserDefaults() // Implement the `NSUserDefaults` object.
     
+    let mixpanel = Mixpanel.sharedInstance()
+    
     // We use constants to declare our NSUserDefault keys because it adds an extra degree of error prevention - if we misspell something (which also becomes less common since Swift will now be able to auto-fill our key names), we'll get a compile error, not an error during runtime.
     let ingameParticlesKey = "ingameParticlesKey"
     let backgroundMusicKey = "backgroundMusicKey"
@@ -169,6 +171,8 @@ class OptionsMenu: CCNode {
     Rolls the credits.
     */
     func credits() {
+        mixpanel.track("Viewed Credits")
+        
         var creditsScene = CCBReader.load("CreditsScene") as! CreditsScene
         
         var scene = CCScene()
@@ -197,7 +201,7 @@ class OptionsMenu: CCNode {
         }
         
     }
-    
+
     /**
     Toggles the state of the backgroundMusicKey.
     */
