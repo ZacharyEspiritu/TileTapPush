@@ -11,7 +11,7 @@
 		550183971B44B55400E134B9 /* iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 550183961B44B55400E134B9 /* iPhone@2x.png */; };
 		5506E15B1B495C5F001F1C81 /* SinglePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5506E15A1B495C5F001F1C81 /* SinglePlayer.swift */; };
 		5537FDB01B43169800C7D7DB /* DominantColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537FDAF1B43169800C7D7DB /* DominantColor.swift */; };
-		5537FDB41B43584B00C7D7DB /* Gameplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537FDB31B43584B00C7D7DB /* Gameplay.swift */; };
+		5537FDB41B43584B00C7D7DB /* TwoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537FDB31B43584B00C7D7DB /* TwoPlayer.swift */; };
 		5541109F1B49D1690018F2F4 /* faster.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5541109E1B49D1690018F2F4 /* faster.wav */; };
 		555288541B46DC0000BEC2B1 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555288531B46DC0000BEC2B1 /* MainScene.swift */; };
 		555288561B4729DD00BEC2B1 /* OptionsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555288551B4729DD00BEC2B1 /* OptionsMenu.swift */; };
@@ -168,7 +168,7 @@
 		550183961B44B55400E134B9 /* iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPhone@2x.png"; path = "Icons/iPhone@2x.png"; sourceTree = "<group>"; };
 		5506E15A1B495C5F001F1C81 /* SinglePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglePlayer.swift; sourceTree = "<group>"; };
 		5537FDAF1B43169800C7D7DB /* DominantColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DominantColor.swift; sourceTree = "<group>"; };
-		5537FDB31B43584B00C7D7DB /* Gameplay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gameplay.swift; sourceTree = "<group>"; };
+		5537FDB31B43584B00C7D7DB /* TwoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoPlayer.swift; sourceTree = "<group>"; };
 		5541109E1B49D1690018F2F4 /* faster.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = faster.wav; sourceTree = "<group>"; };
 		555288531B46DC0000BEC2B1 /* MainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
 		555288551B4729DD00BEC2B1 /* OptionsMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsMenu.swift; sourceTree = "<group>"; };
@@ -496,7 +496,7 @@
 		B737893C1807616C0076A88C /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				5537FDB31B43584B00C7D7DB /* Gameplay.swift */,
+				5537FDB31B43584B00C7D7DB /* TwoPlayer.swift */,
 				5506E15A1B495C5F001F1C81 /* SinglePlayer.swift */,
 				555288571B472E6E00BEC2B1 /* CreditsScene.swift */,
 				555288551B4729DD00BEC2B1 /* OptionsMenu.swift */,
@@ -938,7 +938,7 @@
 				555288581B472E6E00BEC2B1 /* CreditsScene.swift in Sources */,
 				55DD7AA61B5A907D0014DF0E /* GameCenterInteractor.swift in Sources */,
 				555288561B4729DD00BEC2B1 /* OptionsMenu.swift in Sources */,
-				5537FDB41B43584B00C7D7DB /* Gameplay.swift in Sources */,
+				5537FDB41B43584B00C7D7DB /* TwoPlayer.swift in Sources */,
 				5537FDB01B43169800C7D7DB /* DominantColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

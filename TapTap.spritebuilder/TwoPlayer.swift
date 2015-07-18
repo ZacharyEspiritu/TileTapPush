@@ -15,7 +15,7 @@ enum GameState {
     case Initial, Playing, GameOver
 }
 
-class Gameplay: CCNode {
+class TwoPlayer: CCNode {
     
     // MARK: Constants
     
@@ -680,7 +680,7 @@ class Gameplay: CCNode {
     Resets the Gameplay to its original state and restarts the game.
     */
     func playAgain() {
-        var gameplayScene = CCBReader.load("Gameplay") as! Gameplay
+        var gameplayScene = CCBReader.load("TwoPlayer") as! TwoPlayer
         gameplayScene.animationManager.runAnimationsForSequenceNamed("Gameplay")
         
         var scene = CCScene()

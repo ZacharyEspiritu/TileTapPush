@@ -104,7 +104,7 @@ class MainScene: CCNode {
     Starts a new instance of the game.
     */
     func playTwoPlayer() {
-        var gameplayScene = CCBReader.load("Gameplay") as! Gameplay
+        var gameplayScene = CCBReader.load("TwoPlayer") as! TwoPlayer
         gameplayScene.animationManager.runAnimationsForSequenceNamed("Gameplay")
         
         var scene = CCScene()
