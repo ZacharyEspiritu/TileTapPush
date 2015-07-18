@@ -132,6 +132,11 @@ class MainScene: CCNode {
         mixpanel.track("Viewed Options Menu")
     }
     
+    func leaderboard() {
+        mixpanel.track("Viewed Leaderboard")
+        showLeaderboard()
+    }
+    
     
     // MARK: Memory Functions
     

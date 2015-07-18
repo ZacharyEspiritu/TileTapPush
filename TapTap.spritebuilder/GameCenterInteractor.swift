@@ -106,7 +106,7 @@ class GameCenterInteractor: NSObject {
     }
     
     // MARK: 4 High Score Stuff
-    func saveHighScore(gamemode: String, score: Double) {
+    func saveHighScore(score: Int) {
         
         if GKLocalPlayer.localPlayer().authenticated {
             

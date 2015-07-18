@@ -44,6 +44,8 @@ class SinglePlayer: CCNode {
     
     let mixpanel = Mixpanel.sharedInstance()
     
+    let gameCenterInteractor = GameCenterInteractor.sharedInstance
+    
     // MARK: Memory Variables
     
     let defaults = NSUserDefaults.standardUserDefaults()
@@ -764,8 +766,10 @@ class SinglePlayer: CCNode {
         var currentHighScore = defaults.integerForKey(singlePlayerHighScore)
         if score > currentHighScore {
             defaults.setInteger(score, forKey: singlePlayerHighScore)
-            mixpanel.people.set(["Single Player High Score" : defaults.integerForKey(singlePlayerHighScore)])
         }
+        
+        mixpanel.people.set(["Single Player High Score" : defaults.integerForKey(singlePlayerHighScore)])
+        gameCenterInteractor.saveHighScore(defaults.integerForKey(singlePlayerHighScore))
         
         // Display the high score stored in `NSUserDefaults` on the `highScoreLabel`. The `highScore` label has a didSet property that automatically does this for us; we just have to set the variable to what we want.
         highScore = defaults.integerForKey(singlePlayerHighScore)
