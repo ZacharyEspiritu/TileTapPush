@@ -26,6 +26,7 @@
 		55975C8A1B45A0FA00DDAD2A /* scratch.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55975C871B45A0FA00DDAD2A /* scratch.wav */; };
 		55CC03B11B438DEA00A0B0E6 /* ParticleLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CC03B01B438DEA00A0B0E6 /* ParticleLine.swift */; };
 		55CC03B31B4394D900A0B0E6 /* TileRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CC03B21B4394D900A0B0E6 /* TileRow.swift */; };
+		55DD7AA61B5A907D0014DF0E /* GameCenterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DD7AA51B5A907D0014DF0E /* GameCenterInteractor.swift */; };
 		5B121030197484FA004C1E1D /* TapTapActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12102F197484FA004C1E1D /* TapTapActivity.m */; };
 		5B121038197487F2004C1E1D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B737893E1807617C0076A88C /* AppDelegate.m */; };
 		79F3D9CA55A1BAA2FCE081CD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F856FAD473B548B2702847B4 /* libPods.a */; };
@@ -183,6 +184,7 @@
 		55BB321F1B58990900876685 /* Mixpanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Mixpanel.h; path = Pods/Mixpanel/Mixpanel/Mixpanel.h; sourceTree = "<group>"; };
 		55CC03B01B438DEA00A0B0E6 /* ParticleLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticleLine.swift; sourceTree = "<group>"; };
 		55CC03B21B4394D900A0B0E6 /* TileRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileRow.swift; sourceTree = "<group>"; };
+		55DD7AA51B5A907D0014DF0E /* GameCenterInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCenterInteractor.swift; sourceTree = "<group>"; };
 		5B12100919748273004C1E1D /* libEGL.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.so; path = /usr/lib/armv7a/libEGL.so; sourceTree = SDKROOT; };
 		5B12100F197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
 		5B121011197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
@@ -498,6 +500,7 @@
 				5506E15A1B495C5F001F1C81 /* SinglePlayer.swift */,
 				555288571B472E6E00BEC2B1 /* CreditsScene.swift */,
 				555288551B4729DD00BEC2B1 /* OptionsMenu.swift */,
+				55DD7AA51B5A907D0014DF0E /* GameCenterInteractor.swift */,
 				555288531B46DC0000BEC2B1 /* MainScene.swift */,
 				55CC03B21B4394D900A0B0E6 /* TileRow.swift */,
 				55CC03B01B438DEA00A0B0E6 /* ParticleLine.swift */,
@@ -933,6 +936,7 @@
 				55CC03B11B438DEA00A0B0E6 /* ParticleLine.swift in Sources */,
 				5506E15B1B495C5F001F1C81 /* SinglePlayer.swift in Sources */,
 				555288581B472E6E00BEC2B1 /* CreditsScene.swift in Sources */,
+				55DD7AA61B5A907D0014DF0E /* GameCenterInteractor.swift in Sources */,
 				555288561B4729DD00BEC2B1 /* OptionsMenu.swift in Sources */,
 				5537FDB41B43584B00C7D7DB /* Gameplay.swift in Sources */,
 				5537FDB01B43169800C7D7DB /* DominantColor.swift in Sources */,

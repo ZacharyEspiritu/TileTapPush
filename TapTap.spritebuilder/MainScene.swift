@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import GameKit
 
 class MainScene: CCNode {
     
@@ -69,7 +70,16 @@ class MainScene: CCNode {
         }
         
         getColorChoicesFromMemory() // Load color choices from `NSUserDefaults`.
+        
+        setupGameCenter()
     
+    }
+    
+    func setupGameCenter() {
+        
+        let gameCenterInteractor = GameCenterInteractor.sharedInstance
+        gameCenterInteractor.authenticationCheck()
+        
     }
     
     /**
@@ -215,6 +225,26 @@ class MainScene: CCNode {
             mixpanel.track("Color Choice", properties: ["Color" : "Green"])
         }
         
+    }
+    
+}
+
+// MARK: Game Center Handling
+
+extension MainScene: GKGameCenterControllerDelegate {
+    
+    func showLeaderboard() {
+        
+        var viewController = CCDirector.sharedDirector().parentViewController!
+        var gameCenterViewController = GKGameCenterViewController()
+        gameCenterViewController.gameCenterDelegate = self
+        viewController.presentViewController(gameCenterViewController, animated: true, completion: nil)
+        
+    }
+    
+    // Delegate methods
+    func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController!) {
+        gameCenterViewController.dismissViewControllerAnimated(true, completion: nil)
     }
     
 }
