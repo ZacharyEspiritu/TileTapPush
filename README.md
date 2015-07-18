@@ -1,7 +1,6 @@
 # Tile, Tap, Push! (TapTap)
 
-### Abstract
-Side project started while studying at MakeSchool. A combination of the game PushPush and Don't Touch The White Tile. Coded in Swift using Spritebuilder.
+####...is now on the App Store! Download it from the [App Store](https://itunes.apple.com/us/app/tile-tap-push!/id1016306913?ls=1&mt=8) today!
 
 ## Game Design
 
