@@ -1,4 +1,4 @@
-# Tile, Tap, Push! (TapTap)
+# Tile, Tap, Push!
 
 ####...is now on the App Store! Download it from the [App Store](https://itunes.apple.com/us/app/tile-tap-push!/id1016306913?ls=1&mt=8) today!
 
