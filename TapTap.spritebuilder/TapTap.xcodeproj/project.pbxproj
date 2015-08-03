@@ -1248,7 +1248,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = TapTap;
-				PROVISIONING_PROFILE = "e1e1089d-06ce-49bf-8f98-cbc3d13a318e";
+				PROVISIONING_PROFILE = "2be10fee-1ebd-4be7-ba67-c07b8f51ec9f";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = app;
@@ -1285,7 +1285,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = TapTap;
-				PROVISIONING_PROFILE = "e1e1089d-06ce-49bf-8f98-cbc3d13a318e";
+				PROVISIONING_PROFILE = "2be10fee-1ebd-4be7-ba67-c07b8f51ec9f";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/Bridging-Header.h";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
