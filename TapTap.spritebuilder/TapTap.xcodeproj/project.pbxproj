@@ -10,6 +10,7 @@
 		550183951B44B16800E134B9 /* Default-568h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 550183941B44B16800E134B9 /* Default-568h@3x.png */; };
 		550183971B44B55400E134B9 /* iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 550183961B44B55400E134B9 /* iPhone@2x.png */; };
 		5506E15B1B495C5F001F1C81 /* SinglePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5506E15A1B495C5F001F1C81 /* SinglePlayer.swift */; };
+		553089FF1B979CF200D965AA /* iAdHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553089FE1B979CF200D965AA /* iAdHandler.swift */; };
 		5537FDB01B43169800C7D7DB /* DominantColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537FDAF1B43169800C7D7DB /* DominantColor.swift */; };
 		5537FDB41B43584B00C7D7DB /* TwoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537FDB31B43584B00C7D7DB /* TwoPlayer.swift */; };
 		5541109F1B49D1690018F2F4 /* faster.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5541109E1B49D1690018F2F4 /* faster.wav */; };
@@ -167,6 +168,7 @@
 		550183941B44B16800E134B9 /* Default-568h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@3x.png"; sourceTree = "<group>"; };
 		550183961B44B55400E134B9 /* iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPhone@2x.png"; path = "Icons/iPhone@2x.png"; sourceTree = "<group>"; };
 		5506E15A1B495C5F001F1C81 /* SinglePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglePlayer.swift; sourceTree = "<group>"; };
+		553089FE1B979CF200D965AA /* iAdHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iAdHandler.swift; sourceTree = "<group>"; };
 		5537FDAF1B43169800C7D7DB /* DominantColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DominantColor.swift; sourceTree = "<group>"; };
 		5537FDB31B43584B00C7D7DB /* TwoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoPlayer.swift; sourceTree = "<group>"; };
 		5541109E1B49D1690018F2F4 /* faster.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = faster.wav; sourceTree = "<group>"; };
@@ -502,6 +504,7 @@
 				555288551B4729DD00BEC2B1 /* OptionsMenu.swift */,
 				55DD7AA51B5A907D0014DF0E /* GameCenterInteractor.swift */,
 				555288531B46DC0000BEC2B1 /* MainScene.swift */,
+				553089FE1B979CF200D965AA /* iAdHandler.swift */,
 				55CC03B21B4394D900A0B0E6 /* TileRow.swift */,
 				55CC03B01B438DEA00A0B0E6 /* ParticleLine.swift */,
 				5537FDAF1B43169800C7D7DB /* DominantColor.swift */,
@@ -940,6 +943,7 @@
 				555288561B4729DD00BEC2B1 /* OptionsMenu.swift in Sources */,
 				5537FDB41B43584B00C7D7DB /* TwoPlayer.swift in Sources */,
 				5537FDB01B43169800C7D7DB /* DominantColor.swift in Sources */,
+				553089FF1B979CF200D965AA /* iAdHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
