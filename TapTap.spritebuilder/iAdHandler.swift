@@ -186,7 +186,7 @@ class iAdHandler: NSObject {
     func checkIfInterstitialAdShouldBeDisplayed() {
         if interstitial.loaded {
             switch interstitialIndexingNumber % 3 {
-            case 0:
+            case 2:
                 println("Interstitial should be displayed now!")
                 displayInterstitialAd()
             default:

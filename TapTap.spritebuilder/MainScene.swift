@@ -72,6 +72,8 @@ class MainScene: CCNode {
         getColorChoicesFromMemory() // Load color choices from `NSUserDefaults`.
         
         setupGameCenter()
+        
+        iAdHandler.sharedInstance.loadInterstitialAd()
     
     }
     
@@ -232,9 +234,18 @@ class MainScene: CCNode {
             backgroundColorNode.color = greenColor
             mixpanel.track("Color Choice", properties: ["Color" : "Green"])
         }
-        
     }
     
+    
+    // MARK: In-App Purchase Handling
+    
+    func purchaseRemoveAds() {
+        IAPHandler.sharedInstance.attemptPurchase("removeInterstitials")
+    }
+    
+    func restorePurchases() {
+        IAPHandler.sharedInstance.attemptRestorePurchase()
+    }
 }
 
 // MARK: Game Center Handling
@@ -242,17 +253,24 @@ class MainScene: CCNode {
 extension MainScene: GKGameCenterControllerDelegate {
     
     func showLeaderboard() {
-        
         var viewController = CCDirector.sharedDirector().parentViewController!
         var gameCenterViewController = GKGameCenterViewController()
         gameCenterViewController.gameCenterDelegate = self
         viewController.presentViewController(gameCenterViewController, animated: true, completion: nil)
-        
     }
     
-    // Delegate methods
     func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController!) {
         gameCenterViewController.dismissViewControllerAnimated(true, completion: nil)
     }
+}
+
+extension MainScene: IAPHelperDelegate {
     
+    func purchaseSuccessful(productString: String) {
+    
+    }
+    
+    func purchaseFailed() {
+        
+    }
 }

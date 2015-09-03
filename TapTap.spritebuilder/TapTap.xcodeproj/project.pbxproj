@@ -11,6 +11,10 @@
 		550183971B44B55400E134B9 /* iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 550183961B44B55400E134B9 /* iPhone@2x.png */; };
 		5506E15B1B495C5F001F1C81 /* SinglePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5506E15A1B495C5F001F1C81 /* SinglePlayer.swift */; };
 		553089FF1B979CF200D965AA /* iAdHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553089FE1B979CF200D965AA /* iAdHandler.swift */; };
+		55308A451B97F6BA00D965AA /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 55308A441B97F6BA00D965AA /* close.png */; };
+		55308A491B97FCE200D965AA /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55308A481B97FCE200D965AA /* IAPHelper.swift */; };
+		55308A4B1B98010200D965AA /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55308A4A1B98010200D965AA /* iAd.framework */; };
+		55308A4D1B98010700D965AA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55308A4C1B98010700D965AA /* StoreKit.framework */; };
 		5537FDB01B43169800C7D7DB /* DominantColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537FDAF1B43169800C7D7DB /* DominantColor.swift */; };
 		5537FDB41B43584B00C7D7DB /* TwoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5537FDB31B43584B00C7D7DB /* TwoPlayer.swift */; };
 		5541109F1B49D1690018F2F4 /* faster.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5541109E1B49D1690018F2F4 /* faster.wav */; };
@@ -169,6 +173,10 @@
 		550183961B44B55400E134B9 /* iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPhone@2x.png"; path = "Icons/iPhone@2x.png"; sourceTree = "<group>"; };
 		5506E15A1B495C5F001F1C81 /* SinglePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglePlayer.swift; sourceTree = "<group>"; };
 		553089FE1B979CF200D965AA /* iAdHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iAdHandler.swift; sourceTree = "<group>"; };
+		55308A441B97F6BA00D965AA /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
+		55308A481B97FCE200D965AA /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
+		55308A4A1B98010200D965AA /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		55308A4C1B98010700D965AA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		5537FDAF1B43169800C7D7DB /* DominantColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DominantColor.swift; sourceTree = "<group>"; };
 		5537FDB31B43584B00C7D7DB /* TwoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoPlayer.swift; sourceTree = "<group>"; };
 		5541109E1B49D1690018F2F4 /* faster.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = faster.wav; sourceTree = "<group>"; };
@@ -294,6 +302,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55308A4D1B98010700D965AA /* StoreKit.framework in Frameworks */,
+				55308A4B1B98010200D965AA /* iAd.framework in Frameworks */,
 				7A97911819E631CD001FFC4D /* libcocos2d.a in Frameworks */,
 				8392007A18EE8E3300B6C429 /* GLKit.framework in Frameworks */,
 				B77F1B3217B978D7009739AE /* QuartzCore.framework in Frameworks */,
@@ -504,6 +514,7 @@
 				555288551B4729DD00BEC2B1 /* OptionsMenu.swift */,
 				55DD7AA51B5A907D0014DF0E /* GameCenterInteractor.swift */,
 				555288531B46DC0000BEC2B1 /* MainScene.swift */,
+				55308A481B97FCE200D965AA /* IAPHelper.swift */,
 				553089FE1B979CF200D965AA /* iAdHandler.swift */,
 				55CC03B21B4394D900A0B0E6 /* TileRow.swift */,
 				55CC03B01B438DEA00A0B0E6 /* ParticleLine.swift */,
@@ -564,6 +575,8 @@
 		B77F1B3017B978D7009739AE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				55308A4C1B98010700D965AA /* StoreKit.framework */,
+				55308A4A1B98010200D965AA /* iAd.framework */,
 				BC5399D31A44DCC90063F482 /* AndroidKit.framework */,
 				BC5399D41A44DCC90063F482 /* CoreJava.framework */,
 				BC5399D51A44DCC90063F482 /* GLActivityKit.framework */,
@@ -594,6 +607,7 @@
 			isa = PBXGroup;
 			children = (
 				5596AB8C1B4DE8800089D1BA /* Images.xcassets */,
+				55308A441B97F6BA00D965AA /* close.png */,
 				550183981B44CFF200E134B9 /* Audio */,
 				7A40366119DDF8C2007B6E8F /* Platforms */,
 				5B12100D197483EE004C1E1D /* res */,
@@ -825,6 +839,7 @@
 				55975C841B45A0F000DDAD2A /* gameplayBG.mp3 in Resources */,
 				5541109F1B49D1690018F2F4 /* faster.wav in Resources */,
 				B7378975180762440076A88C /* Default-568h@2x.png in Resources */,
+				55308A451B97F6BA00D965AA /* close.png in Resources */,
 				B7378977180762440076A88C /* Default.png in Resources */,
 				55854D4E1B456BF000DA5C31 /* siren.mp3 in Resources */,
 				550183971B44B55400E134B9 /* iPhone@2x.png in Resources */,
@@ -938,6 +953,7 @@
 				555288541B46DC0000BEC2B1 /* MainScene.swift in Sources */,
 				55CC03B11B438DEA00A0B0E6 /* ParticleLine.swift in Sources */,
 				5506E15B1B495C5F001F1C81 /* SinglePlayer.swift in Sources */,
+				55308A491B97FCE200D965AA /* IAPHelper.swift in Sources */,
 				555288581B472E6E00BEC2B1 /* CreditsScene.swift in Sources */,
 				55DD7AA61B5A907D0014DF0E /* GameCenterInteractor.swift in Sources */,
 				555288561B4729DD00BEC2B1 /* OptionsMenu.swift in Sources */,
@@ -1229,8 +1245,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1243,7 +1259,7 @@
 					"\"Source/libs/cocos2d-iphone/external/ObjectAL\"/**",
 				);
 				INFOPLIST_FILE = Source/Resources/Platforms/iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -1252,7 +1268,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = TapTap;
-				PROVISIONING_PROFILE = "2be10fee-1ebd-4be7-ba67-c07b8f51ec9f";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = app;
@@ -1268,8 +1284,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Source/Prefix.pch;
@@ -1281,7 +1297,7 @@
 					"\"Source/libs/cocos2d-iphone/external/ObjectAL\"/**",
 				);
 				INFOPLIST_FILE = Source/Resources/Platforms/iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-lz",
@@ -1289,7 +1305,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = TapTap;
-				PROVISIONING_PROFILE = "2be10fee-1ebd-4be7-ba67-c07b8f51ec9f";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/Bridging-Header.h";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

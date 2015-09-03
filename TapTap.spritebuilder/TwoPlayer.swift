@@ -616,6 +616,8 @@ class TwoPlayer: CCNode {
                 audio.stopBg()
             }
             
+            iAdHandler.sharedInstance.checkIfInterstitialAdShouldBeDisplayed()
+            
             // Change the `gameState` to GameOver to prevent people from continuing to play the game on the now-invisible TileRows.
             gameState = .GameOver
             
