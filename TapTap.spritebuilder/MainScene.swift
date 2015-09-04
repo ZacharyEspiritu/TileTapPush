@@ -14,10 +14,9 @@ class MainScene: CCNode {
     // MARK: Constants
     
     let defaults = NSUserDefaults.standardUserDefaults()
-    
     let audio = OALSimpleAudio.sharedInstance()
-    
     let mixpanel: Mixpanel = Mixpanel.sharedInstance()
+    let IAPhandler = IAPHandler.sharedInstance
     
     // See `OptionsMenu.swift` for information on these constants.
     let hasLoadedBefore = "hasLoadedBefore"
@@ -37,6 +36,18 @@ class MainScene: CCNode {
     weak var backgroundColorNode: CCNodeColor!
     
     weak var particleLine: ParticleLine!
+    
+    weak var removeAdsPopup: CCNode!
+    
+    weak var onePlayerButton: CCButton!
+    weak var twoPlayerButton: CCButton!
+    weak var leaderboardButton: CCButton!
+    weak var optionsButton: CCButton!
+    weak var removeAdsButton: CCButton!
+    
+    weak var purchaseRemoveAdsButton: CCButton!
+    weak var restorePurchasesButton: CCButton!
+    weak var backToMenuButton: CCButton!
     
     
     // MARK: Functions
@@ -69,12 +80,19 @@ class MainScene: CCNode {
             particleLine.stopParticleGeneration()
         }
         
+        if defaults.boolForKey("removeAdsIAP") {
+            removeAdsButton.position = CGPoint(x: -500, y: -500)
+        }
+        
+        removeAdsPopup.cascadeOpacityEnabled = true
+        removeAdsPopup.opacity = 0
+        
         getColorChoicesFromMemory() // Load color choices from `NSUserDefaults`.
         
         setupGameCenter()
         
         iAdHandler.sharedInstance.loadInterstitialAd()
-    
+        IAPhandler.delegate = self
     }
     
     func setupGameCenter() {
@@ -239,17 +257,81 @@ class MainScene: CCNode {
     
     // MARK: In-App Purchase Handling
     
+    /**
+    Attempts to purchase removing ads.
+    */
     func purchaseRemoveAds() {
         IAPHandler.sharedInstance.attemptPurchase("removeInterstitials")
     }
     
+    /**
+    Attempts to restore a previous purchase of removing ads.
+    */
     func restorePurchases() {
         IAPHandler.sharedInstance.attemptRestorePurchase()
     }
+    
+    
+    // MARK: In-App Purchase Dialog Popup Cosmetic Functions
+    
+    /**
+    Opens the popup where players can purchase the remove ads option.
+    */
+    func removeAds() {
+        removeAdsPopup.position = CGPoint(x: 0, y: 0)
+        removeAdsPopup.runAction(CCActionFadeIn(duration: 0.5))
+        changeBackgroundButtonState(false)
+    }
+    
+    /**
+    Closes the popup.
+    */
+    func backToMenu() {
+        
+        let action = CCActionFadeOut(duration: 0.5)
+        removeAdsPopup.runAction(CCActionFadeOut(duration: 0.5))
+        
+        purchaseRemoveAdsButton.enabled = false
+        restorePurchasesButton.enabled = false
+        backToMenuButton.enabled = false
+        
+        delay(0.55) {
+            self.changeBackgroundButtonState(true)
+            self.removeAdsPopup.position = CGPoint(x: 1, y: 0)
+            
+            self.purchaseRemoveAdsButton.enabled = true
+            self.restorePurchasesButton.enabled = true
+            self.backToMenuButton.enabled = true
+        }
+    }
+    
+    /**
+    Changes all of the main menu button states to the `newState`. Used to prevent players from hitting a main menu button and opening the popup at the same time.
+    
+    :param: newState  the desired new state for all of the background buttons to be changed to
+    */
+    func changeBackgroundButtonState(newState: Bool) {
+        onePlayerButton.enabled = newState
+        twoPlayerButton.enabled = newState
+        leaderboardButton.enabled = newState
+        optionsButton.enabled = newState
+        removeAdsButton.enabled = newState
+    }
+    
+    /**
+    When called, delays the running of code included in the `closure` parameter.
+    */
+    func delay(delay:Double, closure:()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), closure)
+    }
 }
 
-// MARK: Game Center Handling
-
+// MARK: Game Center Delegate Methods
 extension MainScene: GKGameCenterControllerDelegate {
     
     func showLeaderboard() {
@@ -264,13 +346,25 @@ extension MainScene: GKGameCenterControllerDelegate {
     }
 }
 
+// MARK: In-App Purchase Delegate Methods
 extension MainScene: IAPHelperDelegate {
     
     func purchaseSuccessful(productString: String) {
-    
+        if productString == "removeInterstitials" {
+            defaults.setBool(true, forKey: "removeAdsIAP")
+            removeAdsButton.position = CGPoint(x: -500, y: -500)
+            
+            mixpanel.identify(mixpanel.distinctId)
+            mixpanel.track("Remove Ads IAP Purchased")
+            mixpanel.people.trackCharge(1)
+        }
     }
     
     func purchaseFailed() {
-        
+        var error = UIAlertView()
+        error.title = "Purchase Failed"
+        error.message = "The purchase was unable to be completed. Please try again later."
+        error.addButtonWithTitle("OK")
+        error.show()
     }
 }

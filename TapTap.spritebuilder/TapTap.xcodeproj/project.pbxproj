@@ -336,6 +336,38 @@
 			name = Audio;
 			sourceTree = "<group>";
 		};
+		55ED693C1B992093000E23E6 /* Handler Classes */ = {
+			isa = PBXGroup;
+			children = (
+				55DD7AA51B5A907D0014DF0E /* GameCenterInteractor.swift */,
+				55308A481B97FCE200D965AA /* IAPHelper.swift */,
+				553089FE1B979CF200D965AA /* iAdHandler.swift */,
+			);
+			name = "Handler Classes";
+			sourceTree = "<group>";
+		};
+		55ED693F1B9920A5000E23E6 /* CCB Files */ = {
+			isa = PBXGroup;
+			children = (
+				55CC03B21B4394D900A0B0E6 /* TileRow.swift */,
+				55CC03B01B438DEA00A0B0E6 /* ParticleLine.swift */,
+				5537FDAF1B43169800C7D7DB /* DominantColor.swift */,
+			);
+			name = "CCB Files";
+			sourceTree = "<group>";
+		};
+		55ED69401B9920B1000E23E6 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				5537FDB31B43584B00C7D7DB /* TwoPlayer.swift */,
+				5506E15A1B495C5F001F1C81 /* SinglePlayer.swift */,
+				555288571B472E6E00BEC2B1 /* CreditsScene.swift */,
+				555288551B4729DD00BEC2B1 /* OptionsMenu.swift */,
+				555288531B46DC0000BEC2B1 /* MainScene.swift */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
 		5B12100D197483EE004C1E1D /* res */ = {
 			isa = PBXGroup;
 			children = (
@@ -508,17 +540,9 @@
 		B737893C1807616C0076A88C /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				5537FDB31B43584B00C7D7DB /* TwoPlayer.swift */,
-				5506E15A1B495C5F001F1C81 /* SinglePlayer.swift */,
-				555288571B472E6E00BEC2B1 /* CreditsScene.swift */,
-				555288551B4729DD00BEC2B1 /* OptionsMenu.swift */,
-				55DD7AA51B5A907D0014DF0E /* GameCenterInteractor.swift */,
-				555288531B46DC0000BEC2B1 /* MainScene.swift */,
-				55308A481B97FCE200D965AA /* IAPHelper.swift */,
-				553089FE1B979CF200D965AA /* iAdHandler.swift */,
-				55CC03B21B4394D900A0B0E6 /* TileRow.swift */,
-				55CC03B01B438DEA00A0B0E6 /* ParticleLine.swift */,
-				5537FDAF1B43169800C7D7DB /* DominantColor.swift */,
+				55ED69401B9920B1000E23E6 /* Scenes */,
+				55ED693C1B992093000E23E6 /* Handler Classes */,
+				55ED693F1B9920A5000E23E6 /* CCB Files */,
 				55BB321F1B58990900876685 /* Mixpanel.h */,
 				7A40362019DDEF0D007B6E8F /* Platforms */,
 				D352B48019EC608A00829775 /* MetalShaders */,

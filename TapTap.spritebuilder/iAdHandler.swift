@@ -34,6 +34,7 @@ class iAdHandler: NSObject {
     
     // MARK: Variables
     
+    let defaults = NSUserDefaults.standardUserDefaults()
     let view = CCDirector.sharedDirector().parentViewController!.view // Returns a UIView of the cocos2d parent view controller.
     
     var adBannerView = ADBannerView(frame: CGRect.zeroRect)
@@ -58,84 +59,6 @@ class iAdHandler: NSObject {
         return Static.instance
     }
     
-    
-    // MARK: Banner Ad Functions
-    
-    /**
-    Sets the position of the soon-to-be banner ad and attempts to load a new ad from the iAd network.
-    
-    :param: bannerPosition  the `BannerPosition` at which the ad should be positioned initially
-    */
-    func loadAds(#bannerPosition: BannerPosition) {
-        self.bannerPosition = bannerPosition
-        
-        if bannerPosition == .Top {
-            adBannerView.center = CGPoint(x: adBannerView.center.x, y: -(adBannerView.frame.size.height / 2))
-        }
-        else {
-            adBannerView.center = CGPoint(x: adBannerView.center.x, y: view.bounds.size.height + (adBannerView.frame.size.height / 2))
-        }
-        
-        adBannerView.delegate = self
-        adBannerView.hidden = true
-        adBannerView.backgroundColor = UIColor.clearColor()
-        view.addSubview(adBannerView)
-    }
-    
-    /**
-    Repositions the `adBannerView` to the designated `bannerPosition`.
-    
-    :param: bannerPosition  the `BannerPosition` at which the ad should be positioned
-    */
-    func setBannerPosition(#bannerPosition: BannerPosition) {
-        self.bannerPosition = bannerPosition
-    }
-    /**
-    Displays the `adBannerView` with a short animation for polish.
-    
-    If a banner ad has not been successfully loaded, nothing will happen.
-    */
-    func displayBannerAd() {
-        if adBannerView.bannerLoaded {
-            adBannerView.hidden = false
-            isBannerDisplaying = true
-            UIView.animateWithDuration(0.5, animations: {() -> Void in
-                if self.bannerPosition == .Top {
-                    self.adBannerView.center = CGPoint(x: self.adBannerView.center.x, y: (self.adBannerView.frame.size.height / 2))
-                }
-                else {
-                    self.adBannerView.center = CGPoint(x: self.adBannerView.center.x, y: self.view.bounds.size.height - (self.adBannerView.frame.size.height / 2))
-                }
-            })
-        }
-        else {
-            println("Did not display ads because banner isn't loaded yet!")
-        }
-    }
-    
-    /**
-    Hides the `adBannerView` with a short animation for polish.
-    
-    If a banner ad has not been successfully loaded, nothing will happen.
-    */
-    func hideBannerAd() {
-        if adBannerView.bannerLoaded {
-            UIView.animateWithDuration(0.5, animations: {() -> Void in
-                if self.bannerPosition == .Top {
-                    self.adBannerView.center = CGPoint(x: self.adBannerView.center.x, y: -(self.adBannerView.frame.size.height / 2))
-                }
-                else {
-                    self.adBannerView.center = CGPoint(x: self.adBannerView.center.x, y: self.view.bounds.size.height + (self.adBannerView.frame.size.height / 2))
-                }
-            })
-            delay(0.5) {
-                self.adBannerView.hidden = true
-                self.isBannerDisplaying = false
-            }
-        }
-    }
-    
-    
     // MARK: Interstitial Functions
     
     /**
@@ -152,32 +75,37 @@ class iAdHandler: NSObject {
     */
     func displayInterstitialAd() {
         
-        if interstitial.loaded {
+        if !defaults.boolForKey("removeAdsIAP") {
             
-            view.addSubview(interstitialAdView)
-            interstitial.presentInView(interstitialAdView)
-            UIViewController.prepareInterstitialAds()
-            
-            closeButton = UIButton(frame: CGRect(x: 15, y: 15, width: 25, height: 25))
-            closeButton.setBackgroundImage(UIImage(named: "close"), forState: UIControlState.Normal)
-            closeButton.addTarget(self, action: Selector("close"), forControlEvents: UIControlEvents.TouchDown)
-            self.view.addSubview(closeButton)
-            
-            isInterstitialDisplaying = true
-            
-            self.interstitialAdView.center = CGPoint(x: self.interstitialAdView.center.x, y: (self.view.bounds.size.height * 1.5))
-            self.closeButton.hidden = true
-            UIView.animateWithDuration(0.5, animations: {() -> Void in
-                self.interstitialAdView.center = CGPoint(x: self.interstitialAdView.center.x, y: (self.view.bounds.size.height / 2))
-                self.closeButton.hidden = false
-            })
-            
-            println("Interstitial displaying!")
+            if interstitial.loaded {
+                
+                view.addSubview(interstitialAdView)
+                interstitial.presentInView(interstitialAdView)
+                UIViewController.prepareInterstitialAds()
+                
+                closeButton = UIButton(frame: CGRect(x: 15, y: 15, width: 25, height: 25))
+                closeButton.setBackgroundImage(UIImage(named: "close"), forState: UIControlState.Normal)
+                closeButton.addTarget(self, action: Selector("close"), forControlEvents: UIControlEvents.TouchDown)
+                self.view.addSubview(closeButton)
+                
+                isInterstitialDisplaying = true
+                
+                self.interstitialAdView.center = CGPoint(x: self.interstitialAdView.center.x, y: (self.view.bounds.size.height * 1.5))
+                self.closeButton.hidden = true
+                UIView.animateWithDuration(0.5, animations: {() -> Void in
+                    self.interstitialAdView.center = CGPoint(x: self.interstitialAdView.center.x, y: (self.view.bounds.size.height / 2))
+                    self.closeButton.hidden = false
+                })
+                
+                println("Interstitial displaying!")
+            }
+            else {
+                println("Interstitial not loaded yet!")
+            }
         }
         else {
-            println("Interstitial not loaded yet!")
+            println("Remove Ads IAP has been purchased!")
         }
-        
     }
     
     /**
@@ -297,22 +225,5 @@ extension iAdHandler: ADInterstitialAdDelegate {
             interstitial = ADInterstitialAd()
             interstitial.delegate = self
         }
-    }
-}
-
-extension iAdHandler: ADBannerViewDelegate {
-    
-    /**
-    Called whenever a banner ad successfully loads.
-    */
-    func bannerViewDidLoadAd(banner: ADBannerView!) {
-        println("Successfully loaded banner!")
-    }
-    
-    /**
-    Called when a banner ad was unable to be loaded.
-    */
-    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
-        println("Was not able to load a banner with error: \(error)")
     }
 }
