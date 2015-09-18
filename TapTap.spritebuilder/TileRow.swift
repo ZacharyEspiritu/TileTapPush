@@ -59,7 +59,7 @@ class TileRow: CCNode {
     func generateRandomTileRow() {
         
         // Generate a random number and based on that number, decide which of the four tiles to color.
-        var rand = CCRANDOM_0_1()
+        let rand = CCRANDOM_0_1()
         if rand < 0.25 {
             enumBox = .Bottom
         }

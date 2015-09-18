@@ -51,18 +51,18 @@ class ParticleLine: CCNode {
     func getColorChoicesFromMemory() {
         
         // Color presets.
-        var turquoiseColor = CCColor(red: 26/255, green: 188/255, blue: 156/255)
-        var grayColor = CCColor(red: 52/255, green: 73/255, blue: 94/255)
-        var orangeColor = CCColor(red: 230/255, green: 126/255, blue: 34/255)
-        var redColor = CCColor(red: 255/255, green: 102/255, blue: 102/255)
-        var silverColor = CCColor(red: 189/255, green: 195/255, blue: 199/255)
-        var yellowColor = CCColor(red: 241/255, green: 196/255, blue: 15/255)
-        var purpleColor = CCColor(red: 155/255, green: 89/255, blue: 182/255)
-        var blueColor = CCColor(red: 0/255, green: 0/255, blue: 255/255)
-        var greenColor = CCColor(red: 39/255, green: 174/255, blue: 96/255)
+        let turquoiseColor = CCColor(red: 26/255, green: 188/255, blue: 156/255)
+        let grayColor = CCColor(red: 52/255, green: 73/255, blue: 94/255)
+        let orangeColor = CCColor(red: 230/255, green: 126/255, blue: 34/255)
+        let redColor = CCColor(red: 255/255, green: 102/255, blue: 102/255)
+        let silverColor = CCColor(red: 189/255, green: 195/255, blue: 199/255)
+        let yellowColor = CCColor(red: 241/255, green: 196/255, blue: 15/255)
+        let purpleColor = CCColor(red: 155/255, green: 89/255, blue: 182/255)
+        let blueColor = CCColor(red: 0/255, green: 0/255, blue: 255/255)
+        let greenColor = CCColor(red: 39/255, green: 174/255, blue: 96/255)
         
         // Restore previously set color choices.
-        var leftColorChoiceInt = defaults.integerForKey(leftSideColorChoice)
+        let leftColorChoiceInt = defaults.integerForKey(leftSideColorChoice)
         if leftColorChoiceInt == 1 { // Turquoise
             dominantParticles.startColor = turquoiseColor
             dominantParticles.endColor = turquoiseColor
@@ -109,7 +109,7 @@ class ParticleLine: CCNode {
             gradientNode.startColor = greenColor
         }
         
-        var rightColorChoiceInt = defaults.integerForKey(rightSideColorChoice)
+        let rightColorChoiceInt = defaults.integerForKey(rightSideColorChoice)
         if rightColorChoiceInt == 1 { // Turquoise
             backgroundParticles.startColor = turquoiseColor
             backgroundParticles.endColor = turquoiseColor

@@ -139,7 +139,7 @@ class SinglePlayer: CCNode {
         for index in 0..<numberOfTileRows {
             
             // Duplicate the tileRow. We have to do this since we can't add the same piece as a child to two different nodes.
-            var blueTileRow = CCBReader.load("TileRow") as! TileRow
+            let blueTileRow = CCBReader.load("TileRow") as! TileRow
             
             var rowWidth = baseTileRowPosition
             
@@ -181,7 +181,7 @@ class SinglePlayer: CCNode {
         // For whatever reason, if we tried to change the opacity for each of the rows in the above for loop, it wouldn't change - however, if we do it in a separate for loop, it ends up working. I'm not even going to ask why - it just works!
         for index in 0..<blueTileRows.count {
             
-            var currentBlueRow = blueTileRows[index]
+            let currentBlueRow = blueTileRows[index]
             
             if index == 0 {
                 currentBlueRow.opacity = baseTileRowOpacity
@@ -278,9 +278,9 @@ class SinglePlayer: CCNode {
     /**
     Schedules the interval between `simulateComputerPlayerTap()` calls for the "computer player". Responsible for controlling the difficulty.
     
-    :param: level  the new level of difficulty to set the game at
+    - parameter level:  the new level of difficulty to set the game at
     */
-    func scheduleComputerPlayer(#level: Int) {
+    func scheduleComputerPlayer(level level: Int) {
         
         // Determine the interval between `simulateComputerPlayerTap()` calls based on the level.
         if level == 1 {
@@ -406,13 +406,13 @@ class SinglePlayer: CCNode {
         dominantColor.runAction(CCActionEaseBounceOut(action: CCActionScaleTo(duration: scalingDuration, scaleX: 0.5, scaleY: 1)))
         particleLine.runAction(CCActionEaseBounceOut(action: CCActionMoveTo(duration: scalingDuration, position: CGPoint(x: 0.5, y: 0.5))))
         
-        var scoreMultiplier: Double = pow(1.2, Double(level))
-        var possiblePointsRemaining: Double = Double(timeRemainingInLevel) / currentInterval
-        var scoreBonus: Int = Int(possiblePointsRemaining * scoreMultiplier)
+        let scoreMultiplier: Double = pow(1.2, Double(level))
+        let possiblePointsRemaining: Double = Double(timeRemainingInLevel) / currentInterval
+        let scoreBonus: Int = Int(possiblePointsRemaining * scoreMultiplier)
         
-        var pointTickerDelay = scalingDuration / Double(scoreBonus)
+        let pointTickerDelay = scalingDuration / Double(scoreBonus)
         
-        self.schedule("addPointToScoreLabel", interval: CCTime(pointTickerDelay), repeat: UInt(scoreBonus), delay: CCTime(0))
+        self.schedule("addPointToScoreLabel", interval: CCTime(pointTickerDelay), `repeat`: UInt(scoreBonus), delay: CCTime(0))
         
         displaySpeedBonusLabel(bonus: scoreBonus)
         
@@ -451,16 +451,16 @@ class SinglePlayer: CCNode {
     func playWooshSound() {
         if defaults.boolForKey(soundEffectsKey) {
             audio.playEffect("faster.wav")
-            println("WOOSH!")
+            print("WOOSH!")
         }
     }
     
     /**
     Displays the "speed bonus" label underneath the score, with animations.
     
-    :param: bonus  the score bonus to display underneath the label.
+    - parameter bonus:  the score bonus to display underneath the label.
     */
-    func displaySpeedBonusLabel(#bonus: Int) {
+    func displaySpeedBonusLabel(bonus bonus: Int) {
         speedBonusLabel.string = "+ \(bonus)\nspeed bonus"
         speedBonusLabel.opacity = 0
         speedBonusLabel.visible = true
@@ -494,10 +494,10 @@ class SinglePlayer: CCNode {
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!) {
         
         if gameState == .Playing { // Check to see if the `gameState` is currently Playing. Used to prevent people from continuing to make moves while the game is in the menu phase.
-            var taplocation = touch.locationInNode(world)
+            let taplocation = touch.locationInNode(world)
             
-            var xTouch = taplocation.x
-            var screenHalf = CCDirector.sharedDirector().viewSize().width / 2
+            let xTouch = taplocation.x
+            let screenHalf = CCDirector.sharedDirector().viewSize().width / 2
             
             if xTouch < screenHalf { // A tap on the blue side.
                 checkIfRightTap(side: .Blue, location: taplocation)
@@ -522,7 +522,7 @@ class SinglePlayer: CCNode {
     */
     func checkForWarning() {
         
-        var scale = dominantColor.scaleX
+        let scale = dominantColor.scaleX
         
         if scale <= 0.22 {
             if scale <= 0.22 {
@@ -567,18 +567,18 @@ class SinglePlayer: CCNode {
     
     Called whenever a tap occurs by `touchBegan()`, which passes the `Side` and the `CGPoint` of the tap location to the function.
     
-    :param: side      The `Side` on which the tap occured.
-    :param: location  The `CGPoint` at which the tap occured.
+    - parameter side:      The `Side` on which the tap occured.
+    - parameter location:  The `CGPoint` at which the tap occured.
     */
-    func checkIfRightTap(#side: Side, location: CGPoint) {
+    func checkIfRightTap(side side: Side, location: CGPoint) {
         
         if side == .Blue { // Blue player tapped.
             
-            var tileRow = blueTileRows[blueIndex]
-            var rowBox: BoxNumber = tileRow.enumBox
+            let tileRow = blueTileRows[blueIndex]
+            let rowBox: BoxNumber = tileRow.enumBox
             
-            var yTouch = location.y
-            var screenQuartersVertical = CCDirector.sharedDirector().viewSize().height / 4
+            let yTouch = location.y
+            let screenQuartersVertical = CCDirector.sharedDirector().viewSize().height / 4
             
             // Compare the tap location against the enumBox of the selected tileRow to see if it was tapped in the right spot.
             if yTouch > 0 && yTouch < screenQuartersVertical && rowBox == .Bottom || yTouch > screenQuartersVertical && yTouch < (screenQuartersVertical * 2) && rowBox == .Midbottom || yTouch > (screenQuartersVertical * 2) && yTouch < (screenQuartersVertical * 3) && rowBox == .Midtop || yTouch > (screenQuartersVertical * 3) && yTouch < (screenQuartersVertical * 4) && rowBox == .Top {
@@ -592,8 +592,8 @@ class SinglePlayer: CCNode {
                 // Run animation sequence to adjust each tile row individually and move it into the next slot.
                 for index in 0..<numberOfTileRows {
                     
-                    var newIndex = (blueIndex + index) % numberOfTileRows
-                    var nextUpRow = blueTileRows[newIndex]
+                    let newIndex = (blueIndex + index) % numberOfTileRows
+                    let nextUpRow = blueTileRows[newIndex]
                     
                     var scaleUpRow: CCActionScaleTo? = nil
                     var moveTileRowDown: CCActionMoveTo? = nil
@@ -697,11 +697,11 @@ class SinglePlayer: CCNode {
     
     Returns a Boolean variable for outside functions to determine if a win occured.
     
-    :returns:  Returns `true` if a win occured as a result of the tap. Returns `false` in all other cases.
+    - returns:  Returns `true` if a win occured as a result of the tap. Returns `false` in all other cases.
     */
     func checkIfWin() -> Bool {
         
-        var scale = dominantColor.scaleX
+        let scale = dominantColor.scaleX
         
         if scale <= -0.01 { // We have a 0.01 difference on each of the possible win states to ensure that no graphical glitches occur in the end-game state.
             
@@ -763,7 +763,7 @@ class SinglePlayer: CCNode {
         scoreHeader.opacity = 1
         
         // Grab the current high score, and check to see if the score from this game is higher than the high score currently stored in `NSUserDefaults`. If it is, replace the old high score with the new score.
-        var currentHighScore = defaults.integerForKey(singlePlayerHighScore)
+        let currentHighScore = defaults.integerForKey(singlePlayerHighScore)
         if score > currentHighScore {
             defaults.setInteger(score, forKey: singlePlayerHighScore)
         }
@@ -803,13 +803,13 @@ class SinglePlayer: CCNode {
     Resets the Gameplay to its original state and restarts the game.
     */
     func playAgain() {
-        var gameplayScene = CCBReader.load("SinglePlayer") as! SinglePlayer
+        let gameplayScene = CCBReader.load("SinglePlayer") as! SinglePlayer
         gameplayScene.animationManager.runAnimationsForSequenceNamed("Gameplay")
         
-        var scene = CCScene()
+        let scene = CCScene()
         scene.addChild(gameplayScene)
         
-        var transition = CCTransition(fadeWithDuration: 0.5)
+        let transition = CCTransition(fadeWithDuration: 0.5)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
     
@@ -817,12 +817,12 @@ class SinglePlayer: CCNode {
     Brings the game back to the mainMenu with some animation for polish.
     */
     func mainMenu() {
-        var mainScene = CCBReader.load("MainScene") as! MainScene
+        let mainScene = CCBReader.load("MainScene") as! MainScene
         
-        var scene = CCScene()
+        let scene = CCScene()
         scene.addChild(mainScene)
         
-        var transition = CCTransition(fadeWithDuration: 0.5)
+        let transition = CCTransition(fadeWithDuration: 0.5)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
         
         mixpanel.track("One Player Mode Session Duration")
@@ -845,7 +845,7 @@ class SinglePlayer: CCNode {
         let greenColor = CCColor(red: 39/255, green: 174/255, blue: 96/255)
         
         // Restore previously set color choices.
-        var leftColorChoiceInt = defaults.integerForKey(leftSideColorChoice)
+        let leftColorChoiceInt = defaults.integerForKey(leftSideColorChoice)
         if leftColorChoiceInt == 1 { // Turquoise
             dominantColorNode.color = turquoiseColor
         }
@@ -874,7 +874,7 @@ class SinglePlayer: CCNode {
             dominantColorNode.color = greenColor
         }
         
-        var rightColorChoiceInt = defaults.integerForKey(rightSideColorChoice)
+        let rightColorChoiceInt = defaults.integerForKey(rightSideColorChoice)
         if rightColorChoiceInt == 1 { // Turquoise
             backgroundColorNode.color = turquoiseColor
         }

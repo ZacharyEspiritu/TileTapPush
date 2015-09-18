@@ -72,7 +72,7 @@ class MainScene: CCNode {
             
             defaults.setInteger(0, forKey: singlePlayerHighScore) // 4 refers to the color red. See colorDictionary in OptionsMenu.swift.
             
-            println("Default settings loaded.")
+            print("Default settings loaded.")
             
         }
         
@@ -106,13 +106,13 @@ class MainScene: CCNode {
     Starts a new instance of the game.
     */
     func playOnePlayer() {
-        var gameplayScene = CCBReader.load("SinglePlayer") as! SinglePlayer
+        let gameplayScene = CCBReader.load("SinglePlayer") as! SinglePlayer
         gameplayScene.animationManager.runAnimationsForSequenceNamed("Gameplay")
         
-        var scene = CCScene()
+        let scene = CCScene()
         scene.addChild(gameplayScene)
         
-        var transition = CCTransition(fadeWithDuration: 0.5)
+        let transition = CCTransition(fadeWithDuration: 0.5)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
         
         mixpanel.track("One Player Mode Inititated")
@@ -124,13 +124,13 @@ class MainScene: CCNode {
     Starts a new instance of the game.
     */
     func playTwoPlayer() {
-        var gameplayScene = CCBReader.load("TwoPlayer") as! TwoPlayer
+        let gameplayScene = CCBReader.load("TwoPlayer") as! TwoPlayer
         gameplayScene.animationManager.runAnimationsForSequenceNamed("Gameplay")
         
-        var scene = CCScene()
+        let scene = CCScene()
         scene.addChild(gameplayScene)
         
-        var transition = CCTransition(fadeWithDuration: 0.5)
+        let transition = CCTransition(fadeWithDuration: 0.5)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
         
         mixpanel.track("Two Player Mode Inititated")
@@ -141,12 +141,12 @@ class MainScene: CCNode {
     Opens up the options menu.
     */
     func options() {
-        var optionsMenuScene = CCBReader.load("OptionsMenu") as! OptionsMenu
+        let optionsMenuScene = CCBReader.load("OptionsMenu") as! OptionsMenu
         
-        var scene = CCScene()
+        let scene = CCScene()
         scene.addChild(optionsMenuScene)
         
-        var transition = CCTransition(fadeWithDuration: 0.5)
+        let transition = CCTransition(fadeWithDuration: 0.5)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
         
         mixpanel.track("Viewed Options Menu")
@@ -177,7 +177,7 @@ class MainScene: CCNode {
         let greenColor = CCColor(red: 39/255, green: 174/255, blue: 96/255)
         
         // Restore previously set color choices.
-        var leftColorChoiceInt = defaults.integerForKey(leftSideColorChoice)
+        let leftColorChoiceInt = defaults.integerForKey(leftSideColorChoice)
         if leftColorChoiceInt == 1 { // Turquoise
             dominantColorNode.color = turquoiseColor
             mixpanel.track("Color Choice", properties: ["Color" : "Turquoise"])
@@ -215,7 +215,7 @@ class MainScene: CCNode {
             mixpanel.track("Color Choice", properties: ["Color" : "Green"])
         }
         
-        var rightColorChoiceInt = defaults.integerForKey(rightSideColorChoice)
+        let rightColorChoiceInt = defaults.integerForKey(rightSideColorChoice)
         if rightColorChoiceInt == 1 { // Turquoise
             backgroundColorNode.color = turquoiseColor
             mixpanel.track("Color Choice", properties: ["Color" : "Turquoise"])
@@ -308,7 +308,7 @@ class MainScene: CCNode {
     /**
     Changes all of the main menu button states to the `newState`. Used to prevent players from hitting a main menu button and opening the popup at the same time.
     
-    :param: newState  the desired new state for all of the background buttons to be changed to
+    - parameter newState:  the desired new state for all of the background buttons to be changed to
     */
     func changeBackgroundButtonState(newState: Bool) {
         onePlayerButton.enabled = newState
@@ -335,13 +335,13 @@ class MainScene: CCNode {
 extension MainScene: GKGameCenterControllerDelegate {
     
     func showLeaderboard() {
-        var viewController = CCDirector.sharedDirector().parentViewController!
-        var gameCenterViewController = GKGameCenterViewController()
+        let viewController = CCDirector.sharedDirector().parentViewController!
+        let gameCenterViewController = GKGameCenterViewController()
         gameCenterViewController.gameCenterDelegate = self
         viewController.presentViewController(gameCenterViewController, animated: true, completion: nil)
     }
     
-    func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController!) {
+    func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController) {
         gameCenterViewController.dismissViewControllerAnimated(true, completion: nil)
     }
 }
@@ -361,7 +361,7 @@ extension MainScene: IAPHelperDelegate {
     }
     
     func purchaseFailed() {
-        var error = UIAlertView()
+        let error = UIAlertView()
         error.title = "Purchase Failed"
         error.message = "The purchase was unable to be completed. Please try again later."
         error.addButtonWithTitle("OK")

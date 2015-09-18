@@ -23,12 +23,12 @@ class CreditsScene: CCNode {
     Opens up the options menu.
     */
     func back() {
-        var optionsMenuScene = CCBReader.load("OptionsMenu") as! OptionsMenu
+        let optionsMenuScene = CCBReader.load("OptionsMenu") as! OptionsMenu
         
-        var scene = CCScene()
+        let scene = CCScene()
         scene.addChild(optionsMenuScene)
         
-        var transition = CCTransition(fadeWithDuration: 1)
+        let transition = CCTransition(fadeWithDuration: 1)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
     
@@ -37,13 +37,13 @@ class CreditsScene: CCNode {
     */
     override func update(delta: CCTime) {
         
-        var creditsEnclosingNodeCurrentHeight: CGFloat = creditsEnclosingNode.positionInPoints.y
-        var creditsEnclosingNodeHeight: CGFloat = creditsEnclosingNode.contentSize.height
+        let creditsEnclosingNodeCurrentHeight: CGFloat = creditsEnclosingNode.positionInPoints.y
+        let creditsEnclosingNodeHeight: CGFloat = creditsEnclosingNode.contentSize.height
         
-        var screenHeight = UIScreen.mainScreen().bounds.size.height
+        let screenHeight = UIScreen.mainScreen().bounds.size.height
         
-        println("Target Height:  \((creditsEnclosingNodeHeight + screenHeight))")
-        println("Current Height: \(creditsEnclosingNodeCurrentHeight)")
+        print("Target Height:  \((creditsEnclosingNodeHeight + screenHeight))")
+        print("Current Height: \(creditsEnclosingNodeCurrentHeight)")
         
         if (creditsEnclosingNodeHeight + screenHeight) < creditsEnclosingNodeCurrentHeight {
             back()

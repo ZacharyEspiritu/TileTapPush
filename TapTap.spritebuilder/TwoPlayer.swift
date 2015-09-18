@@ -119,8 +119,8 @@ class TwoPlayer: CCNode {
         for index in 0..<numberOfTileRows {
             
             // Duplicate the tileRow. We have to do this since we can't add the same piece as a child to two different nodes.
-            var blueTileRow = CCBReader.load("TileRow") as! TileRow
-            var redTileRow = CCBReader.load("TileRow") as! TileRow
+            let blueTileRow = CCBReader.load("TileRow") as! TileRow
+            let redTileRow = CCBReader.load("TileRow") as! TileRow
                         
             var rowWidth = baseTileRowPosition
             
@@ -175,8 +175,8 @@ class TwoPlayer: CCNode {
         // For whatever reason, if we tried to change the opacity for each of the rows in the above for loop, it wouldn't change - however, if we do it in a separate for loop, it ends up working. I'm not even going to ask why - it just works!
         for index in 0..<blueTileRows.count {
             
-            var currentBlueRow = blueTileRows[index]
-            var currentRedRow = redTileRows[index]
+            let currentBlueRow = blueTileRows[index]
+            let currentRedRow = redTileRows[index]
             
             if index == 0 {
                 currentBlueRow.opacity = baseTileRowOpacity
@@ -284,10 +284,10 @@ class TwoPlayer: CCNode {
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!) {
         
         if gameState == .Playing { // Check to see if the `gameState` is currently Playing. Used to prevent people from continuing to make moves while the game is in the menu phase.
-            var taplocation = touch.locationInNode(world)
+            let taplocation = touch.locationInNode(world)
             
-            var xTouch = taplocation.x
-            var screenHalf = CCDirector.sharedDirector().viewSize().width / 2
+            let xTouch = taplocation.x
+            let screenHalf = CCDirector.sharedDirector().viewSize().width / 2
             
             if xTouch < screenHalf { // A tap on the blue side.
                 checkIfRightTap(side: .Blue, location: taplocation)
@@ -315,7 +315,7 @@ class TwoPlayer: CCNode {
     */
     func checkForWarning() {
         
-        var scale = dominantColor.scaleX
+        let scale = dominantColor.scaleX
         
         if scale <= 0.22 || scale >= 0.78 {
             if scale <= 0.22 {
@@ -362,18 +362,18 @@ class TwoPlayer: CCNode {
 
     Called whenever a tap occurs by `touchBegan()`, which passes the `Side` and the `CGPoint` of the tap location to the function.
     
-    :param: side      The `Side` on which the tap occured.
-    :param: location  The `CGPoint` at which the tap occured.
+    - parameter side:      The `Side` on which the tap occured.
+    - parameter location:  The `CGPoint` at which the tap occured.
     */
-    func checkIfRightTap(#side: Side, location: CGPoint) {
+    func checkIfRightTap(side side: Side, location: CGPoint) {
         
         if side == .Blue { // Blue player tapped.
             
-            var tileRow = blueTileRows[blueIndex]
-            var rowBox: BoxNumber = tileRow.enumBox
+            let tileRow = blueTileRows[blueIndex]
+            let rowBox: BoxNumber = tileRow.enumBox
 
-            var yTouch = location.y
-            var screenQuartersVertical = CCDirector.sharedDirector().viewSize().height / 4
+            let yTouch = location.y
+            let screenQuartersVertical = CCDirector.sharedDirector().viewSize().height / 4
             
             // Compare the tap location against the enumBox of the selected tileRow to see if it was tapped in the right spot.
             if yTouch > 0 && yTouch < screenQuartersVertical && rowBox == .Bottom || yTouch > screenQuartersVertical && yTouch < (screenQuartersVertical * 2) && rowBox == .Midbottom || yTouch > (screenQuartersVertical * 2) && yTouch < (screenQuartersVertical * 3) && rowBox == .Midtop || yTouch > (screenQuartersVertical * 3) && yTouch < (screenQuartersVertical * 4) && rowBox == .Top {
@@ -387,8 +387,8 @@ class TwoPlayer: CCNode {
                 // Run animation sequence to adjust each tile row individually and move it into the next slot.
                 for index in 0..<numberOfTileRows {
                     
-                    var newIndex = (blueIndex + index) % numberOfTileRows
-                    var nextUpRow = blueTileRows[newIndex]
+                    let newIndex = (blueIndex + index) % numberOfTileRows
+                    let nextUpRow = blueTileRows[newIndex]
                     
                     var scaleUpRow: CCActionScaleTo? = nil
                     var moveTileRowDown: CCActionMoveTo? = nil
@@ -478,11 +478,11 @@ class TwoPlayer: CCNode {
             
         }
         else if side == .Red { // Red side tapped.
-            var tileRow = redTileRows[redIndex]
-            var rowBox: BoxNumber = tileRow.enumBox
+            let tileRow = redTileRows[redIndex]
+            let rowBox: BoxNumber = tileRow.enumBox
             
-            var yTouch = location.y
-            var screenQuartersVertical = CCDirector.sharedDirector().viewSize().height / 4
+            let yTouch = location.y
+            let screenQuartersVertical = CCDirector.sharedDirector().viewSize().height / 4
             
             // Compare the tap location against the enumBox of the selected tileRow to see if it was tapped in the right spot.
             if yTouch > 0 && yTouch < screenQuartersVertical && rowBox == .Top || yTouch > screenQuartersVertical && yTouch < (screenQuartersVertical * 2) && rowBox == .Midtop || yTouch > (screenQuartersVertical * 2) && yTouch < (screenQuartersVertical * 3) && rowBox == .Midbottom || yTouch > (screenQuartersVertical * 3) && yTouch < (screenQuartersVertical * 4) && rowBox == .Bottom {
@@ -496,8 +496,8 @@ class TwoPlayer: CCNode {
                 // Run animation sequence to adjust each tile row individually and move it into the next slot.
                 for index in 0..<numberOfTileRows {
                     
-                    var newIndex = (redIndex + index) % numberOfTileRows
-                    var nextUpRow = redTileRows[newIndex]
+                    let newIndex = (redIndex + index) % numberOfTileRows
+                    let nextUpRow = redTileRows[newIndex]
                     
                     var scaleUpRow: CCActionScaleTo? = nil
                     var moveTileRowDown: CCActionMoveTo? = nil
@@ -594,10 +594,10 @@ class TwoPlayer: CCNode {
     
     Returns a Boolean variable for outside functions to determine if a win occured.
     
-    :returns:  Returns `true` if a win occured as a result of the tap. Returns `false` in all other cases.
+    - returns:  Returns `true` if a win occured as a result of the tap. Returns `false` in all other cases.
     */
     func checkIfWin() -> Bool {
-        var scale = dominantColor.scaleX
+        let scale = dominantColor.scaleX
         
         if scale <= -0.01 || scale >= 1.01 { // We have a +-0.01 varience on each of the possible win states to ensure that no graphical glitches occur in the end-game state where the edge of the gradient that hides the line between the dominant color and the background color is still slightly visible.
             
@@ -682,13 +682,13 @@ class TwoPlayer: CCNode {
     Resets the Gameplay to its original state and restarts the game.
     */
     func playAgain() {
-        var gameplayScene = CCBReader.load("TwoPlayer") as! TwoPlayer
+        let gameplayScene = CCBReader.load("TwoPlayer") as! TwoPlayer
         gameplayScene.animationManager.runAnimationsForSequenceNamed("Gameplay")
         
-        var scene = CCScene()
+        let scene = CCScene()
         scene.addChild(gameplayScene)
                 
-        var transition = CCTransition(fadeWithDuration: 0.5)
+        let transition = CCTransition(fadeWithDuration: 0.5)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
     
@@ -696,12 +696,12 @@ class TwoPlayer: CCNode {
     Brings the game back to the mainMenu with some animation for polish.
     */
     func mainMenu() {
-        var mainScene = CCBReader.load("MainScene") as! MainScene
+        let mainScene = CCBReader.load("MainScene") as! MainScene
         
-        var scene = CCScene()
+        let scene = CCScene()
         scene.addChild(mainScene)
         
-        var transition = CCTransition(fadeWithDuration: 0.5)
+        let transition = CCTransition(fadeWithDuration: 0.5)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
         
         mixpanel.track("Two Player Mode Session Duration")
@@ -724,7 +724,7 @@ class TwoPlayer: CCNode {
         let greenColor = CCColor(red: 39/255, green: 174/255, blue: 96/255)
         
         // Restore previously set color choices.
-        var leftColorChoiceInt = defaults.integerForKey(leftSideColorChoice)
+        let leftColorChoiceInt = defaults.integerForKey(leftSideColorChoice)
         if leftColorChoiceInt == 1 { // Turquoise
             dominantColorNode.color = turquoiseColor
             dominantColorWinsLabel.string = "TURQUOISE\nWINS!"
@@ -762,7 +762,7 @@ class TwoPlayer: CCNode {
             dominantColorWinsLabel.string = "GREEN\nWINS!"
         }
         
-        var rightColorChoiceInt = defaults.integerForKey(rightSideColorChoice)
+        let rightColorChoiceInt = defaults.integerForKey(rightSideColorChoice)
         if rightColorChoiceInt == 1 { // Turquoise
             backgroundColorNode.color = turquoiseColor
             backgroundColorWinsLabel.string = "TURQUOISE\nWINS!"

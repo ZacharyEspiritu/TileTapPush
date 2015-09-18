@@ -37,8 +37,8 @@ class IAPHandler: NSObject {
     //called by you, to start purchase process
     func attemptPurchase(productName: String) {
         if (SKPaymentQueue.canMakePayments()) {
-            var productID:NSSet = NSSet(object: productName)
-            var productRequest:SKProductsRequest = SKProductsRequest(productIdentifiers: productID as Set<NSObject>)
+            let productID:NSSet = NSSet(object: productName)
+            let productRequest:SKProductsRequest = SKProductsRequest(productIdentifiers: productID as Set<NSObject>)
             productRequest.delegate = self
             productRequest.start()
         } else {
@@ -63,7 +63,7 @@ class IAPHandler: NSObject {
     
     //called after delegate method productRequest(...)
     private func buyProduct(product: SKProduct) {
-        var payment = SKPayment(product: product)
+        let payment = SKPayment(product: product)
         SKPaymentQueue.defaultQueue().addTransactionObserver(self)
         SKPaymentQueue.defaultQueue().addPayment(payment)
     }
@@ -71,11 +71,11 @@ class IAPHandler: NSObject {
 
 extension IAPHandler: SKProductsRequestDelegate {
     
-    func productsRequest(request: SKProductsRequest!, didReceiveResponse response: SKProductsResponse!) {
-        var count: Int = response.products.count
+    func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
+        let count: Int = response.products.count
         if (count > 0) {
             var validProducts = response.products
-            var product = validProducts[0] as! SKProduct
+            let product = validProducts[0] 
             buyProduct(product)
         } else {
             //something went wrong with lookup, try again?
@@ -85,13 +85,13 @@ extension IAPHandler: SKProductsRequestDelegate {
 
 extension IAPHandler: SKPaymentTransactionObserver {
     
-    func paymentQueue(queue: SKPaymentQueue!, updatedTransactions transactions: [AnyObject]!) {
-        println("recieved response")
+    func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        print("recieved response")
         for transaction: AnyObject in transactions {
             if let tx: SKPaymentTransaction = transaction as? SKPaymentTransaction {
                 switch tx.transactionState {
                 case .Purchased, .Restored:
-                    println("product purchased/restored")
+                    print("product purchased/restored")
                     //notify delegate if one exists
                     if let delegate = delegate {
                         delegate.purchaseSuccessful(tx.payment.productIdentifier)

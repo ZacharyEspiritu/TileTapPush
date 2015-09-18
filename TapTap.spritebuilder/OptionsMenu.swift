@@ -88,7 +88,7 @@ class OptionsMenu: CCNode {
         }
         
         // Restore previously set color choices.
-        var leftColorChoiceInt = defaults.integerForKey(leftSideColorChoice)
+        let leftColorChoiceInt = defaults.integerForKey(leftSideColorChoice)
         if leftColorChoiceInt == 1 { // Turquoise
             leftTurquoiseButton.selected = true
         }
@@ -117,7 +117,7 @@ class OptionsMenu: CCNode {
             leftGreenButton.selected = true
         }
         
-        var rightColorChoiceInt = defaults.integerForKey(rightSideColorChoice)
+        let rightColorChoiceInt = defaults.integerForKey(rightSideColorChoice)
         if rightColorChoiceInt == 1 { // Turquoise
             rightTurquoiseButton.selected = true
         }
@@ -146,8 +146,8 @@ class OptionsMenu: CCNode {
             rightGreenButton.selected = true
         }
         
-        println("Current Left Side Color Choice: \(defaults.integerForKey(leftSideColorChoice))")
-        println("Current Right Side Color Choice: \(defaults.integerForKey(rightSideColorChoice))")
+        print("Current Left Side Color Choice: \(defaults.integerForKey(leftSideColorChoice))")
+        print("Current Right Side Color Choice: \(defaults.integerForKey(rightSideColorChoice))")
         
     }
     
@@ -158,12 +158,12 @@ class OptionsMenu: CCNode {
     Returns the game back to the main menu.
     */
     func back() {
-        var mainScene = CCBReader.load("MainScene") as! MainScene
+        let mainScene = CCBReader.load("MainScene") as! MainScene
         
-        var scene = CCScene()
+        let scene = CCScene()
         scene.addChild(mainScene)
         
-        var transition = CCTransition(fadeWithDuration: 0.5)
+        let transition = CCTransition(fadeWithDuration: 0.5)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
     
@@ -173,12 +173,12 @@ class OptionsMenu: CCNode {
     func credits() {
         mixpanel.track("Viewed Credits")
         
-        var creditsScene = CCBReader.load("CreditsScene") as! CreditsScene
+        let creditsScene = CCBReader.load("CreditsScene") as! CreditsScene
         
-        var scene = CCScene()
+        let scene = CCScene()
         scene.addChild(creditsScene)
         
-        var transition = CCTransition(fadeWithDuration: 1)
+        let transition = CCTransition(fadeWithDuration: 1)
         CCDirector.sharedDirector().presentScene(scene, withTransition: transition)
     }
     
@@ -189,7 +189,7 @@ class OptionsMenu: CCNode {
     */
     func ingameParticlesToggle() {
         
-        var currentState = defaults.boolForKey(ingameParticlesKey)
+        let currentState = defaults.boolForKey(ingameParticlesKey)
         
         if currentState {
             defaults.setBool(false, forKey: ingameParticlesKey)
@@ -207,7 +207,7 @@ class OptionsMenu: CCNode {
     */
     func backgroundMusicToggle() {
         
-        var currentState = defaults.boolForKey(backgroundMusicKey)
+        let currentState = defaults.boolForKey(backgroundMusicKey)
         
         if currentState {
             defaults.setBool(false, forKey: backgroundMusicKey)
@@ -226,7 +226,7 @@ class OptionsMenu: CCNode {
     */
     func soundEffectsToggle() {
         
-        var currentState = defaults.boolForKey(soundEffectsKey)
+        let currentState = defaults.boolForKey(soundEffectsKey)
         
         if currentState {
             defaults.setBool(false, forKey: soundEffectsKey)
@@ -249,10 +249,10 @@ class OptionsMenu: CCNode {
     
     **Note:** Since `NSUserDefaults` can only store primitive data types and objects, the `color` parameter is converted into an `Int` using the `colorDictionary` found in the Variables section above. This `Int` is the only thing that gets stored in `NSUserDefaults`.
     
-    :param: side   the `ColorButtonSide` that the tapped button is located on
-    :param: color  the `Color` that the tapped button is associated with
+    - parameter side:   the `ColorButtonSide` that the tapped button is located on
+    - parameter color:  the `Color` that the tapped button is associated with
     */
-    func colorToggle(#side: ColorButtonSide, color: Color) {
+    func colorToggle(side side: ColorButtonSide, color: Color) {
         
         if side == .Left { // Left side buttons.
             
@@ -304,7 +304,7 @@ class OptionsMenu: CCNode {
                 defaults.setInteger(colorDictionary[.Turquoise]!, forKey: leftSideColorChoice)
             }
             
-            println("Left Side Color Choice: \(defaults.integerForKey(leftSideColorChoice))")
+            print("Left Side Color Choice: \(defaults.integerForKey(leftSideColorChoice))")
             
         }
         else if side == .Right { // Right side buttons.
@@ -357,7 +357,7 @@ class OptionsMenu: CCNode {
                 defaults.setInteger(colorDictionary[.Turquoise]!, forKey: rightSideColorChoice)
             }
             
-            println("Right Side Color Choice: \(defaults.integerForKey(rightSideColorChoice))")
+            print("Right Side Color Choice: \(defaults.integerForKey(rightSideColorChoice))")
             
         }
         
