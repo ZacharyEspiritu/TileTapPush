@@ -288,7 +288,6 @@ class MainScene: CCNode {
     */
     func backToMenu() {
         
-        let action = CCActionFadeOut(duration: 0.5)
         removeAdsPopup.runAction(CCActionFadeOut(duration: 0.5))
         
         purchaseRemoveAdsButton.enabled = false

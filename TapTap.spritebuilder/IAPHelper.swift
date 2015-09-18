@@ -3,7 +3,7 @@
 //  swift-helpers
 //
 //  Created by Andrew Brandt on 2/4/15.
-//  Copyright (c) 2015 Make School. All rights reserved.
+//  Copyright (c) 2015 Make School. Used with permission.
 //
 
 import StoreKit
@@ -38,7 +38,7 @@ class IAPHandler: NSObject {
     func attemptPurchase(productName: String) {
         if (SKPaymentQueue.canMakePayments()) {
             let productID:NSSet = NSSet(object: productName)
-            let productRequest:SKProductsRequest = SKProductsRequest(productIdentifiers: productID as Set<NSObject>)
+            let productRequest:SKProductsRequest = SKProductsRequest(productIdentifiers: productID as! Set<String>)
             productRequest.delegate = self
             productRequest.start()
         } else {

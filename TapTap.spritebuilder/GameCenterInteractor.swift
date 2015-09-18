@@ -67,7 +67,7 @@ class GameCenterInteractor: NSObject {
             if (viewController != nil)
             {
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.showAuthenticationDialogueWhenReasonable(presentingViewController: CCDirector.sharedDirector().parentViewController!, gameCenterController: viewController)
+                    self.showAuthenticationDialogueWhenReasonable(presentingViewController: CCDirector.sharedDirector().parentViewController!, gameCenterController: viewController!)
                 })
             }
                 
@@ -86,8 +86,8 @@ class GameCenterInteractor: NSObject {
             
             if (error != nil)
             {
-                print("Failed to sign in with error:\(error.localizedDescription).")
-                self.delegate?.failedToSignInWithError(error)
+                print("Failed to sign in with error:\(error!.localizedDescription).")
+                self.delegate?.failedToSignInWithError(error!)
                 // Delegate can take necessary action. For example: present a UIAlertController with the error details.
             }
         }
