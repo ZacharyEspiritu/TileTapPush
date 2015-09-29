@@ -782,7 +782,7 @@ class SinglePlayer: CCNode {
         
         // Only display the end-game advertisement if the player's score is above 200 in an attempt to avoid displaying ads to very short gameplay sessions to avoid interrupting the user workflow too much.
         if score > 200 {
-            iAdHandler.sharedInstance.displayInterstitialAd()
+            // iAdHandler.sharedInstance.displayInterstitialAd()
         }
     }
     

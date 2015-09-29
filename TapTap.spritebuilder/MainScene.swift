@@ -91,7 +91,7 @@ class MainScene: CCNode {
         
         setupGameCenter()
         
-        iAdHandler.sharedInstance.loadInterstitialAd()
+        // iAdHandler.sharedInstance.loadInterstitialAd()
         IAPhandler.delegate = self
     }
     
